@@ -1,0 +1,100 @@
+/* Container with gradient border */
+.gradient-border {
+  position: relative;
+  padding: 5px;           /* border thickness */
+  border-radius: 12px;    /* outer radius */
+  overflow: hidden;
+  width: 40%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+
+}
+
+/* Animated gradient layer */
+.gradient-border::before,.gradient-border::after {
+    content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 3px; /* border thickness */
+      background-image: conic-gradient(from var(--angle),#FF3B00, #ff5e13d8, #ff8c00d8, #FFC300, #FFD633, #ff3c0077
+ );
+      filter: blur(1.5rem);
+      /* opacity: 0.6; */
+      z-index: -1;
+      animation: rotateAngle 3s linear infinite;
+  
+}
+
+/* Inner content */
+.gradient-border > .content {
+  position: relative;
+  background-color: white; /* content background */
+  border-radius: 9px;      /* slightly smaller than outer radius */
+  padding: 16px;
+  text-align: center;
+  z-index: 1;
+}
+
+  @property --angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    /* Keyframes to animate the --angle */
+    @keyframes rotateAngle {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+
+    /* Card container */
+    /* .card {
+      position: relative;
+      margin: 50px auto;
+      width: 40%;
+      padding: 5px;
+      border-radius: 12px;
+      background: #1c1f2b;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+      font-family: sans-serif;
+    } */
+
+    /* Inner content */
+    /* .card > .content {
+      position: relative;
+      z-index: 2;
+    } */
+
+    /* Gradient border/glow */
+    /* .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 3px; 
+      background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+      filter: blur(1.5rem);
+      opacity: 0.6;
+      z-index: -1;
+      animation: rotateAngle 3s linear infinite;
+    } */
+
+    /* Optional second layer for stronger glow */
+    /* .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 3px;
+      background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+      filter: blur(0.8rem);
+      opacity: 0.4;
+      z-index: -1;
+      animation: rotateAngle 3s linear infinite;
+    } */

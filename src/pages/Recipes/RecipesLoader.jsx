@@ -1,0 +1,91 @@
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Link, useParams } from "react-router-dom";
+import { FaRegClock, FaStar } from "react-icons/fa";
+import { Mosaic } from "react-loading-indicators";
+import useDataLoader from "../../hooks/useDataLoader";
+import RecipeDetails from "../../components/Shared/Recipes/RecipeDetails";
+
+const RecipesLoader = () => {
+  const { name } = useParams();
+  // console.log(name);
+  const data = useDataLoader();
+  const [foodItem, setFoodItem] = useState([]);
+
+  useEffect(() => {
+    data.get(`/foodItem/${name}`).then((res) => {
+      setFoodItem(res.data);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }, [name]);
+  // console.log(data);
+
+  return (
+    <div className="mt-5 md:mt-20 ">
+      <p className="text-center font-bold underline underline-offset-5 text-2xl md:text-4xl mb-16 uppercase">
+        {name}{" "}
+      </p>
+      {foodItem.length === 0 && (
+        <div className="flex mx-auto py-20 w-8 h-8">
+          <Mosaic
+            color={[
+              "#000000",
+              "#475569",
+              "#4b5563",
+              "#52525b",
+              "#404040",
+              "#262626",
+              "#1c1917",
+            ]}
+            size="medium"
+            text=""
+            textColor=""
+          />
+        </div>
+      )}
+      <div className="grid grid-cols-2 gap-3 md:gap-7 mx-3 md:mx-20 overflow-y-hidden overflow-x-hidden ">
+        {foodItem.map((food, index) => (
+          <div key={food._id}>
+            <motion.div
+              initial={{ opacity: 0, scale: 1, y: 50, x: 50 }}
+              transition={{ duration: 1, delay: index * 0.1, type: "spring" }}
+              //   animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col-reverse md:flex-row justify-between h-full items-center border-2 border-[#ff9543] rounded-lg py-3 md:py-6 px-4 md:px-10 gap-3 md:gap-0"
+            >
+              {/* Text Content */}
+              <div className="flex  flex-col gap-2 md:gap-3 w-full md:w-2/3">
+                <p className="text-lg md:text-2xl font-bold">{food.name}</p>
+
+                <p className="flex items-center gap-1 md:gap-2 text-sm md:text-lg font-medium">
+                  <span className=" md:text-lg font-semibold ">
+                    Cooking Time:
+                  </span>
+                  <FaRegClock />
+                  {food.cookingTime} min
+                </p>
+
+                <p className="flex items-center gap-2 md:text-lg font-medium">
+                  <span className="font-semibold">Rating:</span>
+                  <FaStar className="text-yellow-400" />
+                  {food.rating ? food.rating : 0}
+                </p>
+                <RecipeDetails id={food._id}></RecipeDetails>
+              </div>
+
+              {/* Image */}
+              <img
+                className="w-full md:w-[275px] h-28 md:h-44 rounded-xl object-cover"
+                src={food.img}
+                alt={food.name}
+              />
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default RecipesLoader;
