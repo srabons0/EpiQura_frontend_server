@@ -20,7 +20,7 @@ const ReviewLayout = () => {
     const pendingReviews = reviewRequest.filter((r) => r.status === "Pending").length;
   const lowRating = reviewRequest.filter((r) => r.rating <= 3.5).length;
   return (
-    <div>
+    <div className="mt-10 lg:mt-0">
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
         {toggle?<h1 className="text-3xl mb-8 font-bold text-slate-900">
           Reviews Management
@@ -33,7 +33,7 @@ const ReviewLayout = () => {
         </h1>
       </div>
 
-      <div className={`grid grid-cols-2 ${toggle?"md:grid-cols-4":"md:grid-cols-2"} gap-6 mb-12`}>
+      <div className={`grid grid-cols-2 ${toggle?"md:grid-cols-4":"md:grid-cols-2"} gap-2 lg:gap-6 mb-12`}>
         {(toggle?[
           { label: "Total Reviews", value: totalReviews },
           { label: "Average Rating", value: avgRating !== "NaN"? avgRating : 0 },

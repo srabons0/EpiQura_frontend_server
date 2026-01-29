@@ -11,6 +11,7 @@ const RecipesLoader = () => {
   // console.log(name);
   const data = useDataLoader();
   const [foodItem, setFoodItem] = useState([]);
+const [cut, setCut] = useState(6);
 
   useEffect(() => {
     data.get(`/foodItem/${name}`).then((res) => {
@@ -22,7 +23,7 @@ const RecipesLoader = () => {
 
   return (
     <div className="mt-5 md:mt-20 ">
-      <p className="text-center font-bold underline underline-offset-5 text-2xl md:text-4xl mb-16 uppercase">
+      <p className="text-center font-bold underline text-[#ff9543] underline-offset-5 text-2xl md:text-3xl mb-16 uppercase">
         {name}{" "}
       </p>
       {foodItem.length === 0 && (
@@ -44,7 +45,7 @@ const RecipesLoader = () => {
         </div>
       )}
       <div className="grid grid-cols-2 gap-3 md:gap-7 mx-3 md:mx-20 overflow-y-hidden overflow-x-hidden ">
-        {foodItem.map((food, index) => (
+        {foodItem.slice(0, cut).map((food, index) => (
           <div key={food._id}>
             <motion.div
               initial={{ opacity: 0, scale: 1, y: 50, x: 50 }}
@@ -54,27 +55,25 @@ const RecipesLoader = () => {
               viewport={{ once: true }}
               className="flex flex-col-reverse md:flex-row justify-between h-full items-center border-2 border-[#ff9543] rounded-lg py-3 md:py-6 px-4 md:px-10 gap-3 md:gap-0"
             >
-              {/* Text Content */}
               <div className="flex  flex-col gap-2 md:gap-3 w-full md:w-2/3">
                 <p className="text-lg md:text-2xl font-bold">{food.name}</p>
-
-                <p className="flex items-center gap-1 md:gap-2 text-sm md:text-lg font-medium">
-                  <span className=" md:text-lg font-semibold ">
-                    Cooking Time:
-                  </span>
-                  <FaRegClock />
-                  {food.cookingTime} min
-                </p>
 
                 <p className="flex items-center gap-2 md:text-lg font-medium">
                   <span className="font-semibold">Rating:</span>
                   <FaStar className="text-yellow-400" />
                   {food.rating ? food.rating : 0}
                 </p>
+                <p className="flex items-center gap-1 md:gap-2 text-sm md:text-lg font-medium">
+                  <span className=" md:text-lg font-semibold ">
+                    Price:
+                  </span>
+                 
+                  ৳{food.realPrice}
+                </p>
+
                 <RecipeDetails id={food._id}></RecipeDetails>
               </div>
 
-              {/* Image */}
               <img
                 className="w-full md:w-[275px] h-28 md:h-44 rounded-xl object-cover"
                 src={food.img}
@@ -84,6 +83,20 @@ const RecipesLoader = () => {
           </div>
         ))}
       </div>
+      {cut < foodItem.length && (
+        <div className=" flex justify-center mt-10 md:mt-20 overflow-y-hidden">
+         
+            <motion.button
+              onClick={() => setCut(cut + 6)}
+              whileHover={{ scale: 0.95 }}
+              whileTap={{ scale: 1 }}
+              className=" border-2 bg-[#c7c7c711] cursor-pointer text-[#ff9543] border-[#ff9543] py-3 font-bold w-2/5 md:w-1/4 md:text-xl rounded-md"
+            >
+              See More
+            </motion.button>
+        
+        </div>
+      )}
     </div>
   );
 };

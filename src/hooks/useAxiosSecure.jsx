@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase/firebase.init";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:3000",
@@ -11,9 +12,15 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   axiosSecure.interceptors.request.use(
-    (config) => {
-      config.headers.Authorization = `Bearer ${user.accessToken}`;
-      return config;
+      async (config) => {
+    const user = auth.currentUser;
+
+    if (user) {
+      const token = await user.getIdToken(); 
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config; 
     },
     (error) => {
       return Promise.reject(error);

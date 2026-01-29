@@ -8,16 +8,16 @@ const ManageProductsLayout = () => {
   const [toggle, setToggle] = useState(false);
 
     return (
-       <div>
+       <div className="mt-10 mlg:mt-0">
            
-        <header className={`relative mb-10 overflow-hidden rounded-3xl ${toggle?"bg-linear-to-r from-orange-300/20 to-black/1":"bg-linear-to-r from-black/1 to-orange-300/20"} p-8 text-white` }>
+        <header className={`relative mb-10 overflow-hidden rounded-3xl ${toggle?"bg-linear-to-r from-orange-300/20 to-black/1":"bg-linear-to-r from-black/1 to-orange-300/20"} px-3 py-8 lg:p-8 text-white` }>
  
     <div className="flex justify-between">
-      <p className="text-xl uppercase tracking-widest font-medium text-slate-500">
+      <p className="text-sm lg:text-xl uppercase tracking-widest font-medium text-slate-500">
       Manage  Product 
       </p>
 
-      <h1 className="mt-2 text-3xl font-bold  text-slate-500">
+      <h1 className="mt-2 text-xl lg:text-3xl font-bold  text-slate-500">
         {toggle ? "Add Category" : "Add Product"}
       </h1>
     </div>

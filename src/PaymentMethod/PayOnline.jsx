@@ -84,8 +84,8 @@ const PayOnline = () => {
   };
 
   return (
-    <div className="mb-20">
-      <div className="card w-1/3 mx-auto shadow-lg ">
+    <div className="mb-20 px-2">
+      <div className="card w-full md:w-1/3 md:mx-auto rounded-2xl shadow-xl overflow-hidden ">
         <div className="card-body">
           <div className="flex justify-between">
             <h2 className="text-3xl font-bold">Order Summary</h2>
@@ -115,12 +115,15 @@ const PayOnline = () => {
             </li>
             <li className="flex justify-between items-center">
               <span className="text-xl font-semibold uppercase">pay on:</span>
-              <img
+            <button disabled={totalPrice === 0} className={`${
+                totalPrice === 0
+                  ? "cursor-not-allowed opacity-40":"cursor-pointer"}`}>
+              <img 
                 onClick={() => modalRef.current?.showModal()}
-                className="w-18 h-16"
+                className={`w-18 h-16 rounded-lg  hover:scale-105 `}
                 src={stripe}
                 alt=""
-              />
+              /></button> 
             </li>
             {transcription && (
               <p className="text-base"> Transition id :{transcription}</p>
@@ -164,7 +167,7 @@ const PayOnline = () => {
 
       <dialog
         ref={modalRef}
-        className="modal bg-[#ffffffdd] border-4 border-[#8f8f8f49] md:w-1/2 mx-auto h-[68%] my-auto"
+        className="modal bg-[#ffffffdd] border-4 border-[#8f8f8f49] w-[95%] px-6 md:w-1/2 mx-auto h-120 md:h-[68%] my-auto"
       >
         <Elements stripe={stripePromise}>
           <CheckOutForm
@@ -173,7 +176,6 @@ const PayOnline = () => {
           />
         </Elements>
 
-        {/* if there is a button in form, it will close the modal */}
         <button
           onClick={() => modalRef.current?.close()}
           className="btn btn-sm btn-circle btn-ghost text-lg absolute right-6 top-4"

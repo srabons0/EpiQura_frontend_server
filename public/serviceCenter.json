@@ -1,0 +1,112 @@
+[
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Uttara Shopping Complex", "Uttara Model Town"],
+    "covered_area": [{"Sector": 1, "Road": 1, "Block": "A"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.407,
+    "latitude": 23.844
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Dhanmondi Lake", "Shishu Park"],
+    "covered_area": [{"Sector": 2, "Road": 3, "Block": "B"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.377,
+    "latitude": 23.745
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Mirpur 10 Stadium", "National Zoo"],
+    "covered_area": [{"Sector": 10, "Road": 5, "Block": "C"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.348,
+    "latitude": 23.810
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Mohammadpur Govt College", "Suhrawardy Udyan"],
+    "covered_area": [{"Sector": 3, "Road": 2, "Block": "D"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.360,
+    "latitude": 23.745
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Gulshan Lake Park", "Japanese School"],
+    "covered_area": [{"Sector": 4, "Road": 7, "Block": "E"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.407,
+    "latitude": 23.794
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Banani Super Market", "Apollo Hospital"],
+    "covered_area": [{"Sector": 5, "Road": 6, "Block": "F"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.410,
+    "latitude": 23.803
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Bashundhara City", "NSU Campus"],
+    "covered_area": [{"Sector": 6, "Road": 8, "Block": "G"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.417,
+    "latitude": 23.812
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Tejgaon Industrial Area", "Gulshan Bridge"],
+    "covered_area": [{"Sector": 7, "Road": 9, "Block": "H"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.400,
+    "latitude": 23.763
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Motijheel Financial Area", "City College"],
+    "covered_area": [{"Sector": 8, "Road": 10, "Block": "I"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.418,
+    "latitude": 23.728
+  },
+  {
+    "region": "Dhaka",
+    "district": "Dhaka",
+    "city": "Dhaka",
+    "landmarks": ["Kalabagan Crossing", "New Market"],
+    "covered_area": [{"Sector": 9, "Road": 4, "Block": "J"}],
+    "status": "active",
+    "flowchart": "https://example.com/dhaka-flowchart.png",
+    "longitude": 90.375,
+    "latitude": 23.750
+  }
+]

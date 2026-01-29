@@ -1,42 +1,39 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaWallet, FaBook, FaStar, FaUtensils } from "react-icons/fa";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { useState, useEffect } from "react";
+import {
+  FaWallet,
+  FaBook,
+  FaStar,
+  FaUtensils,
+  FaBoxOpen,
+} from "react-icons/fa";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import useLoader from "../../hooks/useLoader";
+import useDataLoader from "../../hooks/useDataLoader";
+import RecipeDetails from "../../components/Shared/Recipes/RecipeDetails";
 
-// Fake recent orders
-const recentOrders = [
+/* ---------------- DATA ---------------- */
+
+const quickActions = [
+  { title: "Payments", icon: <FaWallet />, link: "/dashboard/user/payments" },
+  { title: "My Orders", icon: <FaBoxOpen />, link: "/dashboard/user/orders" },
+  { title: "Reviews", icon: <FaStar />, link: "/dashboard/user/reviews" },
   {
-    _id: "1",
-    items: [
-      { name: "Chicken Alfredo", img: "https://i.ibb.co/f1nGjkN/chicken-alfredo-1-2.jpg", quantity: 1 },
-      { name: "BLT Sandwich", img: "https://i.ibb.co/x1Pmqrj/BLT-for-recipe-1-6-1200x675.jpg", quantity: 2 },
-    ],
-    date: "2025-12-16",
-    time: "19:00",
-    total: 1300,
-    status: "Confirmed",
-  },
-  {
-    _id: "2",
-    items: [
-      { name: "Margherita Pizza", img: "https://i.ibb.co/5vG6r9k/margherita-pizza.jpg", quantity: 2 },
-    ],
-    date: "2025-12-18",
-    time: "13:30",
-    total: 1600,
-    status: "Pending",
+    title: "Notifications",
+    icon: <FaUtensils />,
+    link: "/dashboard/user/notifications",
   },
 ];
 
-// Fake recommended dishes
-const recommended = [
-  { name: "Veggie Delight Pizza", img: "https://i.ibb.co/9hjz8y7/veggie-pizza.jpg", price: 750 },
-  { name: "Spicy Ramen", img: "https://i.ibb.co/zRZx0xD/spicy-ramen.jpg", price: 650 },
-  { name: "Chocolate Brownie", img: "https://i.ibb.co/8bZ2Lhx/brownie.jpg", price: 250 },
-];
-
-// Fake spending data for chart
 const chartData = [
   { day: "Mon", spent: 1200 },
   { day: "Tue", spent: 800 },
@@ -47,173 +44,227 @@ const chartData = [
   { day: "Sun", spent: 700 },
 ];
 
-// Quick Actions
-const quickActions = [
-  { title: "Payments", icon: <FaWallet className="w-6 h-6" />, link: "/dashboard/paymentHistory", bg: "bg-gradient-to-tr from-yellow-400 to-yellow-600" },
-  { title: "Bookings", icon: <FaBook className="w-6 h-6" />, link: "/dashboard/myBooking", bg: "bg-gradient-to-tr from-green-400 to-green-600" },
-  { title: "Reviews", icon: <FaStar className="w-6 h-6" />, link: "/dashboard/addReview", bg: "bg-gradient-to-tr from-blue-400 to-blue-600" },
-  { title: "Menu", icon: <FaUtensils className="w-6 h-6" />, link: "/menu", bg: "bg-gradient-to-tr from-red-400 to-red-600" },
-];
+export default function UserHome() {
+  const [timeLeft, setTimeLeft] = useState("");
+  const { user, loading } = useAuth();
+  const [orders, isPending, refetch] = useLoader(
+    "savedOrder",
+    `/save-order/${user?.email}`,
+    !!user?.email && !loading,
+  );
+  const [bestSellers, setBestSellers] = useState([]);
 
-// Fake daily offers
-const dailyOffers = [
-  { name: "Cheese Burger", img: "https://i.ibb.co/cyVHQF1/cheese-burger.jpg", price: 550, discount: 20 },
-  { name: "Sushi Set", img: "https://i.ibb.co/2y3Ww0Y/sushi-set.jpg", price: 1200, discount: 15 },
-];
+  const data = useDataLoader();
+  useEffect(() => {
+    data.get("/foodItems/BestSellers").then((res) => setBestSellers(res.data));
+  }, [data]);
 
-const UserHome = () => {
-  // Countdown timer for daily offers
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [specialOffers, setSpecialOffers] = useState([]);
 
   useEffect(() => {
-    const target = new Date();
-    target.setHours(23, 59, 59, 999); // countdown to end of day
-    const interval = setInterval(() => {
-      const now = new Date();
-      const diff = target - now;
-      const hours = Math.floor((diff / 1000 / 60 / 60) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      setTimeLeft({ hours, minutes, seconds });
-    }, 1000);
-    return () => clearInterval(interval);
+    data
+      .get("/foodItems/SpecialOffer")
+      .then((res) => setSpecialOffers(res.data));
+  }, [data]);
+  useEffect(() => {
+    const update = () => {
+      const end = new Date();
+      end.setHours(23, 59, 59);
+      const diff = end - new Date();
+      const h = Math.floor(diff / 1000 / 60 / 60);
+      const m = Math.floor((diff / 1000 / 60) % 60);
+      setTimeLeft(`${h}h ${m}m`);
+    };
+    update();
+    const i = setInterval(update, 60000);
+    return () => clearInterval(i);
   }, []);
 
   return (
-    <div className="p-6 h-full flex flex-col gap-6">
+    <div className="min-h-screen bg-slate-50  sm:px-6 lg:px-10 py-8 space-y-10">
+      <div className="bg-white rounded-2xl p-6 sm:p-8 border shadow-sm">
+        <h1 className="text-xl sm:text-2xl font-semibold text-slate-900">
+          Welcome back, {user?.displayName}!
+        </h1>
+        <p className="text-sm text-slate-500 mt-1">
+          Here’s a quick overview of your activity
+        </p>
+      </div>
 
-      {/* Welcome Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="bg-gradient-to-r from-orange-400 to-pink-400 p-6 rounded-2xl shadow-lg text-white flex flex-col md:flex-row justify-between items-center gap-4"
-      >
-        <div>
-          <h1 className="text-3xl md:text-4xl font-bold">Hello, Sadman!</h1>
-          <p className="text-lg md:text-xl mt-1">Check your activity summary and explore exciting dishes!</p>
-          <div className="flex gap-4 mt-4 flex-wrap">
-            <div className="bg-white bg-opacity-20 p-3 rounded-xl flex flex-col items-center">
-              <p className="text-lg font-bold">12</p><p className="text-sm">Payments</p>
-            </div>
-            <div className="bg-white bg-opacity-20 p-3 rounded-xl flex flex-col items-center">
-              <p className="text-lg font-bold">8</p><p className="text-sm">Bookings</p>
-            </div>
-            <div className="bg-white bg-opacity-20 p-3 rounded-xl flex flex-col items-center">
-              <p className="text-lg font-bold">5</p><p className="text-sm">Reviews</p>
-            </div>
-          </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {quickActions.map((a) => (
+          <Link
+            key={a.title}
+            to={a.link}
+            className="bg-white border rounded-2xl p-2 md:p-4 flex items-center gap-3 hover:shadow-md transition-all"
+          >
+            <span className="text-slate-700 text-xl">{a.icon}</span>
+            <span className="font-medium text-slate-800 text-sm md:text-base">{a.title}</span>
+          </Link>
+        ))}
+      </div>
+
+      <div className="bg-white border rounded-2xl md:p-6 shadow-sm">
+        <h2 className="font-semibold text-slate-900 mb-4 p-2">Weekly Spending</h2>
+        <div className="w-full h-[220px] text-sm md:text-base">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData}>
+              <XAxis dataKey="day" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="spent" fill="#111827" radius={[6, 6, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
-        <img src="https://i.ibb.co/HxYvX4X/food-dashboard.png" alt="Food illustration" className="w-40 md:w-60" />
-      </motion.div>
-
-      {/* Quick Action Buttons */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {quickActions.map((action, idx) => (
-          <motion.div
-            key={idx}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`flex flex-col items-center justify-center gap-2 p-6 rounded-xl shadow-lg text-white cursor-pointer ${action.bg}`}
-          >
-            {action.icon}
-            <Link to={action.link} className="text-lg font-semibold">{action.title}</Link>
-          </motion.div>
-        ))}
       </div>
 
-      {/* Weekly Spending Chart */}
-      <div className="bg-white rounded-2xl shadow-lg p-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Weekly Spending</h2>
-        <ResponsiveContainer width="100%" height={200}>
-          <BarChart data={chartData}>
-            <XAxis dataKey="day" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="spent" fill="#FF8008" radius={[8, 8, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <div className="bg-white border rounded-2xl shadow-sm overflow-hidden">
+        <div className="p-6 border-b">
+          <h2 className="font-semibold text-slate-900">Recent Orders</h2>
+        </div>
 
-      {/* Recent Orders */}
-      <div className="flex flex-col gap-4 flex-1 overflow-y-auto hide-scrollbar">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Recent Orders</h2>
-        {recentOrders.map((order) => (
-          <motion.div
-            key={order._id}
-            whileHover={{ scale: 1.02 }}
-            className="bg-white shadow-md rounded-2xl p-4 flex flex-col md:flex-row justify-between gap-4 relative"
-          >
-            <div className="flex gap-3">
-              {order.items.map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center">
-                  <img src={item.img} alt={item.name} className="w-20 h-20 rounded-xl object-cover" />
-                  <p className="text-sm mt-1 font-medium">{item.name} x{item.quantity}</p>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col justify-center text-gray-800 gap-1">
-              <p><strong>Date:</strong> {order.date}</p>
-              <p><strong>Time:</strong> {order.time}</p>
-              <p><strong>Total:</strong> ${order.total}</p>
-              <motion.p
-                animate={{ scale: [1, 1.05, 1] }}
-                className={`font-bold ${order.status === "Confirmed" ? "text-green-600" : "text-yellow-600"}`}
-              >
-                Status: {order.status}
-              </motion.p>
-            </div>
-            <div className="flex items-center justify-center md:justify-end">
-              <Link to="/dashboard/myBooking" className="text-blue-600 font-semibold hover:underline">View Details</Link>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Recommended Section with Parallax Hover */}
-      <div className="flex flex-col gap-3 mt-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Recommended for You</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {recommended.map((item, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.05, y: -5, rotate: 0.5 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer"
+        <div className="divide-y">
+          {orders.slice(0, 3).map((order) => (
+            <div
+              key={order._id}
+              className="p-5 grid grid-cols-1 sm:grid-cols-3 gap-4 items-center"
             >
-              <img src={item.img} alt={item.name} className="w-full h-40 object-cover" />
-              <div className="p-4">
-                <p className="font-semibold text-gray-800">{item.name}</p>
-                <p className="text-green-600 font-bold mt-1">${item.price}</p>
-                <Link to="/menu" className="text-blue-600 mt-2 block hover:underline font-medium">Order Now</Link>
+              <div>
+                <p className="text-sm font-medium text-slate-800 line-clamp-2">
+                  {order.orderedItems.map((item) => item.name).join(", ")}
+                </p>
+                <p className="text-xs text-slate-500 mt-1">
+                  {new Date(order.date).toLocaleDateString()}
+                </p>
               </div>
-            </motion.div>
+
+              <div className="text-sm text-slate-600">
+                Items:{" "}
+                <span className="font-semibold">
+                  {order.orderedItems.reduce(
+                    (sum, item) => sum + item.quantity,
+                    0,
+                  )}
+                </span>
+              </div>
+
+              <div className="flex sm:flex-col sm:items-end justify-between gap-2">
+                <p className="font-semibold text-slate-900">
+                  ৳
+                  {order.orderedItems.reduce(
+                    (sum, item) => sum + item.quantity * item.realPrice,
+                    0,
+                  )}
+                </p>
+
+                <span
+                  className={`text-xs font-medium px-3 py-1 rounded-full w-fit
+                ${
+                  order.status === "Completed"
+                    ? "bg-green-100 text-green-700"
+                    : order.status === "Pending"
+                      ? "bg-yellow-100 text-yellow-700 animate-pulse"
+                      : "bg-red-100 text-red-700"
+                }`}
+                >
+                  {order.status}
+                </span>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Daily Offers Section with Countdown */}
-      <div className="flex flex-col gap-3 mt-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Daily Offers</h2>
-        <p className="text-gray-500">Hurry! Offers end in: {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {dailyOffers.map((offer, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer relative"
+      <div className="bg-linear-to-r from-slate-900 to-slate-700 text-white rounded-2xl p-6 shadow-md">
+        <h2 className="font-semibold text-white mb-4">Recommended for you</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {bestSellers.map((i) => (
+            <div
+              key={i.name}
+              className="bg-white border rounded-2xl p-5 hover:shadow-md transition"
             >
-              <img src={offer.img} alt={offer.name} className="w-full h-40 object-cover" />
-              <div className="p-4">
-                <p className="font-semibold text-gray-800">{offer.name}</p>
-                <p className="text-green-600 font-bold mt-1">${offer.price} - {offer.discount}% Off</p>
-                <Link to="/menu" className="text-blue-600 mt-2 block hover:underline font-medium">Order Now</Link>
+              <p className="font-medium text-slate-800">{i.name}</p>
+              <p className="text-sm text-slate-500 mt-1">৳{i.realPrice}</p>
+              <div className="relative flex items-center">
+                <span className="text-sm font-medium text-blue-600 mt-3 inline-block">
+                  {" "}
+                  Order now →
+                </span>
+                <div className="absolute -left-3 -top-2.5 text-black">
+                  <RecipeDetails
+                    id={i._id}
+                    opacity={"opacity-0"}
+                  ></RecipeDetails>
+                </div>
               </div>
-            </motion.div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-slate-50  md:px-4 sm:px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">
+            Special Offers
+          </h2>
+        </div>
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {specialOffers.map((i) => (
+            <div
+              key={i.name}
+              className="bg-white border relative rounded-2xl p-5 hover:shadow-md transition"
+            >
+              {i.specialOffer?.badgeNote && (
+                <span
+                  className="
+            absolute top-4 right-4
+            px-3 py-1
+            rounded-full
+            text-xs font-semibold
+            bg-indigo-50 text-indigo-700
+          "
+                >
+                  {i.specialOffer.badgeNote}
+                </span>
+              )}
+
+              <div className="flex flex-col gap-3">
+                <h3 className="text-lg font-semibold text-slate-800 leading-tight">
+                  {i.name}
+                </h3>
+
+                <p className="text-sm text-slate-500">
+                  {i.specialOffer?.title}
+                </p>
+
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {i.specialOffer?.description}
+                </p>
+              </div>
+              <div className="flex justify-between mt-5">
+               
+                <span className="text-xl font-bold text-slate-900">
+              ৳{i.realPrice}
+            </span>
+
+                <div className="relative flex items-center">
+                  <span className="text-sm font-medium text-blue-600 mt-3 inline-block">
+                    {" "}
+                    Order now →
+                  </span>
+                  <div className="absolute -left-3 -top-2.5 text-black">
+                    <RecipeDetails
+                      id={i._id}
+                      opacity={"opacity-0"}
+                    ></RecipeDetails>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
     </div>
   );
-};
-
-export default UserHome;
+}

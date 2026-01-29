@@ -53,37 +53,41 @@ useEffect(() => {
   };
 
   return (
-    <div className="p-1 w-[40%] rounded-xl mx-auto
-            gradient-border">
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg ">
-      <h2 className="text-3xl text-[#FF8008] font-semibold mb-6 text-center">
-       Set Your Info
+  <div className="w-full mt-15 md:mt-0 px-4 sm:px-6 lg:px-8">
+  <div className="mx-auto max-w-xl relative rounded-2xl p-0.5 bg-linear-to-r from-orange-400 via-orange-300 to-yellow-400">
+    
+    <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+      <h2 className="text-2xl sm:text-3xl font-semibold text-center text-[#FF8008] mb-6">
+        Set Your Info
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
-        {/* Customer Name */}
         <div>
-                <p className="font-semibold text-xl mb-2">Full Name</p>
+          <label className="block text-base sm:text-lg font-semibold mb-2">
+            Full Name
+          </label>
           <input
             type="text"
             placeholder="Full Name"
-            className="w-full p-3 border-2 border-[#00000038] rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
             defaultValue={users.name}
             {...register("name", { required: "Name is required" })}
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
           />
           {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
+            <p className="mt-1 text-sm text-red-500">
+              {errors.name.message}
+            </p>
           )}
         </div>
 
-        {/* Phone */}
         <div>
-                <p className="font-semibold text-xl mb-2">Phone Number</p>
+          <label className="block text-base sm:text-lg font-semibold mb-2">
+            Phone Number
+          </label>
           <input
             type="tel"
             placeholder="Phone Number"
-            className="w-full p-3  border-2 border-[#00000038] rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
             defaultValue={users.phone}
             {...register("phone", {
               required: "Phone number is required",
@@ -92,52 +96,57 @@ useEffect(() => {
                 message: "Enter a valid 11-digit number",
               },
             })}
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
           />
           {errors.phone && (
-            <p className="text-red-500 text-sm">{errors.phone.message}</p>
+            <p className="mt-1 text-sm text-red-500">
+              {errors.phone.message}
+            </p>
           )}
         </div>
 
-        {/* Address */}
         <div>
-                <p className="font-semibold text-xl mb-2">address</p>
+          <label className="block text-base sm:text-lg font-semibold mb-2">
+            Address
+          </label>
           <textarea
-            placeholder="Delivery Address. Example: House / Road / Area"
             rows="3"
+            placeholder="House / Road / Area"
             defaultValue={users.address}
-            className="w-full p-3 border-2 border-[#00000038]  rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
             {...register("address", { required: "Address is required" })}
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none"
           />
           {errors.address && (
-            <p className="text-red-500 text-sm">{errors.address.message}</p>
+            <p className="mt-1 text-sm text-red-500">
+              {errors.address.message}
+            </p>
           )}
         </div>
 
-        {/* Submit Button */}
-        <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.97 }}>
-        <button
-          className="w-full mt-4 px-6 py-3 text-white text-lg font-medium rounded-lg transition-all duration-500 bg-[linear-gradient(to_right,#FF8008_0%,#FFC837_51%,#FF8008_100%)] bg-size-[200%_auto] hover:bg-position-[right_center]"
+        <motion.button
+          whileHover={{ y: -1 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full mt-4 rounded-lg py-3 text-lg font-semibold text-white bg-linear-to-r from-[#FF8008] via-[#FFC837] to-[#FF8008] bg-size-[200%_auto] transition-all duration-500 hover:bg-position-[right_center]"
         >
           Set Your Info
-        </button>
-</motion.div>
+        </motion.button>
       </form>
-       <Toaster 
-         position="top-center"
-  reverseOrder={false}/>
 
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
-    {users.phone && users.address ? (
-      <p className="text-white text-lg font-semibold text-center mt-4">
-        Your info is already set.
-      </p>
-    ):
-    (
-      <p className="text-white text-lg font-semibold text-center mt-4">
-        Please set your {users.address ? "" : "Address"} {users.phone || users.address ? "" : "and"} {users.phone ? "" : "Phone number"}.
-      </p>
-    )}
-    </div>
+  </div>
+
+  <p className="mt-4 text-center text-base sm:text-lg font-semibold text-black">
+    {users.phone && users.address
+      ? "Your info is already set."
+      : `Please set your ${
+          users.address ? "" : "Address"
+        } ${users.phone || users.address ? "" : "and"} ${
+          users.phone ? "" : "Phone number"
+        }.`}
+  </p>
+</div>
+
   );
 }
 export default PaymentForm;

@@ -42,7 +42,7 @@ const ReportsAnalytics = ({ soldItemsSummary, isPendingSoldItems }) => {
     },
   ];
   return (
-    <div className="  px-5 md:px-10 py-10">
+    <div className="  lg:px-5 md:px-10 py-10">
       <div className="grid grid-cols-1 md:grid-cols-1 gap-10 mb-12">
         {isPendingWeekly ? (
           <div className="mt-20 flex justify-center">
@@ -64,11 +64,11 @@ const ReportsAnalytics = ({ soldItemsSummary, isPendingSoldItems }) => {
             </div>
           </div>
         ) : (
-          <div className="rounded-3xl bg-white shadow-lg p-7">
-            <h3 className="font-semibold text-lg text-slate-900 mb-1">
+          <div className="rounded-3xl bg-white shadow-lg lg:p-7">
+            <h3 className="font-semibold lg:text-lg text-slate-900 p-7 lg:p-0 mb-1">
               Revenue Growth Trend
             </h3>
-            <div className="h-72">
+            <div className="h-72  text-xs">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={revenueWeekly}>
                   <XAxis dataKey="day" />
@@ -105,12 +105,12 @@ const ReportsAnalytics = ({ soldItemsSummary, isPendingSoldItems }) => {
             </div>
           </div>
         ) : (
-          <div className="rounded-3xl bg-white shadow-lg p-7">
-            <h3 className="font-semibold text-lg text-slate-900 mb-1">
+          <div className="rounded-3xl bg-white shadow-lg lg:p-7">
+            <h3 className="font-semibold text-lg text-slate-900  p-3 lg:p-0 mb-1">
               Revenue by Category
             </h3>
 
-            <div className="h-72">
+            <div className="h-72 text-xs">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={soldItemsSummary.byType}>
                   <XAxis dataKey="_id" />

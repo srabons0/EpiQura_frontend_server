@@ -11,7 +11,7 @@ const ProductModal = ({ product, onClose }) => {
         animate={{ y: 0, opacity: 1, scale: 1 }}
         exit={{ y: 40, opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
-        className="relative w-full h-[90vh] max-w-4xl bg-white rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] overflow-hidden"
+        className="relative overflow-y-auto w-full h-[90vh] max-w-4xl bg-white rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] pb-5 lg:pb-0 overflow-hidden"
       >
         
         <button
@@ -41,7 +41,7 @@ const ProductModal = ({ product, onClose }) => {
         </div>
 
         
-        <div className="p-8 grid grid-cols-4 gap-6">
+        <div className="p-8 grid grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             ["Price", `৳${product.realPrice}`],
             ["Rating", product.rating ? product.rating + "/5" + " (20 reviews)" : 0],

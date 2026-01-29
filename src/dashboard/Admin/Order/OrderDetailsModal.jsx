@@ -22,7 +22,6 @@ const OrderDetailsModal = ({ selectedOrder, setSelectedOrder }) => {
         transition={{ duration: 0.25, ease: "easeOut" }}
         className="relative  overflow-y-auto h-4/6 w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl"
       >
-        {/* Close */}
         <button
           onClick={() => setSelectedOrder(null)}
           className="absolute p-1 bg-gray-200 rounded-full top-4 right-4 text-gray-500 hover:text-red-500 transition"
@@ -30,7 +29,6 @@ const OrderDetailsModal = ({ selectedOrder, setSelectedOrder }) => {
           <FaTimes />
         </button>
 
-        {/* Info */}
         <div className="space-y-2 text-sm text-gray-700">
           <p>
             <span className="font-semibold">Customer: </span>
@@ -117,25 +115,24 @@ const OrderDetailsModal = ({ selectedOrder, setSelectedOrder }) => {
           </p>
         </div>
 
-        {/* Dishes */}
         <div className="mt-4">
           <p className="font-semibold text-sm mb-2">Dishes</p>
           <ul className="list-disc list-inside grid grid-cols-2 gap-3 text-sm text-gray-600 space-y-1">
             {(selectedOrder.orderedItems || []).map((dish, i) => (
               <span
                 key={i}
-                className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs flex items-center gap-1"
+                className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs"
               >
-                <FaUtensils className="text-orange-600 text-[10px]" />
+                <span className=" flex items-center p-1 gap-1"><FaUtensils className="text-orange-600 text-[10px]" />
                 {dish.name}
                 {dish.quantity > 1 && ` x ${dish.quantity}`}
-                <span className="font-semibold">(৳{dish.realPrice})</span>
+                <span className="font-semibold">(৳{dish.realPrice})</span> </span>
+                {dish.offer&& <span className="mt-1 ms-5">{dish.offer}</span>}
               </span>
             ))}
           </ul>
         </div>
 
-        {/* Total */}
         <div className="mt-5 ">
           <p className="text-base font-semibold text-gray-900">
             Total: ৳{selectedOrder.price}

@@ -18,19 +18,19 @@ const PayOffline = () => {
   const [users] = useLoader(
     "user",
     `/user?email=${user.email}`,
-    !!user?.email && !loading
+    !!user?.email && !loading,
   );
 
   const [cart, isPending, refetch] = useLoader(
     "cart",
     `/orderFood?email=${user.email}`,
-    !!user?.email && !loading
+    !!user?.email && !loading,
   );
   // console.log(cart);
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.realPrice * item.quantity,
-    0
+    0,
   );
   const totalItem = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -65,7 +65,7 @@ const PayOffline = () => {
                 setSucceeded(true);
                 setProcessing(false);
                 setSuccess(
-                  "Your order has been confirmed! Please prepare the cash upon delivery."
+                  "Your order has been confirmed! Please prepare the cash upon delivery.",
                 );
                 // console.log("Successfully");
                 toast.success("Successfully your order has been placed!");
@@ -93,64 +93,60 @@ const PayOffline = () => {
   };
 
   return (
-    <div className="mb-20">
-      <div className="card w-1/3 mx-auto shadow-lg ">
-        <div className="card-body">
-          <div className="flex justify-between">
-            <h2 className="text-3xl font-bold">Order Summary</h2>
-          </div>
-          <ul className="mt-6 flex flex-col gap-2 text-xs">
+    <div className="mb-20 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#1b4332]">
+            Order Summary
+          </h2>
+
+          <ul className="mt-6 flex flex-col gap-3 text-base sm:text-lg">
             <li className="flex justify-between">
-              <span className="text-xl font-semibold uppercase ">
-                total items:
-              </span>
-              <span className="text-xl font-semibold uppercase">
-                {" "}
-                {totalItem}
-              </span>
+              <span className="font-semibold uppercase">Total items:</span>
+              <span className="font-semibold uppercase">{totalItem}</span>
             </li>
             <li className="flex justify-between">
-              <span className="text-xl font-semibold uppercase ">
-                total cost:
-              </span>
-              <span className="text-xl font-semibold uppercase">
-                {" "}
-                ৳{totalPrice}
-              </span>
+              <span className="font-semibold uppercase">Total cost:</span>
+              <span className="font-semibold uppercase">৳{totalPrice}</span>
             </li>
             <li className="flex justify-between">
-              <span className="text-xl font-semibold uppercase ">
-                delivery cost:
-              </span>
-              <span className="text-xl font-semibold uppercase"> ৳99</span>
+              <span className="font-semibold uppercase">Delivery cost:</span>
+              <span className="font-semibold uppercase">৳99</span>
             </li>
             <li className="flex justify-between">
-              <span className="text-xl font-semibold uppercase ">pay on:</span>
-              <span className="text-xl font-semibold uppercase"> cash</span>
+              <span className="font-semibold uppercase">Pay on:</span>
+              <span className="font-semibold uppercase">Cash</span>
             </li>
-            <li className="text-lg font-medium mt-4">
+            <li className="mt-4 text-sm sm:text-base font-medium text-gray-600">
               We’ll call you after your order is confirmed.
             </li>
           </ul>
+
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="mt-6"
           >
             <button
+              disabled={totalPrice === 0}
               onClick={handleConfirmOrder}
-              className=" btn-block px-9 py-4 block text-center font-medium uppercase text-white no-underline  shadow-[0_0_20px_#eee] transition-all duration-500 bg-[linear-gradient(to_right,#28a745_0%,#71dd8a_51%,#28a745_100%)] bg-size-[200%_auto] hover:bg-position-[right_center]"
+              className={`${
+                totalPrice === 0
+                  ? "bg-gray-600 text-gray-300 cursor-not-allowed opacity-50"
+                  : "text-white shadow-[0_0_20px_#eee] transition-all duration-500 bg-[linear-gradient(to_right,#28a745_0%,#71dd8a_51%,#28a745_100%)] bg-size-[200%_auto] hover:bg-position-[right_center]"
+              } btn-block px-9 py-4 block text-center text-sm font-medium uppercase text-white no-underline`}
             >
               {processing
                 ? "Processing..."
                 : succeeded
-                ? "Your order has been placed successfully!"
-                : "Confirm Order"}
+                  ? "order has been placed successfully!"
+                  : "Confirm Order"}
             </button>
           </motion.div>
-          <div>
-            {error && <p className="text-red-500 mt-4">{error}</p>}
-            {success && <p className="text-green-500 mt-4">{success}</p>}
+
+          <div className="mt-4 text-center text-sm">
+            {error && <p className="text-red-500 mt-2">{error}</p>}
+            {success && <p className="text-green-500 mt-2">{success}</p>}
             <Toaster position="top-right" />
           </div>
         </div>

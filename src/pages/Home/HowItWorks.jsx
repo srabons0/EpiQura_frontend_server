@@ -21,7 +21,6 @@ export default function HowItWorks() {
 
   return (
     <section className="w-11/12 mx-auto my-14 md:my-20">
-      {/* Header */}
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-[#ff9543]">
           How It Works
@@ -31,7 +30,6 @@ export default function HowItWorks() {
         </p>
       </div>
 
-      {/* Steps Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {steps.map((item) => (
           <motion.div

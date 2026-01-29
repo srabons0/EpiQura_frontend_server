@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   BsFillPeopleFill,
@@ -8,15 +8,13 @@ import {
 import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
 import img1 from "/assets/logo/logo.png";
 import { Link, NavLink } from "react-router-dom";
-import { IoHome, IoSearch } from "react-icons/io5";
+import { IoHome,  IoLocationSharp } from "react-icons/io5";
 import { MdOutlineRestaurantMenu, MdSpaceDashboard } from "react-icons/md";
-import { FaShoppingCart, FaSignInAlt } from "react-icons/fa";
+import {  FaSignInAlt } from "react-icons/fa";
 import { IoIosCall } from "react-icons/io";
 import useAuth from "../../hooks/useAuth";
-import useDataLoader from "../../hooks/useDataLoader";
-import SearchBar from "../ui/SearchBar";
-import LogoutBtn from "../ui/LogoutBtn";
-import useLoader from "../../hooks/useLoader";
+import useAdmin from "../ui/useAdmin";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const variants = {
   open: {
@@ -39,16 +37,15 @@ const variants = {
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [users, setUsers] = useState();
   const { user, loading } = useAuth();
-  const data = useDataLoader();
+  const [isAdmin] = useAdmin();
+console.log(isAdmin)
 
   const menuItems = [
     { to: "/", label: "Home", icon: IoHome },
     { to: "/recipes/beef", label: "Recipes", icon: MdOutlineRestaurantMenu },
     {
-      to: isAdmin ? "/dashboard/admin/home" : "/dashboard/user/home",
+      to:  isAdmin ? "/dashboard/admin/home" : "/dashboard/user/home",
       label: "Dashboard",
       icon: MdSpaceDashboard,
     },
@@ -73,7 +70,7 @@ const Navbar = () => {
               transition={{ duration: 1, delay: 0.5 }}
               tabIndex={0}
               role="button"
-              className={` text-white bg-black p-3 z-20 relative cursor-pointer btn-circle`}
+              className={` text-white bg-black p-1.5 md:p-2.5 z-50 relative cursor-pointer btn-circle`}
             >
               {!isActive ? (
                 <motion.div
@@ -86,7 +83,7 @@ const Navbar = () => {
                     damping: 20,
                   }}
                 >
-                  <BsMenuButtonWide className="md:w-6 md:h-6" />
+                  <BsMenuButtonWide className="w-3 h-3 md:w-6 md:h-6" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -98,7 +95,7 @@ const Navbar = () => {
                     damping: 20,
                   }}
                 >
-                  <AiOutlineClose className="md:w-6 md:h-6" />
+                  <AiOutlineClose className="w-3 h-3  md:w-6 md:h-6" />
                 </motion.div>
               )}
             </motion.div>
@@ -108,8 +105,8 @@ const Navbar = () => {
               tabIndex={0}
               className={`${
                 isActive ? "absolute" : "hidden"
-              } pt-32 pb-10 w-48 md:w-64 md:ps-14 ps-5 text-[12px] -top-7 h-[770px] -left-5 z-10
-               text-white bg-[#00000078] flex flex-col gap-10 text-center`}
+              } pt-32 pb-10 w-48 md:w-64 md:ps-14 ps-5 text-[12px]  -top-7 rounded-b-lg md:h-[770px] -left-5 z-40
+               text-white bg-[#00000099] flex flex-col gap-10 text-center`}
             >
               {menuItems.map(({ to, label, icon: Icon }) => (
                 <motion.li
@@ -125,8 +122,8 @@ const Navbar = () => {
                  px-4 py-2 rounded-md
            ${
              isActive
-               ? "bg-white/10 border-l-4 border-orange-500 text-white"
-               : "border-l-4 border-transparent hover:bg-white/10"
+               ? "bg-white/40 border-l-4 border-orange-500 text-white"
+               : "border-l-4 border-transparent hover:bg-white/20"
            }`
                     }
                   >
@@ -166,9 +163,22 @@ const Navbar = () => {
         </motion.div>
 
         <div className="navbar-end gap-1 ">
-          {/* <IoSearch className="md:w-6 md:h-6 text-white" /> */}
-          <SearchBar></SearchBar>
-
+<motion.div
+            whileHover={{ scale: 1.102 }}
+            whileTap={{ scale: 0.95 }}
+            className=""
+          >
+            <Link to="/coverage">
+              <motion.button
+                initial={{ opacity: 0, scale: -0.5, y: -100 }}
+                animate={{ opacity: 2, scale: 1.1, y: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="md:p-3 p-2 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle mr-2 md:mr-5  z-30"
+              >
+                <IoLocationSharp className="md:w-6 md:h-6 text-white" />
+              </motion.button>
+            </Link>
+          </motion.div>
           <motion.div
             whileHover={{ scale: 1.102 }}
             whileTap={{ scale: 0.95 }}
@@ -179,7 +189,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, scale: -0.5, y: 100 }}
                 animate={{ opacity: 2, scale: 1.1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="p-3 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle md:mr-5  z-30"
+                className="md:p-3 p-2 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle md:mr-5  z-30"
               >
                 <AiOutlineShoppingCart className="md:w-6 md:h-6 text-white" />
               </motion.button>

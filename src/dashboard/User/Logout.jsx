@@ -8,14 +8,14 @@ const Logout = ({ clearAuth }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear user authentication / tokens
+   
     clearAuth();
     toast.success("You have successfully logged out!");
-    navigate("/"); // redirect to home page
+    navigate("/");
   };
 
   useEffect(() => {
-    // Optional: auto-logout after 5 seconds
+  
     const timer = setTimeout(handleLogout, 5000);
     return () => clearTimeout(timer);
   }, []);

@@ -10,20 +10,19 @@ const image_url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
 const AddProduct = () => {
   const axiosSecure = useAxiosSecure();
   const [images, setImages] = useState(false);
+  const [specialOffer, setSpecialOffer] = useState("Regular");
   const dataloader = useDataLoader();
   const { register, handleSubmit, reset } = useForm();
   const [error, setError] = useState("");
   const [selectCategory, categoryIsPending, categoryRefetch] = useLoader(
     "category",
-    `/category`
+    `/category`,
   );
   const onSubmit = async (data) => {
-   
-    if(data.price <= 0 || data.cookingTime <=0){
+    if (data.price <= 0 || data.cookingTime <= 0) {
       return setError("Price and Cooking time must be greater than zero.");
     }
- 
-    
+
     if (data.menuSection === "default" && data.category === "default") {
       return setError("Please select your category to proceed.");
     }
@@ -44,6 +43,11 @@ const AddProduct = () => {
       added_at: new Date().toISOString(),
       ingredients: data.ingredients,
       img: res.data.data.display_url,
+       specialOffer: {
+        title: data.title,
+        badgeNote: data.badgeNote,
+        description: data.description,
+      },
     };
     console.log(info);
 
@@ -75,140 +79,194 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="py-10 bg-[#dbdbdb1e]">
-      <div className="w-10/12 mx-auto border-4 p-10 rounded-lg  border-[#282828] bg-[#f8b44d]  text-white">
-        <p className="text-4xl text-center mb-10 font-bold  underline underline-offset-4">
-          Add Your Recipe
-        </p>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex items-center justify-center gap-10">
-            <div className="w-2/3">
-              <label className="text-lg font-bold ">Recipe Name</label>
-              <input
-                className="input placeholder:text-lg  rounded-lg shadow-lg text-lg font-semibold input-bordered mt-3 mb-4 w-full
-                             bg-[#ffffff19] border-[#ffffff] border-2 placeholder:text-white"
-                placeholder="Name"
-                required
-                {...register("name")}
-              />
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 py-12 px-4">
+  <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl p-6 sm:p-10">
 
-              <label className="text-lg font-bold ">Price</label>
-              <input
-                className="input placeholder:text-lg  rounded-lg shadow-lg text-lg font-semibold input-bordered mt-3 mb-4 w-full 
-                            bg-[#ffffff19] border-[#ffffff] border-2 placeholder:text-white"
-                placeholder="Price"
-                type="number"
-                step="0.01"
-                required
-                {...register("price")}
-              />
+    <h2 className="text-xl lg:text-3xl md:text-4xl font-bold text-slate-800 text-center mb-12 tracking-tight">
+      Add Your Recipe
+    </h2>
 
-              <label className="text-lg font-bold ">Cooking Time</label>
-              <input
-                className="input placeholder:text-lg text-lg font-semibold input-bordered mt-3 mb-4  rounded-lg shadow-lg w-full 
-                            bg-[#ffffff19] border-[#ffffff] border-2 placeholder:text-white"
-                placeholder="Cooking Time"
-                type="number"
-                required
-                {...register("cookingTime")}
-              />
-              
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
 
-              <label className="text-lg font-bold ">Choose Your Category</label>
-              <select
-                defaultValue="default"
-                className="select rounded-lg shadow-lg select-bordered text-lg font-semibold mb-4 mt-3
-                             w-full bg-[#f8b44d] text-white border-[#ffffff] border-2 placeholder:text-white"
-                required
-                {...register("category")}
-              >
-                <option disabled value="default">
-                  Choose Category
-                </option>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-                {selectCategory.map((category) => (
-                  <option key={category._id} value={category.name}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+        <div className="space-y-5">
 
-              <label className="text-lg font-bold ">
-                Specialty Sections (If you have)
-              </label>
-              <select
-                defaultValue="default"
-                className="select rounded-lg shadow-lg select-bordered text-lg font-semibold mb-4 mt-3
-                             w-full bg-[#f8b44d] text-white border-[#ffffff] border-2 placeholder:text-white"
-                required
-                {...register("menuSection")}
-              >
-                <option disabled value="default">
-                  Menu Section Category
-                </option>
-
-                <option value="Regular">Regular Dish</option>
-                <option value="TopFood">Top Food</option>
-                <option value="SpecialOffer">Special Offer</option>
-                <option value="Popular">Popular</option>
-              </select>
-              {error && (
-                <div className="text-lg font-semibold mb-3 mt-10 text-red-600">
-                  {error}
-                </div>
-              )}
-            </div>
-            <div className="w-2/3 flex flex-col justify-center items-center gap-5">
-              <div className="relative">
-                <img
-                  className=" w-64 h-64 text-white outline-8 outline-[#ffc670]
-                    shadow-lg bg-[#ffb443] object-contain rounded-full border-[#ffffff] border-8 drop-shadow-lg"
-                  src={images ? images : img}
-                  alt=""
-                />
-                <input
-                  onInput={handleImageUpload}
-                  className="bg-black w-64 h-64 rounded-full absolute
-                                cursor-pointer top-0 left-0 opacity-0"
-                  {...register("image")}
-                  required
-                  type="file"
-                  name="image"
-                  id=""
-                />
-              </div>
-              <label className="text-lg font-bold ">
-                Upload Your Recipe Photo Here
-              </label>
-              <div className="w-full mt-4 flex flex-col justify-start items-start">
-                <label className="text-lg font-bold ">Additional Note</label>
-                <input
-                  className="input placeholder:text-lg text-lg font-semibold input-bordered w-full mb-4 mt-3 rounded-lg shadow-lg  
-                             bg-[#ffffff19] border-[#ffffff] border-2 placeholder:text-white"
-                  placeholder="optional"
-                  {...register("additionalNote")}
-                />
-
-                <label className="text-lg font-bold ">Ingredients</label>
-                <textarea
-                  className="textarea textarea-bordered text-lg font-semibold mt-3 w-full h-28 rounded-lg shadow-lg placeholder:text-lg bg-[#ffffff19] 
-                  border-[#ffffff] border-2 placeholder:text-white"
-                  placeholder="Ingredients"
-                  required
-                  name=""
-                  id=""
-                  {...register("ingredients")}
-                ></textarea>
-              </div>
-            </div>
+          <div>
+            <label className="font-semibold text-slate-700">Recipe Name</label>
+            <input
+              {...register("name")}
+              required
+              placeholder="Recipe name"
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-700 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            />
           </div>
 
-          <button className="border-[#ffffff] border-2 btn w-full bg-[#ffffff19] hover:border-[#ff8400ae] rounded-lg py-3 h-12 hover:bg-[#ffaa2b] text-lg font-bold text-white mt-10 shadow-lg">
-            Add Recipe
-          </button>
-        </form>
+          <div>
+            <label className="font-semibold text-slate-700">Price</label>
+            <input
+              {...register("price")}
+              type="number"
+              step="0.01"
+              required
+              placeholder="Price"
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="font-semibold text-slate-700">Cooking Time (minutes)</label>
+            <input
+              {...register("cookingTime")}
+              type="number"
+              required
+              placeholder="Cooking time"
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="font-semibold text-slate-700">Category</label>
+            <select
+              {...register("category")}
+              defaultValue="default"
+              required
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            >
+              <option disabled value="default">
+                Choose category
+              </option>
+              {selectCategory.map((category) => (
+                <option key={category._id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="font-semibold text-slate-700">
+              Menu Section
+            </label>
+            <select
+              {...register("menuSection")}
+              onChange={(e) => setSpecialOffer(e.target.value)}
+              required
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            >
+              <option disabled value="">
+                Select section
+              </option>
+              <option value="Regular">Regular Dish</option>
+              <option value="TopFood">Top Food</option>
+              <option value="SpecialOffer">Special Offer</option>
+              <option value="Popular">Popular</option>
+              <option value="BestSellers">Best Sellers</option>
+            </select>
+          </div>
+
+          {error && (
+            <p className="text-red-600 font-semibold">{error}</p>
+          )}
+        </div>
+
+        <div className="flex flex-col items-center gap-6">
+
+          <div className="relative group">
+            <img
+              src={images ? images : img}
+              alt=""
+              className="w-60 h-60 rounded-full object-cover border-4 border-orange-400 shadow-xl"
+            />
+            <input
+              {...register("image")}
+              onInput={handleImageUpload}
+              required
+              type="file"
+              className="absolute inset-0 opacity-0 cursor-pointer z-50"
+            />
+            <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+            <span className="text-white font-semibold">
+              Upload Photo
+            </span>
+          </div>
+          </div>
+
+          <p className="font-semibold text-slate-600">
+            Upload Recipe Image
+          </p>
+
+          <div className="w-full space-y-4">
+            <div>
+              <label className="font-semibold text-slate-700">
+                Additional Note
+              </label>
+              <input
+                {...register("additionalNote")}
+                placeholder="Optional"
+                className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold text-slate-700">
+                Ingredients
+              </label>
+              <textarea
+                {...register("ingredients")}
+                required
+                placeholder="List ingredients"
+                className="mt-2 w-full h-28 resize-none rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {specialOffer === "SpecialOffer" && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="font-semibold text-slate-700">Offer Title</label>
+            <input
+              {...register("title")}
+              placeholder="Offer title"
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            />
+            <label className="font-semibold text-slate-700 mt-4 block">
+              Description
+            </label>
+            <input
+              {...register("description")}
+              placeholder="Offer description"
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="font-semibold text-slate-700">Badge Note</label>
+            <input
+              {...register("badgeNote")}
+              placeholder="Limited / Hot Deal"
+              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 font-medium focus:ring-2 focus:ring-orange-400 focus:outline-none"
+            />
+          </div>
+        </div>
+      )}
+
+      <button
+        type="submit"
+        className="
+          w-full py-4 rounded-2xl text-lg font-bold text-white
+          bg-linear-to-r from-orange-400 to-orange-600
+          shadow-lg hover:shadow-2xl transition
+        "
+      >
+        Add Recipe
+      </button>
+    </form>
+  </div>
+</div>
+
   );
 };
 

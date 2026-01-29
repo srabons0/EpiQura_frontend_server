@@ -100,7 +100,7 @@ const handleDelete = async (id) => {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by Product ID or Name"
+            placeholder="Search by User ID or Name"
             className="w-full rounded-xl border border-gray-300 px-10 py-2 outline-none focus:ring-2 focus:ring-orange-400 shadow-sm"
           />
         </div>

@@ -1,0 +1,3 @@
+.leaflet-container .leaflet-control-attribution{
+    opacity: 0 ! important;
+}

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 export default function AppDownload() {
   return (
     <section className="w-11/12 mx-auto my-20">
-      {/* Header */}
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-[#ff9543]">
           Download Our App
@@ -15,9 +14,7 @@ export default function AppDownload() {
         </p>
       </div>
 
-      {/* Content */}
       <div className="grid md:grid-cols-2 gap-12 md:gap-0 items-center">
-        {/* Image / Illustration */}
         <motion.div
         initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0, }}
@@ -30,7 +27,6 @@ export default function AppDownload() {
           />
         </motion.div>
 
-        {/* Text + Buttons */}
          <motion.div
         initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0, }}
@@ -45,9 +41,7 @@ export default function AppDownload() {
             discounts only available through the app.
           </p>
 
-          {/* Store Buttons */}
           <div className="flex flex-wrap gap-4">
-            {/* Play Store */}
             <a
               href="https://play.google.com/store/apps?hl=en"
               target="_blank"
@@ -64,7 +58,6 @@ export default function AppDownload() {
               </div>
             </a>
 
-            {/* App Store */}
             <a
               href="https://www.apple.com/app-store/"
               target="_blank"

@@ -10,7 +10,6 @@ const LogoutBtn = ({ onLogout }) => {
   const dropdownRef = useRef(null);
      const { user, logoutUser } = useAuth();
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

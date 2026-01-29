@@ -25,7 +25,7 @@ const PaymentModal = ({ payment, onClose, handleUpdateStatus }) => {
           <FaTimes size={18} />
         </button>
 
-        <h2 className="text-lg font-bold text-gray-400 mb-4">
+        <h2 className="text-sm lg:text-lg font-bold text-gray-400 mb-4">
           ##{payment._id}
         </h2>
 
@@ -36,7 +36,7 @@ const PaymentModal = ({ payment, onClose, handleUpdateStatus }) => {
           </div>
           <div>
             <p className="text-gray-400">Email</p>
-            <p className="font-medium">{payment.email}</p>
+            <p className="font-medium text-[10px] lg:text-sm">{payment.email}</p>
           </div>
           <div>
             <p className="text-gray-400">Amount</p>
@@ -55,7 +55,7 @@ const PaymentModal = ({ payment, onClose, handleUpdateStatus }) => {
           </div>
           <div>
             <p className="text-gray-400">Date</p>
-            <p className="font-medium">
+            <p className="font-medium text-xs lg:text-sm">
               {payment?.date &&
                 new Date(payment.date).toLocaleString("en-BD", {
                   dateStyle: "medium",
@@ -70,24 +70,24 @@ const PaymentModal = ({ payment, onClose, handleUpdateStatus }) => {
         </div>
 
     
-        <div className="flex gap-3">
+        <div className="flex gap-3 lg:text-base text-xs">
           <button
             onClick={() => handleUpdateStatus(payment._id, "Completed")}
             className="flex-1 bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 transition flex items-center justify-center gap-2"
           >
-            <FaCheckCircle /> Mark Completed
+            <FaCheckCircle />  Completed
           </button>
           <button
             onClick={() => handleUpdateStatus(payment._id, "Pending")}
             className="flex-1 bg-yellow-200 text-yellow-800 py-2 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
           >
-            <FaCheckCircle /> Mark Pending
+            <FaCheckCircle />  Pending
           </button>
           <button
             onClick={() => handleUpdateStatus(payment._id, "Failed")}
             className="flex-1 bg-red-600 text-white py-2 rounded-xl hover:bg-red-700 transition flex items-center justify-center gap-2"
           >
-            <FaTimesCircle /> Mark Failed
+            <FaTimesCircle />  Failed
           </button>
         </div>
       </motion.div>

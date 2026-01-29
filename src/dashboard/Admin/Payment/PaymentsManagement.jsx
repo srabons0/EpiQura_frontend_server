@@ -10,7 +10,7 @@ import {
   FaRegTrashAlt,
   FaClock,
 } from "react-icons/fa";
-import PaymentModal from "./PaymentModal"; // Import modal component
+import PaymentModal from "./PaymentModal"; 
 import useLoader from "../../../hooks/useLoader";
 import PaymentDetailsModal from "./PaymentDetailsModal";
 import toast, { Toaster } from "react-hot-toast";
@@ -26,7 +26,7 @@ const PaymentsManagement = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [updateStatus, setUpdateStatus] = useState(null);
-  const [selectedPayment, setSelectedPayment] = useState(null); // For modal
+  const [selectedPayment, setSelectedPayment] = useState(null); 
   const axiosSecure = useAxiosSecure();
 
   const filteredPayments = payments.filter((p) => {
@@ -112,7 +112,7 @@ const PaymentsManagement = () => {
 
       
       <div className="flex flex-col md:flex-row gap-4 mb-6">
-        <div className="relative  w-2/5">
+        <div className="relative  w-full md:max-w-md">
           <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
@@ -215,7 +215,6 @@ const PaymentsManagement = () => {
     </div>)}
       
 
-      {/* Payments Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {filteredPayments.map((payment, index) => (
           <motion.div

@@ -8,16 +8,15 @@ export default function Newsletter() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // TODO: send email to backend
+   
     console.log("Newsletter subscribed:", email);
 
-    setEmail(""); // clear input
+    setEmail(""); 
   };
 
   return (
     <section className="w-11/12 mx-auto my-36">
       
-      {/* Section Header */}
       <div className="text-center max-w-xl mx-auto mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-[#ff9543]">
           Subscribe to Our Newsletter
@@ -27,7 +26,6 @@ export default function Newsletter() {
         </p>
       </div>
 
-      {/* Newsletter Form */}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col md:flex-row items-center justify-center gap-4"

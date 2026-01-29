@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import axios from "axios";
 import { FaRegClock, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
@@ -9,16 +8,12 @@ import useDataLoader from "../../../hooks/useDataLoader";
 import RollingCounter from "../../ui/RollingCounter";
 import toast, { Toaster } from "react-hot-toast";
 
-const RecipeDetails = ({ id }) => {
+const RecipeDetails = ({ id,opacity }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  // console.log(quantity);
   const data = useDataLoader();
   const { user } = useAuth();
   const [item, setItem] = useState([]);
-  // console.log(id);
-  // console.log(item);
-  //   useScrollToTop("smooth");
 
   useEffect(() => {
     data.get(`/foodItemId/${id}`).then((res) => {
@@ -62,9 +57,8 @@ const RecipeDetails = ({ id }) => {
 
   const backdrop = {
     visible: { opacity: 1 },
-    //    hidden: { opacity: 0 }
   };
-  const modal = {
+ const modal = {
     hidden: {
       rotateX: -90,
       rotateY: -90,
@@ -93,18 +87,20 @@ const RecipeDetails = ({ id }) => {
 
   return (
     <div className="">
+    
       <motion.button
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.96 }}
         onClick={() => setIsOpen(true)}
-        className="w-full md:w-1/2 border-2 cursor-pointer border-[#ff9543] text-[#ff9543] bg-[#fa81000e] py-3 font-bold  md:text-xl rounded-md md:mt-4 mt-2"
+        className={`px-6 sm:px-9 border-2 cursor-pointer border-[#ff9543] text-[#ff9543] bg-[#fa81000e] py-3 font-bold text-base sm:text-xl rounded-md mt-2 sm:mt-4 ${opacity&& opacity}`}
       >
         See Details
       </motion.button>
-      <AnimatePresence>
+
+      <AnimatePresence >
         {isOpen && (
           <motion.div
-            className="fixed inset-0  flex items-center justify-center"
+            className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 px-4"
             variants={backdrop}
             initial="hidden"
             animate="visible"
@@ -112,112 +108,123 @@ const RecipeDetails = ({ id }) => {
             onClick={() => setIsOpen(false)}
           >
             <motion.div
-              className="bg-white rounded-xl  pb-3 px-6 mt-17 w-1/2 shadow-xl relative"
+              className="bg-white rounded-2xl max-w-100 shadow-xl md:w-full md:max-w-220 max-h-[90vh] overflow-y-auto"
               variants={modal}
               initial="hidden"
               animate="visible"
               exit="exit"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="  h-[550px]">
-                <motion.div className="flex flex-col-reverse justify-around px-10 items-center py-8">
-                  <div className="">
-                    <p className="text-2xl font-semibold mt-5 mb-4">
-                      {" "}
+              <div className="p-5 sm:p-8">
+                <div className="flex flex-col lg:flex-row gap-4 md:gap-8 items-center">
+                 
+                  <img
+                    className="w-full sm:w-72 h-48 sm:h-72 object-cover rounded-xl"
+                    src={item.img}
+                    alt=""
+                  />
+
+                
+                  <div className="flex-1 w-full ">
+                    <h2 className="text-xl sm:text-2xl font-semibold mb-4">
                       {item.name}
-                    </p>
-                    {/* <p className="text-xl "><span className="text-xl font-semibold">Location:
-                    </span> {item.location}</p> */}
-                    <div className="flex gap-6">
-                      <div className="w-2/3">
-                        <p>
-                          <span className=" font-semibold">Ingredients: </span>
+                    </h2>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                      <div>
+                        <p className="text-sm sm:text-base">
+                          <span className="font-semibold">Ingredients: </span>
                           {item.ingredients}
                         </p>
 
                         {item.additionalNote && (
-                          <p className=" ">
-                            <span className=" font-semibold">
+                          <p className="mt-2 text-sm sm:text-base">
+                            <span className="font-semibold">
                               Dish Details:{" "}
-                            </span>{" "}
+                            </span>
                             {item.additionalNote}
                           </p>
                         )}
                       </div>
-                      <div className="flex flex-col gap-2">
-                        <p className="flex items-center gap-1">
-                          <span className=" font-semibold">Cooking: </span>
-                          <FaRegClock />
-                          {item.cookingTime}min
-                        </p>
-                        <p className="flex items-center gap-1">
-                          <span className=" font-semibold">Rating: </span>
-                          <FaStar />
-                          {item.rating ? item.rating : 0}
-                        </p>
-                        <p className=" ">
-                          <span className=" font-semibold">price: </span> ৳
-                          {item.realPrice}
-                        </p>
-                        <p className=" ">
-                          <span className=" font-semibold">
-                            Delivery cost:{" "}
-                          </span>
-                          ৳99
-                        </p>
+                      <div className="flex justify-between items-end mr-10">
+                        <div className="flex flex-col gap-2 text-sm sm:text-base">
+                          <p className="flex items-center gap-1">
+                            <span className="font-semibold">Cooking:</span>
+                            <FaRegClock /> {item.cookingTime} min
+                          </p>
+
+                          <p className="flex items-center gap-1">
+                            <span className="font-semibold">Rating:</span>
+                            <FaStar /> {item.rating || 0}
+                          </p>
+
+                          <p>
+                            <span className="font-semibold">Price:</span> ৳
+                            {item.realPrice}
+                          </p>
+
+                          <p>
+                            <span className="font-semibold">Delivery:</span> ৳99
+                          </p>
+                        </div>
+                        <div className="block md:hidden">
+                          <RollingCounter
+                            initial={1}
+                            min={1}
+                            max={50}
+                            onChange={(n) => setQuantity(n)}
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div className="flex justify-between gap-5 items-center mt-6">
-                      <div>
-                        {!user ? (
-                          <Link to="/login">
-                            <motion.button
-                              whileHover={{ scale: 1.06 }}
-                              whileTap={{ scale: 0.95 }}
-                              className="w-[300px] border-2 text-[#ff9543] border-[#ff9543]  py-3 font-bold  text-xl rounded-md"
-                            >
-                              Add to cart
-                            </motion.button>
-                          </Link>
-                        ) : (
-                          <motion.button
-                            whileHover={{ scale: 1.06 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={handleAddToCart}
-                            className="w-[300px] border-2 text-[#ff9543] border-[#ff9543]  py-3 font-bold  text-xl rounded-md"
-                          >
-                            Add to cart
-                          </motion.button>
-                        )}
-                      </div>
-
+                    <div className="hidden md:block">
                       <RollingCounter
                         initial={1}
                         min={1}
                         max={50}
                         onChange={(n) => setQuantity(n)}
                       />
+                    </div>
+                   
+                    <div className="md:mt-6 flex flex-col sm:flex-row gap-4 items-center">
+                      {!user ? (
+                        <Link to="/login" className="w-full sm:w-auto">
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="w-full sm:w-64 border-2 text-[#ff9543] border-[#ff9543] py-3 font-bold rounded-md"
+                          >
+                            Add to cart
+                          </motion.button>
+                        </Link>
+                      ) : (
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={handleAddToCart}
+                          className="w-full sm:w-64 border-2 text-[#ff9543] border-[#ff9543] md:py-3 py-2 font-bold rounded-md"
+                        >
+                          Add to cart
+                        </motion.button>
+                      )}
+
                       <motion.button
-                        whileHover={{ scale: 1.06 }}
+                        whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsOpen(false)}
-                        className="w-[200px] px-4 py-3 bg-red-500 font-medium text-white rounded-lg hover:bg-red-400 transition"
+                        className="w-full sm:w-40 px-4 py-2 md:py-3 bg-red-500 font-medium text-white rounded-lg hover:bg-red-400 transition"
                       >
                         Close
                       </motion.button>
                     </div>
                   </div>
-                  <img
-                    className="w-full md:w-[210px] h-28 md:h-[220px] oject-cover rounded-xl"
-                    src={item.img}
-                    alt=""
-                  />
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
       <Toaster position="top-right" reverseOrder={false} />
     </div>
   );

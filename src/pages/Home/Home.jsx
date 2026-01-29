@@ -15,7 +15,7 @@ import Testimonials from "./Testimonials/Testimonials";
 const Home = () => {
   useScrollToTop();
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-fit overflow-hidden">
       <ShoppingCart></ShoppingCart>
       <Banner></Banner>
       <Categories></Categories>

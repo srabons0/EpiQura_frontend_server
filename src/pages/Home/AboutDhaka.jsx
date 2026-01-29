@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 const AboutDhaka = () => {
     return (
      <section className="w-11/12 mx-auto  my-36">
-      {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h2 className="text-3xl md:text-4xl font-bold text-[#ff9543]">
           Fast Food Delivery in Dhaka
@@ -16,7 +15,6 @@ const AboutDhaka = () => {
         </p>
       </div>
 
-      {/* Content Sections */}
       <div className="grid grid-cols-1  md:grid-cols-2 gap-12 w-5/6 mx-auto">
         <motion.div 
             initial={{ opacity: 0, x: -40 }}

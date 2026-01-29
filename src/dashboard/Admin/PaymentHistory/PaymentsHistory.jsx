@@ -211,10 +211,10 @@ const PaymentsHistory = () => {
                       (sum, item) => sum + item.quantity * item.realPrice,
                       0
                     )}
-                    ,{payment.price}
+                    
                   </td>
                   <td>
-                    <span className="badge text-white font-medium badge-success">
+                    <span className={` text-white font-medium ${payment.paymentStatus === "Completed" ? "bg-green-600 badge-success badge" : "bg-red-600 badge badge-error"}`}>
                       {payment.paymentStatus}
                     </span>
                   </td>

@@ -37,13 +37,8 @@ const UserProfile = () => {
     `/user?email=${user.email}`,
     !!user?.email && !loading
   );
-  // console.log(users);
-
-  useEffect(() => {
-    if (users) {
-      reset();
-    }
-  }, [users, reset]);
+  console.log(users);
+  console.log(user);
 
   const navigate = useNavigate();
   // const { logOut } = useAuth();
@@ -104,133 +99,135 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen flex flex-col gap-10">
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold text-gray-800"
-      >
-        Profile Details
-      </motion.h2>
+    <div className="min-h-screen bg-slate-50 px-4 sm:px-6 lg:px-10 py-10">
+  <motion.h2
+    initial={{ opacity: 0, y: -16 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="text-2xl sm:text-3xl font-bold text-slate-800 mb-10 text-center"
+  >
+    Profile Details
+  </motion.h2>
 
-      <motion.form
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-3xl flex flex-col gap-6 mx-auto"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-          Profile Picture
-        </h3>
-        <div className="w-2/3 flex items-center gap-5">
-          <img
-            className=" w-36 h-36 object-cover rounded-full transition duration-300 group-hover:scale-[1.03] border-[#666666] border-2"
-            src={images ? images : user?.photoURL ? user?.photoURL : photoUploader}
-            alt=""
-          />
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className=" relative flex items-center rounded-lg border-[#a9a9a9] border-2 justify-center w-40 h-10 cursor-pointer"
-          >
-            <label className="text-lg font-bold ">Update Photo</label>
-            <input
-              onInput={handleImageUpload}
-              className="bg-black w-full h-full absolute -top-0.5 left-0 opacity-5"
-              {...register("image")}
-              type="file"
-              name="image"
-              id=""
-            />
-          </motion.div>
+  <motion.form
+    initial={{ opacity: 0, scale: 0.98 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.3 }}
+    onSubmit={handleSubmit(onSubmit)}
+    className="mx-auto max-w-4xl bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10 space-y-10"
+  >
+    <div className="flex flex-col sm:flex-row items-center gap-6">
+      <img
+        src={
+          images
+            ? images
+            : user?.photoURL
+            ? user.photoURL
+            : photoUploader
+        }
+        alt="Profile"
+        className="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-slate-200"
+      />
+
+      <label className="relative cursor-pointer">
+        <input
+          type="file"
+          {...register("image")}
+          onInput={handleImageUpload}
+          className="absolute inset-0 opacity-0 cursor-pointer"
+        />
+        <div className="px-6 py-2 rounded-xl border border-slate-300 text-slate-700 font-semibold hover:bg-slate-100 transition">
+          Update Photo
         </div>
-
-        {/* Personal Information */}
-        <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-          Profile Information
-        </h3>
-
-        <div className="flex flex-col gap-2">
-          <label className="font-semibold text-gray-700 flex items-center gap-2">
-            <FaUser /> Name
-          </label>
-          <input
-            type="text"
-            defaultValue={users.name}
-            className="p-3 border rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            {...register("name", { required: "Name is required" })}
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label className="font-semibold text-gray-700 flex items-center gap-2">
-            <FaEnvelope /> Email
-          </label>
-          <input
-            type="email"
-            defaultValue={users.email}
-            className="p-3 border rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            {...register("email", { required: "Email is required" })}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label className="font-semibold text-gray-700 flex items-center gap-2">
-            <FaPhone /> Phone
-          </label>
-          <input
-            type="tel"
-            defaultValue={users.phone}
-            className="p-3 border rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            {...register("phone", {
-              required: "Phone number is required",
-              pattern: {
-                value: /^[0-9]{11}$/,
-                message: "Enter a valid 11-digit number",
-              },
-            })}
-          />
-          {errors.phone && (
-            <p className="text-red-500 text-sm">{errors.phone.message}</p>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label className="font-semibold text-gray-700 flex items-center gap-2">
-            <FaMapMarkerAlt /> Address
-          </label>
-          <input
-            type="text"
-            defaultValue={users.address}
-            className="p-3 border rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            {...register("address", { required: "Address is required" })}
-          />
-          {errors.address && (
-            <p className="text-red-500 text-sm">{errors.address.message}</p>
-          )}
-        </div>
-
-        {/* Submit */}
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.97 }}
-          type="submit"
-          className="bg-linear-to-r from-yellow-400 to-orange-500 text-white font-bold py-3 rounded-xl shadow-lg mt-4 hover:shadow-xl"
-        >
-          Save Changes
-        </motion.button>
-      </motion.form>
-
-      <Toaster position="top-center" reverseOrder={false} />
-
-      <Logout></Logout>
+      </label>
     </div>
+
+    <div className="border-t border-slate-200" />
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-1">
+        <label className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+          <FaUser /> Name
+        </label>
+        <input
+          type="text"
+          defaultValue={users.name}
+          {...register("name", { required: "Name is required" })}
+          className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+        />
+        {errors.name && (
+          <p className="text-xs text-red-500">{errors.name.message}</p>
+        )}
+      </div>
+
+      <div className="space-y-1">
+        <label className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+          <FaEnvelope /> Email
+        </label>
+        <input
+          type="email"
+          defaultValue={users.email}
+          {...register("email", { required: "Email is required" })}
+          className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+        />
+        {errors.email && (
+          <p className="text-xs text-red-500">{errors.email.message}</p>
+        )}
+      </div>
+
+      <div className="space-y-1">
+        <label className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+          <FaPhone /> Phone
+        </label>
+        <input
+          type="tel"
+          defaultValue={users.phone}
+          {...register("phone", {
+            required: "Phone number is required",
+            pattern: {
+              value: /^[0-9]{11}$/,
+              message: "Enter a valid 11-digit number",
+            },
+          })}
+          className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+        />
+        {errors.phone && (
+          <p className="text-xs text-red-500">{errors.phone.message}</p>
+        )}
+      </div>
+
+      <div className="space-y-1">
+        <label className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+          <FaMapMarkerAlt /> Address
+        </label>
+        <input
+          type="text"
+          defaultValue={users.address}
+          {...register("address", { required: "Address is required" })}
+          className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+        />
+        {errors.address && (
+          <p className="text-xs text-red-500">{errors.address.message}</p>
+        )}
+      </div>
+    </div>
+
+    <motion.button
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.97 }}
+      type="submit"
+      className="w-full sm:w-auto px-10 py-3 rounded-xl font-bold text-white bg-linear-to-r from-yellow-400 to-orange-500 shadow-lg hover:shadow-xl transition"
+    >
+      Save Changes
+    </motion.button>
+  </motion.form>
+
+  <Toaster position="top-center" reverseOrder={false} />
+
+  <div className="mt-10 flex justify-center">
+    <Logout />
+  </div>
+</div>
+
   );
 };
 

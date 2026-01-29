@@ -43,7 +43,6 @@ const CheckOutForm = ({transcription,setTranscription}) => {
 
   //   console.log(info);
 
-  // Request PaymentIntent from backend if Stripe payment
   useEffect(() => {
     if (totalPrice) {
       axiosSecure
@@ -62,7 +61,6 @@ const CheckOutForm = ({transcription,setTranscription}) => {
   }, [axiosSecure, totalPrice]);
 console.log("clientSecret:", clientSecret,totalPrice);
 
-  // Handle card payment submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -91,7 +89,7 @@ console.log("clientSecret:", clientSecret,totalPrice);
       setError("");
     }
 
-    // confirm payment
+  
     console.log("clientSecret", clientSecret);
 
     const { paymentIntent, error: confirmError } =
@@ -144,7 +142,7 @@ console.log("clientSecret:", clientSecret,totalPrice);
     }
   };
 
-  // Save order to backend
+  
 
   return (
     <div className="w-full mt-10">
@@ -156,32 +154,58 @@ console.log("clientSecret:", clientSecret,totalPrice);
           <label className="text-2xl font-semibold text-center mb-6">
             Pay To Card
           </label>
-          <CardElement
-            className="w-full border-2 bg-white text-lg px-3 py-4 rounded-lg border-black"
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#424770",
-                  "::placeholder": {
-                    color: "#aab7c4",
-                  },
-                },
-                invalid: {
-                  color: "#9e2146",
-                },
-              },
-            }}
-          />
+<div className="relative w-full">
+  <CardElement
+    className="
+      w-full
+      rounded-2xl
+      bg-white/80
+      backdrop-blur-md
+      px-5
+      py-4
+      shadow-md
+      ring-1
+      ring-black/10
+      transition-all
+      focus-within:ring-2
+      focus-within:ring-orange-400
+      focus-within:shadow-lg
+    "
+    options={{
+      style: {
+        base: {
+          fontSize: "16px",
+          fontFamily: "Poppins, system-ui, sans-serif",
+          color: "#111827",
+          fontWeight: "500",
+          letterSpacing: "0.03em",
+          "::placeholder": {
+            color: "#9ca3af",
+          },
+        },
+        invalid: {
+          color: "#ef4444",
+          iconColor: "#ef4444",
+        },
+        complete: {
+          color: "#16a34a",
+        },
+      },
+    }}
+  />
+</div>
+
+
+
         </div>
-        <p className="text-xl font-bold text-[#fd4545] mt-5">{error}</p>
+        <p className="text-sm lg:text-xl font-bold text-[#fd4545] mt-5">{error}</p>
 
         <motion.button
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.9 }}
           type="submit"
           disabled={!stripe}
-          className="btn-block px-9 py-4 block mt-8 text-center font-medium uppercase text-white no-underline  shadow-[0_0_20px_#eee] hover:bg-[#1bd233] bg-green-500  w-1/3 rounded-bl-xl rounded-tr-xl "
+          className="btn-block px-9 py-4 block mt-8 text-center font-medium uppercase text-white no-underline  shadow-[0_0_20px_#eee] hover:bg-[#1bd233] bg-green-500  md:w-1/3 rounded-bl-xl rounded-tr-xl "
         >
           Pay
         </motion.button>

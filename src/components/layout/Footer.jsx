@@ -41,14 +41,14 @@ const Footer = () => {
                 EpiQura
               </motion.p>
             </div>
-            <p className=" md:text-lg  font-semibold w-96">
+            <p className=" md:text-lg  text-sm font-semibold md:w-96">
               Bringing you the best flavors, one dish at a time. Follow us for
               the latest updates, special offers, and delicious inspiration
             </p>
           </div>
 
           <div className="flex flex-col md:gap-10">
-            <div className="md:ms-24 md:flex gap-2 md:gap-8 md:text-xl md:mr-40 grid grid-cols-2 w-2/3 md:w-3/4 font-bold ">
+            <div className="md:ms-24 text-sm flex gap-3 flex-wrap md:gap-8 md:text-xl md:mr-40  w-full md:w-3/4 font-bold ">
               <Link to="/" className="col-span-2">
                 <motion.p
                   whileHover={{ scale: 1.1 }}
@@ -95,8 +95,8 @@ const Footer = () => {
                 <p className="text-xl md:text-3xl  font-bold mt-10 mb-3  md:my-5">
                   Contact Us
                 </p>
-                <p className=" md:text-lg font-medium">
-                  <span className=" md:text-xl  font-bold">Address: </span>
+                <p className="text-xs  md:text-lg font-medium">
+                  <span className="md:text-xl  text-base font-bold">Address: </span>
                   House 123, Road 7, Sector 11, Uttara, Dhaka
                 </p>
                 <p className=" md:text-lg font-medium">

@@ -36,6 +36,9 @@ import ProductLayout from "../dashboard/Admin/Product/ProductLayout";
 import ReviewLayout from "../dashboard/Admin/Review/ReviewLayout";
 import ManageProductsLayout from "../dashboard/Admin/ManageProducts/ManageProductsLayout";
 import UserReviewLayout from "../dashboard/User/Review/UserReviewLayout";
+import Coverage from "../components/Coverage/Coverage";
+import Forbidden from "../components/feature/Forbidden";
+import NotFound from "../components/feature/NotFound";
 
 export const Route = createBrowserRouter([
   {
@@ -61,6 +64,11 @@ export const Route = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+      {
+        path: "coverage",
+        Component: Coverage,
+        loader: () => fetch("http://localhost:3000/coverage"),
       },
       {
         path: "addToCart",
@@ -128,6 +136,8 @@ export const Route = createBrowserRouter([
       },
     ],
   },
+  // USER DASHBOARD
+
   {
     path: "dashboard/user",
     element: (
@@ -147,7 +157,7 @@ export const Route = createBrowserRouter([
       },
       {
         path: "reviews",
-        element: <UserReviewLayout/>,
+        element: <UserReviewLayout />,
       },
       {
         path: "profile",
@@ -186,19 +196,25 @@ export const Route = createBrowserRouter([
         element: <PaymentsHistory></PaymentsHistory>,
       },
       {
-        path:"product",
-        element:<ProductLayout></ProductLayout>,
-       children:[
-         { path: "products", element: <ProductsManagement /> },
-       ]
+        path: "product",
+        element: <ProductLayout></ProductLayout>,
+        children: [{ path: "products", element: <ProductsManagement /> }],
       },
       {
         path: "manageProducts",
-        element: <ManageProductsLayout/>,
+        element: <ManageProductsLayout />,
       },
       { path: "reviews", element: <ReviewLayout /> },
       { path: "profile", element: <AdminProfile /> },
       { path: "logout", element: <Logout /> },
     ],
+  },
+  {
+    path: "*",
+    Component: NotFound,
+  },
+  {
+    path: "/forbidden",
+    Component: Forbidden,
   },
 ]);

@@ -1,63 +1,93 @@
 import { motion } from "framer-motion";
 import { CgProfile } from "react-icons/cg";
-import { FaIdBadge, FaTimes } from "react-icons/fa";
+import { FaCheckCircle, FaCreditCard, FaIdBadge, FaMoneyBill, FaTimes, FaTimesCircle } from "react-icons/fa";
 
 
 const OrderModal = ({ isStatus ,setIsStatus, updateStatus}) => {
   if (!isStatus) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="relative w-full max-w-sm bg-white rounded-2xl p-6 shadow-2xl"
-      >
-        {/* Close */}
-        <button
-          onClick={() => setIsStatus(null)}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-        >
-          <FaTimes />
-        </button>
-
-        {/* Title */}
-        <h2 className="text-lg font-semibold text-gray-900 mb-5 text-center">
-          Update Order Status
-        </h2>
-
-        <p className="text-md text-gray-500 text-center mb-2 break-all flex items-center gap-1 justify-center">
-            <span className="font-semibold text-gray-700">
-          Order ID: </span> <FaIdBadge className="text-gray-400" /> {isStatus._id}
-        </p>
-
-                        <p className="font-medium flex justify-center items-center gap-1 mb-6">
-                          <CgProfile /> {isStatus.name}
-                        </p>
-                   
-
-        {/* Status Buttons */}
-        <div className="space-x-3 flex">
-          {["Pending", "Completed", "Cancelled"].map((status) => (
-            <button
-              key={status}
-              onClick={() => updateStatus(isStatus._id, status)}
-              className={`w-full py-3 rounded-xl text-sm font-semibold text-white transition ${
-                status === "Pending"
-                  ? "bg-yellow-500 hover:bg-yellow-600"
-                  : status === "Completed"
-                  ? "bg-green-500 hover:bg-green-600"
-                  : "bg-red-500 hover:bg-red-600"
-              }`}
-            >
-              {status}
-            </button>
-          ))}
-        </div>
-      </motion.div>
-    </div>
+     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+         <motion.div
+           initial={{ scale: 0.8, opacity: 0 }}
+           animate={{ scale: 1, opacity: 1 }}
+           exit={{ scale: 0.8, opacity: 0 }}
+           className="bg-white rounded-2xl shadow-2xl w-11/12 md:w-1/2 p-6 relative"
+         >
+           <button
+             onClick={() => setIsStatus(null)}
+             className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+           >
+             <FaTimes size={18} />
+           </button>
+   
+           <h2 className="text-lg font-bold text-gray-400 mb-4">
+             ##{isStatus._id}
+           </h2>
+   
+           <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
+             <div>
+               <p className="text-gray-400">Customer</p>
+               <p className="font-medium">{isStatus.name}</p>
+             </div>
+             <div>
+               <p className="text-gray-400">Email</p>
+               <p className="font-medium">{isStatus.email}</p>
+             </div>
+             <div>
+               <p className="text-gray-400">Amount</p>
+               <p className="font-semibold text-gray-900">৳{isStatus.price}</p>
+             </div>
+             <div>
+               <p className="text-gray-400">Payment Method</p>
+               <p className="font-medium flex items-center gap-1">
+                 {isStatus.payment === "Paid" ? (
+                   <FaCreditCard className="text-blue-600" />
+                 ) : (
+                   <FaMoneyBill className="text-green-600" />
+                 )}
+                 {isStatus.payment}
+               </p>
+             </div>
+             <div>
+               <p className="text-gray-400">Date</p>
+               <p className="font-medium">
+                 {isStatus?.date &&
+                   new Date(isStatus.date).toLocaleString("en-BD", {
+                     dateStyle: "medium",
+                     timeStyle: "short",
+                   })}
+               </p>
+             </div>
+             <div>
+               <p className="text-gray-400">Status</p>
+               <p className="font-medium">{isStatus.status}</p>
+             </div>
+           </div>
+   
+       
+           <div className="flex gap-3">
+             <button
+               onClick={() => updateStatus(isStatus._id, "Completed")}
+               className="flex-1 bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 transition flex items-center justify-center gap-2"
+             >
+               <FaCheckCircle />  Completed
+             </button>
+             <button
+               onClick={() => updateStatus(isStatus._id, "Pending")}
+               className="flex-1 bg-yellow-200 text-yellow-800 py-2 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
+             >
+               <FaCheckCircle />  Pending
+             </button>
+             <button
+               onClick={() => updateStatus(isStatus._id, "Failed")}
+               className="flex-1 bg-red-600 text-white py-2 rounded-xl hover:bg-red-700 transition flex items-center justify-center gap-2"
+             >
+               <FaTimesCircle /> Failed
+             </button>
+           </div>
+         </motion.div>
+       </div>
   );
 };
 

@@ -20,9 +20,8 @@ const UserOrderDetails = ({ selectedOrder, setSelectedOrder }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
-        className="relative  overflow-y-auto h-4/6 w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl"
+        className="relative  overflow-y-auto md:h-4/6 w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl"
       >
-        {/* Close */}
         <button
           onClick={() => setSelectedOrder(null)}
           className="absolute p-1 bg-gray-200 rounded-full top-4 right-4 text-gray-500 hover:text-red-500 transition"
@@ -30,7 +29,6 @@ const UserOrderDetails = ({ selectedOrder, setSelectedOrder }) => {
           <FaTimes />
         </button>
 
-        {/* Info */}
         <div className="space-y-2 text-sm text-gray-700">
           <p>
             <span className="font-semibold">Customer: </span>
@@ -101,7 +99,6 @@ const UserOrderDetails = ({ selectedOrder, setSelectedOrder }) => {
           </p>
         </div>
 
-        {/* Dishes */}
         <div className="mt-4">
           <p className="font-semibold text-sm mb-2">Dishes</p>
           <ul className="list-disc list-inside grid grid-cols-2 gap-3 text-sm text-gray-600 space-y-1">
@@ -119,7 +116,6 @@ const UserOrderDetails = ({ selectedOrder, setSelectedOrder }) => {
           </ul>
         </div>
 
-        {/* Total */}
         <div className="mt-5 ">
           <p className="text-base font-semibold text-gray-900">
             Total: ৳{selectedOrder.price}

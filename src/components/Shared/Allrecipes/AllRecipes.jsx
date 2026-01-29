@@ -6,22 +6,22 @@ const AllRecipes = () => {
 
   return (
     <div className="pt-10 md:pt-20">
-      <p className="text-2xl md:text-4xl text-center mt-16 mb-5 md:mb-12 font-bold underline underline-offset-4">
-        Recipes
+      <p className="text-2xl md:text-3xl text-[#ff9543] text-center mt-16 mb-5 md:mb-8 font-bold underline underline-offset-4">
+       All Recipes
       </p>
-      <div className="grid grid-cols-6 mx-5 md:grid-cols-10 ">
+      <div className="grid grid-cols-6 gap-3 md:gap-0 mx-5 md:grid-cols-10 ">
         {category.map((data, idx) => (
           <Link
             to={`/recipes/${data.name}`}
             key={idx}
             className=" flex flex-col 
-                    items-center gap-2 justify-center font-semibold text-sm md:text-lg"
+                    items-center gap-2 justify-center font-medium md:font-semibold text-sm md:text-lg"
            
           >
             <motion.img
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="w-16 h-16 md:w-32 md:h-32 md:ms-5 mt-5 rounded-full"
+              className="w-14 h-14 md:w-32 md:h-32 md:ms-5 mt-5 rounded-full"
               src={data.img}
             />
             <p>{data.name}</p>

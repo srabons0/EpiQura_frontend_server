@@ -46,7 +46,6 @@ const Testimonials = () => {
   return (
     <section className=" py-16 mt-20">
       <div className="max-w-full mx-auto  px-4 text-center ">
-        {/* <img className="w-1/6 mx-auto mb-5" src={testimonialsQuote} alt="" /> */}
         <h2 className="text-3xl md:text-4xl text-[#ff9543] font-bold ">
           Taste That Speaks for Itself
         </h2>
@@ -138,6 +137,9 @@ const Testimonials = () => {
   );
 };
 
+
+
+export default Testimonials;
 {
   // <SwiperSlide className="" key={testimonials._id}>
   //                           <div className="mx-16">
@@ -146,7 +148,7 @@ const Testimonials = () => {
   //                                   <div className="flex items-center  ">
   //                                       <p className="text-xl font-semibold text-black">{testimonials.name}</p>
   //                                       <div className="text-right absolute right-0 font-semibold text-black">
-  //                                           <p>{testimonials.email}</p>
+                                            // <p>{testimonials.email}</p>
   //                                           <p>{new Date(testimonials.date).toLocaleDateString()}</p>
   //                                       </div>
   //                                   </div>
@@ -171,5 +173,3 @@ const Testimonials = () => {
   //                           </div>
   //                       </SwiperSlide>
 }
-
-export default Testimonials;

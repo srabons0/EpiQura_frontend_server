@@ -36,121 +36,156 @@ console.log("reviews in all review", reviews);
   };
 
   return (
-    <div>
-      {isPending && (
-        <div className="mt-20 flex justify-center">
-          <div className="inline-block scale-[0.7] origin-top">
-            <Mosaic
-              size="small"
-              color={[
-                "#000000",
-                "#475569",
-                "#4b5563",
-                "#52525b",
-                "#404040",
-                "#262626",
-                "#1c1917",
-              ]}
-              text=""
-              textColor=""
+   <div className="min-h-screen bg-slate-100 px-4 sm:px-8 py-16">
+
+  {isPending && (
+    <div className="flex justify-center mb-12">
+      <div className="scale-[0.75]">
+        <Mosaic
+          size="small"
+          color={[
+            "#0f172a",
+            "#334155",
+            "#475569",
+            "#64748b",
+            "#1e293b",
+          ]}
+        />
+      </div>
+    </div>
+  )}
+
+  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    {reviews.map((review, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: index * 0.05 }}
+        className="
+          group relative rounded-2xl border border-slate-200
+          bg-white/70 backdrop-blur-md shadow-lg
+          p-6 hover:shadow-xl transition
+        "
+      >
+        <div className="flex items-start justify-between">
+          <div className="flex gap-3">
+            <img
+              src={review.img}
+              alt=""
+              className="w-12 h-12 rounded-full object-cover border"
             />
+            <div>
+              <p className="font-semibold text-slate-800">
+                {review.name}
+              </p>
+              <p className="text-xs text-slate-500">
+                {review.email}
+              </p>
+            </div>
+          </div>
+
+          <div className="text-right text-xs text-slate-500">
+            {new Date(review.date).toLocaleDateString()}
           </div>
         </div>
-      )}
 
-      <div className="space-y-4 grid grid-cols-1 gap-5 mx-10 my-10 md:grid-cols-2 ">
-        {reviews.map((review, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.25, delay: 0.1 }}
-            className="bg-[#8a8a8a05] border-2 border-[#8a8a8a46] p-5 rounded-lg group relative  backdrop-blur-md shadow-lg"
+        <p className="mt-4 text-sm text-slate-600 leading-relaxed">
+          {review.description}
+        </p>
+
+        <div className="mt-5 flex items-end justify-between">
+          <div>
+            <p className="font-semibold text-slate-800">
+              {review.dish}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-1">
+            {[...Array(Math.floor(review.rating))].map((_, i) => (
+              <FaStar key={i} className="text-amber-400 text-sm" />
+            ))}
+            {[...Array(Math.ceil(review.rating) - Math.floor(review.rating))].map(
+              (_, i) => (
+                <FaStarHalf key={i} className="text-amber-400 text-sm" />
+              )
+            )}
+            {[...Array(5 - Math.ceil(review.rating))].map((_, i) => (
+              <FaStar key={i} className="text-slate-300 text-sm" />
+            ))}
+            <span className="ml-2 text-xs text-slate-500">
+              {review.rating}/5
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-4 space-y-1 text-sm text-slate-600">
+          <p>
+            <span className="font-semibold text-slate-800">
+              Highlights:
+            </span>{" "}
+            {review.pros}
+          </p>
+          <p>
+            <span className="font-semibold text-slate-800">
+              Downsides:
+            </span>{" "}
+            {review.cons}
+          </p>
+        </div>
+
+        <div className="mt-4 flex justify-between items-center">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              review.recommend
+                ? "bg-emerald-100 text-emerald-700"
+                : "bg-rose-100 text-rose-700"
+            }`}
           >
-            <div className="flex gap-1 relative">
-              <img className="w-12 h-12 rounded-full" src={review.img} alt="" />
-              <div className="flex items-center  ">
-                <p className=" font-semibold text-black">{review.name}</p>
-                <div className="text-right text-sm absolute right-0 font-semibold text-black">
-                  <p>{review.email}</p>
-                  <p>{new Date(review.date).toLocaleDateString()}</p>
-                </div>
-              </div>
-            </div>
-            <div className="mt-1">
-              <p className="w-11/12 text-sm mb-3">{review.description}</p>
+            {review.recommend ? "Recommended" : "Not Recommended"}
+          </span>
+        </div>
 
-              <div className="flex justify-between items-end">
-                <div>
-                  <p className=" font-semibold text-black mt-2 mb-1">
-                    {review.dish}
-                  </p>
-                  {/* <div className="text-xs text-slate-500">
-                    <span className="font-medium">{review.dish}</span> •{" "}
-                    <span>{review.type}</span>
-                  </div> */}
-                </div>
-                <div className="flex items-center gap-1 mb-3">
-                  {[...Array(Math.floor(review.rating))].map((_, i) => (
-                    <FaStar
-                      key={i}
-                      className={`text-sm ${
-                        i < Math.floor(review.rating)
-                          ? "text-amber-400"
-                          : "text-slate-300"
-                      }`}
-                    />
-                  ))}
-                  {[
-                    ...Array(
-                      Math.ceil(review.rating) - Math.floor(review.rating)
-                    )
-                  ].map((_, i) => (
-                    <FaStarHalf key={i} className="text-sm text-amber-400" />
-                  ))}
-                  {[...Array(5 - Math.ceil(review.rating))].map((_, i) => (
-                    <FaStar key={i} className="text-sm text-slate-300" />
-                  ))}
-                  <span className="text-xs text-slate-500 ml-2">
-                    {review.rating}/5
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-between items-end">
-              <div className="flex flex-col mt-2 gap-1">
-                <p className="text-sm">
-                  <span className="font-semibold text-black">Highlights:</span>{" "}
-                  {review.pros}
-                </p>
-                <p className="text-sm">
-                  <span className="font-semibold text-black">Downsides:</span>{" "}
-                  {review.cons}
-                </p>
-              </div>
-              <div className=" px-2 py-0.5 text-xs text-slate-500 rounded-full bg-slate-200">
-                <div>
-                  {review.recommend ? "Recommended" : "Not Recommended"}
-                </div>
-              </div>
-            </div>
-            <button
-              className="right-0 bottom-0 absolute 
-      opacity-0 translate-y-2
-      group-hover:opacity-100 group-hover:translate-y-0
-      transition-all duration-300 hover:bg-red-400
-      bg-red-500 text-white text-base
-     w-full flex items-center rounded-bl-lg  border-2 border-[#8a8a8a46] rounded-br-lg justify-center gap-2 py-2"
-              onClick={() => handleDeleteReview(review._id)}
-            >
-              <FaTrash />
-              Delete
-            </button>
-          </motion.div>
-        ))}
-      </div>
-      <Toaster position="top-right" reverseOrder={false} />
-    </div>
+     <button
+  onClick={() => handleDeleteReview(review._id)}
+  className="
+    absolute bottom-0 left-0 w-full
+    lg:flex items-center justify-center gap-2
+    py-2 text-sm font-semibold
+    bg-rose-500 text-white
+    rounded-b-2xl
+    transition-all duration-300
+    opacity-0 translate-y-3  hidden
+    group-hover:opacity-100 group-hover:translate-y-0
+  "
+>
+  <FaTrash />
+  Delete Review
+</button>
+
+     <button
+  onClick={() => handleDeleteReview(review._id)}
+  className=" lg:hidden
+    absolute -top-2 -right-3 w-1/11
+    flex items-center justify-center gap-2
+    py-2 text-sm font-semibold
+    bg-rose-500 text-white
+    rounded-full
+    transition-all duration-300
+    
+  "
+>
+  <FaTrash />
+</button>
+
+      </motion.div>
+    ))}
+  </div>
+
+  <Toaster position="top-right" />
+</div>
+
   );
 };
 

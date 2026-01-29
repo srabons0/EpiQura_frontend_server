@@ -8,7 +8,7 @@ const SearchBar = () => {
   const [query, setQuery] = useState("");
   const inputRef = useRef(null);
 
-  // Focus input when opened
+ 
   useEffect(() => {
     if (isOpen && inputRef.current) inputRef.current.focus();
   }, [isOpen]);

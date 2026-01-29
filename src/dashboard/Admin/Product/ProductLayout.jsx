@@ -16,15 +16,15 @@ const ProductLayout = () => {
   const totalPages = Math.ceil(products.length / 10);
   return (
     <div>
-      <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
-        {toggle?<h1 className="text-3xl mb-8 font-bold text-slate-900">
+      <div className="mb-8 flex mt-10 lg:mt-0 flex-col md:flex-row md:items-center md:justify-between">
+        {toggle?<h1 className="text-xl lg:text-3xl mb-8 font-bold text-slate-900">
           Products Management
         </h1>:
-        <h1 className="text-3xl mb-8 font-bold text-slate-900">
+        <h1 className="text-xl lg:text-3xl mb-8 font-bold text-slate-900">
           Categories Management
         </h1>}
-        <h1 className="text-3xl font-bold text-slate-900">
-          Total Categories : {toggle ? products.length:category.length}
+        <h1 className="text-xl lg:text-3xl font-bold text-slate-900">
+         {toggle ? "Total Products :"+" "+ products.length:"Total Categories :"+" "+  category.length}
         </h1>
       </div>
       <div className="relative flex mb-5 border-b-2 border-gray-300">

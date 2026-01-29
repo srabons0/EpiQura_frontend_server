@@ -11,7 +11,7 @@ export default function ImageUploader({photo}) {
   const { register, handleSubmit, reset } = useForm();
  
 
-  // Handle file selection
+  
   const onSubmit = async(data) => {
     // console.log(event)
     // const file = data.image[0];
@@ -34,7 +34,7 @@ export default function ImageUploader({photo}) {
             setImages(false)
         }
     };
-  // Upload image to backend
+ 
   
 
   return (

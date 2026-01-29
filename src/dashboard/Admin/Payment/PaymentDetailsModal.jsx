@@ -124,12 +124,13 @@ const OrderDetailsModal = ({ selectedPayment, setSelectedPayment }) => {
             {(selectedPayment.orderedItems || []).map((dish, i) => (
               <span
                 key={i}
-                className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs flex items-center gap-1"
+                className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs"
               >
-                <FaUtensils className="text-orange-600 text-[10px]" />
+                <span className=" flex items-center p-1 gap-1"><FaUtensils className="text-orange-600 text-[10px]" />
                 {dish.name}
                 {dish.quantity > 1 && ` x ${dish.quantity}`}
-                <span className="font-semibold">(৳{dish.realPrice})</span>
+                <span className="font-semibold">(৳{dish.realPrice})</span> </span>
+                {dish.offer&& <span className="mt-1 ms-5">{dish.offer}</span>}
               </span>
             ))}
           </ul>

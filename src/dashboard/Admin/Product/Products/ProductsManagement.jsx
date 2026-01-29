@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaSearch, FaEdit, FaTrash, FaEye } from "react-icons/fa";
-import ProductModal from "./ProductModal"; // For view/edit modal
+import ProductModal from "./ProductModal";
 import Swal from "sweetalert2";
 import ProductEdit from "./ProductEdit";
 import toast, { Toaster } from "react-hot-toast";
@@ -141,6 +141,9 @@ const ProductsManagement = () => {
           <option value="TopFood">Top Food</option>
           <option value="SpecialOffer">Special Offer</option>
           <option value="Popular">Popular</option>
+          <option  value="BestSellers">
+                    Best Sellers
+                  </option>
         </select>
         <select
           value={filter}

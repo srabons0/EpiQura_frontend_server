@@ -2,57 +2,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaClock, FaDollarSign, FaCreditCard, FaMoneyBill } from "react-icons/fa";
 
-// Fake booking data
-const fakeBookings = [
-  {
-    _id: "b1",
-    date: "2025-12-16",
-    time: "19:00",
-    items: [
-      {
-        name: "Chicken Alfredo",
-        quantity: 1,
-        price: 600,
-        img: "https://i.ibb.co/f1nGjkN/chicken-alfredo-1-2.jpg",
-        notes: "Extra cheese, no garlic",
-      },
-      {
-        name: "BLT Sandwich",
-        quantity: 2,
-        price: 350,
-        img: "https://i.ibb.co/x1Pmqrj/BLT-for-recipe-1-6-1200x675.jpg",
-        notes: "No mayo for 1 sandwich",
-      },
-    ],
-    totalPrice: 1300,
-    paymentMethod: "Stripe",
-    status: "Confirmed",
-  },
-  {
-    _id: "b2",
-    date: "2025-12-18",
-    time: "13:30",
-    items: [
-      {
-        name: "Margherita Pizza",
-        quantity: 2,
-        price: 800,
-        img: "https://i.ibb.co/5vG6r9k/margherita-pizza.jpg",
-        notes: "Thin crust",
-      },
-      {
-        name: "Caesar Salad",
-        quantity: 1,
-        price: 250,
-        img: "https://i.ibb.co/2k5J3PL/caesar-salad.jpg",
-        notes: "Extra dressing",
-      },
-    ],
-    totalPrice: 1850,
-    paymentMethod: "Cash on Delivery",
-    status: "Pending",
-  },
-];
 
 const MyBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -79,7 +28,6 @@ const MyBooking = () => {
               transition={{ delay: index * 0.1 }}
               className="bg-white shadow-lg rounded-lg p-5 hover:shadow-2xl transition-shadow duration-300"
             >
-              {/* Status */}
               <div className="flex justify-end mb-4">
                 <span
                   className={`px-3 py-1 rounded-full text-sm font-semibold ${
@@ -94,7 +42,6 @@ const MyBooking = () => {
                 </span>
               </div>
 
-              {/* Date & Time */}
               <div className="flex gap-4 mb-4 text-gray-700">
                 <div className="flex items-center gap-2">
                   <FaCalendarAlt /> {booking.date}
@@ -104,7 +51,6 @@ const MyBooking = () => {
                 </div>
               </div>
 
-              {/* Ordered Items */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 {booking.items.map((item, idx) => (
                   <div
@@ -127,7 +73,6 @@ const MyBooking = () => {
                 ))}
               </div>
 
-              {/* Total & Payment */}
               <div className="flex justify-between items-center text-gray-800 font-semibold text-lg">
                 <span>Total: <FaDollarSign className="inline" /> {booking.totalPrice}</span>
                 <span className="flex items-center gap-2 text-blue-600">

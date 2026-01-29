@@ -30,7 +30,7 @@ const FoodCounter = ({ initial = 1, min = 1, max = 20, onChange }) => {
       </button>
 
       <motion.span
-        key={count} // key triggers animation on change
+        key={count} 
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.2 }}

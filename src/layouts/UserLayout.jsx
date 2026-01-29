@@ -15,8 +15,8 @@ import UserDashboardNav from "../dashboard/User/UserDashboardNav";
 const UserLayout = () => {
     useScrollToTop();
     const handleLogout = () => {
-    localStorage.removeItem("token"); // Clear auth
-    window.location.href = "/"; // redirect to home
+    localStorage.removeItem("token");
+    window.location.href = "/";
   };
     return (
       <div>

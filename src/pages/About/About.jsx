@@ -1,7 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
-import heroImg from "/assets/food-banner/img-5.jpg"; // Replace with high-quality image
-import foodImg from "/assets/food-banner/img-3.jpg"; // Replace with high-quality food image
+import { motion, transform } from "framer-motion";
+import heroImg from "/assets/food-banner/img-5.jpg";
+import foodImg from "/assets/food-banner/img-3.jpg";
 import { Link } from "react-router-dom";
 import useScrollToTop from "../../components/ui/useScrollToTop";
 
@@ -10,7 +10,6 @@ export default function About() {
   return (
     <section className="w-11/12 mx-auto my-20 pt-15">
 
-      {/* Hero Section */}
       <div className="relative mb-20 ">
         <img
           src={heroImg}
@@ -37,23 +36,14 @@ export default function About() {
         </div>
       </div>
 
-      {/* About & Mission */}
+   
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-20"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.2 } },
-        }}
       >
-        {/* Text */}
         <motion.div
-          variants={{
-            hidden: { opacity: 0, x: -50 },
-            visible: { opacity: 1, x: 0 },
-          }}
+           initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 2, scale: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
           className="flex flex-col gap-6"
         >
           <div>
@@ -70,32 +60,29 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Image */}
         <motion.img
-          variants={{
-            hidden: { opacity: 0, x: 50 },
-            visible: { opacity: 1, x: 0 },
-          }}
+           initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 2, scale: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
           src={foodImg}
           alt="Delicious Food"
           className="w-full rounded-3xl shadow-lg"
         />
       </motion.div>
 
-      {/* Small Attractive Sections */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="bg-[#FFF3E0] p-6 rounded-2xl text-center shadow-lg"
+          className="bg-[#ffe0e0] p-6 rounded-2xl text-center shadow-lg"
         >
-          <h3 className="text-xl font-bold text-[#FF9543] mb-2">Hygienic Kitchen</h3>
+          <h3 className="text-xl font-bold text-[#ff4343] mb-2">Hygienic Kitchen</h3>
           <p className="text-gray-700">Our kitchen follows strict hygiene standards to ensure safe and fresh meals.</p>
         </motion.div>
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="bg-[#FFF3E0] p-6 rounded-2xl text-center shadow-lg"
+          className="bg-[#E0F7FA] p-6 rounded-2xl text-center shadow-lg"
         >
-          <h3 className="text-xl font-bold text-[#FF9543] mb-2">Fresh Ingredients</h3>
+          <h3 className="text-xl font-bold text-[#00ACC1] mb-2">Fresh Ingredients</h3>
           <p className="text-gray-700">Only high-quality, fresh ingredients are used in every dish we serve.</p>
         </motion.div>
         <motion.div
@@ -106,13 +93,12 @@ export default function About() {
           <p className="text-gray-700">Meals are packed safely and delivered promptly to ensure freshness and satisfaction.</p>
         </motion.div>
       </div>
-{/* Additional Attractive Sections */}
 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
   <motion.div
     whileHover={{ scale: 1.05 }}
-    className="bg-[#E0F7FA] p-6 rounded-2xl text-center shadow-lg"
+    className="bg-[#e0e6fa] p-6 rounded-2xl text-center shadow-lg"
   >
-    <h3 className="text-xl font-bold text-[#00ACC1] mb-2">Locally Sourced</h3>
+    <h3 className="text-xl font-bold text-[#0044c1] mb-2">Locally Sourced</h3>
     <p className="text-gray-700">
       We use locally sourced ingredients to ensure freshness and support local farmers.
     </p>
@@ -120,9 +106,9 @@ export default function About() {
 
   <motion.div
     whileHover={{ scale: 1.05 }}
-    className="bg-[#FFF3E0] p-6 rounded-2xl text-center shadow-lg"
+    className="bg-[#f2ffe0] p-6 rounded-2xl text-center shadow-lg"
   >
-    <h3 className="text-xl font-bold text-[#FF9543] mb-2">Customer Favorites</h3>
+    <h3 className="text-xl font-bold text-[#91ff43] mb-2">Customer Favorites</h3>
     <p className="text-gray-700">
       Our menu features dishes loved by our customers, carefully curated for taste and quality.
     </p>
@@ -138,7 +124,6 @@ export default function About() {
     </p>
   </motion.div>
 </div>
-{/* Why Choose Us Section */}
 <section className="mb-20">
   <motion.div
     className="text-center mb-12"
@@ -177,7 +162,6 @@ export default function About() {
   </div>
 </section>
 
-      {/* CTA Section */}
       <motion.div
         className="text-center mb-20"
         initial={{ opacity: 0, y: 20 }}

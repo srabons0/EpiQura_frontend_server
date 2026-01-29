@@ -62,116 +62,118 @@ const AddToCart = () => {
     0
   );
   return (
-    <div className="">
-      <img
-        className=" w-full h-full absolute top-0 left-0 opacity-80 object-cover lg:h-[470px]"
-        src={img1}
-        alt=""
-      />
-      <div
-        className="mb-10 overflow-x-hidden lg:h-[470px] w-full relative top-0 
-             bg-linear-to-r from-[#161616] to-[#0000002d] lg:ps-40"
-      ></div>
-      <p
-        className="text-center text-5xl absolute top-[30%] left-[20%] text-white mt-5 
-            font-semibold mb-20 flex items-center justify-center text-shadow"
-      >
+   <div className="relative w-full pb-20 overflow-hidden">
+  <div className="relative h-[280px] sm:h-[350px] lg:h-[470px]">
+    <img
+      className="absolute inset-0 w-full h-full object-cover opacity-80"
+      src={img1}
+      alt=""
+    />
+    <div className="absolute inset-0 bg-linear-to-r from-[#161616] to-[#0000002d]" />
+
+    <div className="relative z-10 h-full flex items-center md:justify-start justify-center">
+      <h1 className="text-3xl sm:text-4xl md:ms-60 lg:text-5xl font-bold text-white text-center tracking-wide md:text-right">
         Your Shopping Cart
+      </h1>
+    </div>
+  </div>
+
+  <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 mt-10">
+    <div className=" flex mt-20 relative flex-row lg:flex-row gap-6 items-center justify-between">
+      {cart.length === 0 ? (
+        <button className="bg-gray-500 text-gray-300 cursor-not-allowed opacity-50 lg:px-8 px-4 py-1.5 lg:py-3 font-semibold rounded-full flex gap-2 text-xs md:text-base items-center">
+          <FaRegTrashAlt /> Cancel All Items
+        </button>
+      ) : (
+        <motion.button
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleAllItemCancel}
+          className="bg-gradient-to-r from-red-600  text-xs md:text-base  to-red-400 text-white lg:px-8 px-4 py-1.5 lg:py-3 font-semibold rounded-full flex gap-2 items-center shadow-lg"
+        >
+          <FaRegTrashAlt /> Cancel All Items
+        </motion.button>
+      )}
+
+      <p className="text-xl absolute -top-13 left-25 md:static sm:text-2xl font-semibold uppercase underline underline-offset-4">
+        Total Cost : ৳{totalPrice}
       </p>
 
-      <div className="flex justify-around items-center">
-        {cart.length === 0 ? (
-          <button
-            className="bg-gray-500 text-gray-300 cursor-not-allowed opacity-50   -top-8 left-96
-                      px-8 py-3 font-bold text-lg  rounded-badge flex gap-2 items-center"
-          >
-            <FaRegTrashAlt /> Cancel All Item
-          </button>
-        ) : (
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.93 }}
-            onClick={() => handleAllItemCancel()}
-            className="bg-linear-to-r from-[#fe0000] to-[#ff0808a4]  flex gap-2 items-center  text-white px-8 py-3 font-bold text-lg rounded-xl"
-          >
-            <FaRegTrashAlt /> Cancel All Item
-          </motion.button>
-        )}
-        <p
-          className=" text-3xl font-semibold mb-20 mt-5 uppercase underline
-                 underline-offset-4"
+      {cart.length === 0 ? (
+        <button className="bg-gray-500  text-xs md:text-base  text-gray-300 cursor-not-allowed opacity-50 lg:px-8 px-4 py-1.5 lg:py-3 font-semibold rounded-full flex gap-2 items-center">
+          <FaMoneyCheck /> Pay For Items
+        </button>
+      ) : (
+        <motion.button
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-linear-to-r from-[#ffa620] to-[#fecb4a] text-white lg:px-8 px-4 py-1.5 lg:py-3 font-semibold rounded-full  text-xs md:text-base  shadow-lg"
         >
-          total cost : ৳{totalPrice}
-        </p>
-
-        {cart.length === 0 ? (
-          <button
-            className="bg-gray-500 text-gray-300 cursor-not-allowed opacity-50   -top-8 left-96
-                      px-8 py-3 font-bold text-lg  rounded-badge flex gap-2 items-center"
-          >
+          <Link to="/payment" className="flex gap-2 items-center">
             <FaMoneyCheck /> Pay For Items
-          </button>
-        ) : (
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.93 }}
-            className="bg-linear-to-r  from-[#ffa620] to-[#fecb4a]   -top-8 left-96 text-white px-8 py-3 font-bold text-lg  rounded-badge"
-          >
-            <Link to="/payment" className=" flex gap-2 items-center">
-              <FaMoneyCheck /> Pay For Items
-            </Link>
-          </motion.button>
-        )}
-      </div>
+          </Link>
+        </motion.button>
+      )}
+    </div>
+  </div>
 
-      <div className=" grid grid-cols-4 gap-5 mx-20 mt-5">
-        {cart.map((food) => (
-          <div key={food._id}>
-            <div className="p-4 pt-5 rounded-lg shadow-2xl">
-              <img
-                className="w-52  h-48 rounded-md mx-auto "
-                src={food.img}
-                alt=""
-              />
-              <p className="text-lg font-semibold text-center mt-3">
-                {food.name}
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {cart.map((food) => (
+        <div
+          key={food._id}
+          className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300"
+        >
+          <div className="p-5">
+            <img
+              className="w-full h-44 object-cover rounded-xl"
+              src={food.img}
+              alt=""
+            />
+
+            <h3 className="text-lg font-semibold text-center mt-4">
+              {food.name}
+            </h3>
+
+            <p className="text-center font-medium mt-1">
+              Price: ৳{food.realPrice}
+            </p>
+
+            {food.quantity && (
+              <p className="text-center font-medium">
+                Quantity: {food.quantity}
               </p>
-              <p className="text-base font-semibold text-center my-1 ">
-                Price: ৳{food.realPrice}
-              </p>
-              {food.quantity && (
-                <p className="text-base font-semibold text-center my-1 ">
-                  Quantity: {food.quantity}
-                </p>
-              )}
-              <p className="text-base font-semibold text-center mb-5">
-                Cooking time: {food.cookingTime}min
-              </p>
-              <div className="flex justify-center gap-2 my-2">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => handleCancel(food._id)}
-                  className=" py-2 px-5 bg-red-500 text-white rounded-xl"
-                >
-                  cancel
-                </motion.button>
-              </div>
+            )}
+
+            <p className="text-center font-medium mb-4">
+              Cooking Time: {food.cookingTime} min
+            </p>
+
+            <div className="flex justify-center">
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleCancel(food._id)}
+                className="px-6 py-2 bg-red-500 text-white rounded-full font-medium"
+              >
+                Cancel
+              </motion.button>
             </div>
           </div>
-        ))}
-      </div>
-
-      {!cart.length && (
-        <div
-          className="text-center text-4xl text-slate-300 h-64 flex items-center font-semibold  
-                justify-center"
-        >
-          You need to add an item to your shopping cart!
         </div>
-      )}
-      <Toaster position="top-right" reverseOrder={false} />
+      ))}
     </div>
+  </div>
+
+  {!cart.length && (
+    <div className="h-64 flex items-center justify-center text-center text-2xl sm:text-3xl text-slate-400 font-semibold">
+      You need to add an item to your shopping cart!
+    </div>
+  )}
+
+  <Toaster position="top-right" reverseOrder={false} />
+</div>
+
   );
 };
 

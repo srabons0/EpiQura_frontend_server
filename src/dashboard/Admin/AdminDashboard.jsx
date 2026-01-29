@@ -49,7 +49,7 @@ const AdminDashboard = () => {
     useLoader("revenueMonthlySummary", `/revenueMonthlySummary`);
   const [soldItemsSummary, isPendingSoldItems, refetchSoldItems] = useLoader(
     "soldItemsSummary",
-    `/soldItemsSummary`
+    `/soldItemsSummary`,
   );
   const [orders, isPending, refetch] = useLoader("savedOrder", `/save-order`);
 
@@ -104,12 +104,11 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className=" bg-gray-50 p-6 md:p-10 space-y-10">
-      {/* Header */}
+    <div className=" bg-gray-50 mt-7 md:mt-0 md:p-10 space-y-10">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {kpis.map((kpi, i) => (
           <motion.div
             key={i}
@@ -118,22 +117,22 @@ const AdminDashboard = () => {
             transition={{ delay: i * 0.1, type: "spring", stiffness: 120 }}
             className="relative bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md "
           >
-            <div className="flex flex-row-reverse justify-between">
+            <div className="flex flex-row-reverse justify-between items-center">
               <div
-                className={`flex items-center justify-center h-12 w-12 rounded-xl text-${kpi.color}-600 bg-${kpi.color}-100`}
+                className={`flex items-center justify-center w-7 h-7 md:h-12  md:w-12 rounded-xl text-${kpi.color}-600 bg-${kpi.color}-100`}
               >
                 {kpi.icon}
               </div>
-              <p className="text-sm font-medium text-gray-600 mt-3">
+              <p className="text-xs lg:text-sm font-medium text-gray-600 md:mt-3">
                 {kpi.label}
               </p>
             </div>
-            {/* Value */}
-            <p className="text-2xl font-bold text-gray-900 mt-1">{kpi.value}</p>
+            <p className="text-xl lg:text-2xl font-bold text-gray-900 mt-1">
+              {kpi.value}
+            </p>
 
-            {/* Trend */}
             <div
-              className={`mt-2 text-sm font-medium flex items-center gap-1 ${
+              className={`mt-2 text-xs lg:text-sm font-medium flex items-center gap-1 ${
                 kpi.trend >= 0 ? `text-${kpi.color}-600` : "text-red-600"
               }`}
             >
@@ -141,7 +140,6 @@ const AdminDashboard = () => {
               month
             </div>
 
-            {/* Decorative shadow circle */}
             <div
               className={`absolute -top-3 -right-3 w-6 h-6 rounded-full bg-${kpi.color}-100 opacity-50`}
             ></div>
@@ -149,9 +147,7 @@ const AdminDashboard = () => {
         ))}
       </div>
 
-      {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Orders Table */}
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 border shadow-sm">
           <h2 className="text-lg font-semibold text-gray-900 mb-5">
             Recent Orders
@@ -161,7 +157,7 @@ const AdminDashboard = () => {
             <table className="w-full text-sm">
               <thead>
                 <tr className="text-gray-500 border-b">
-                  <th className="pb-3 text-left">Order ID</th>
+                  <th className="pb-3 text-left">ID</th>
                   <th className="pb-3 text-left">Customer</th>
                   <th className="pb-3 text-left">Payment</th>
                   <th className="pb-3 text-left">Total</th>
@@ -169,12 +165,12 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order,idx) => (
+                {orders.map((order, idx) => (
                   <tr
                     key={order.id}
                     className="border-b last:border-none hover:bg-gray-50 transition"
                   >
-                    <td className="py-4 font-medium">ORD-1001{idx+1}</td>
+                    <td className="py-4 font-medium">10{idx + 1}</td>
                     <td>{order.name}</td>
                     <td>{order.payment}</td>
                     <td className="font-medium">৳{order.price}</td>
@@ -194,61 +190,69 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Right Panel */}
         <div className="space-y-6">
-          {/* Top Foods */}
           <div className="bg-white rounded-2xl p-6 border shadow-sm">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               Top Selling Foods
             </h2>
 
             <ul className="space-y-4">
-              {
-isPendingSoldItems && <div className="mt-20 flex justify-center">
-  <div className="inline-block scale-[0.5] origin-top">
-    <Mosaic
-      size="small"
-      color={[
-        "#000000",
-        "#475569",
-        "#4b5563",
-        "#52525b",
-        "#404040",
-        "#262626",
-        "#1c1917",
-      ]}
-      text=""
-      textColor=""
-    />
-  </div>
-</div>
-}
+              {isPendingSoldItems && (
+                <div className="mt-20 flex justify-center">
+                  <div className="inline-block scale-[0.5] origin-top">
+                    <Mosaic
+                      size="small"
+                      color={[
+                        "#000000",
+                        "#475569",
+                        "#4b5563",
+                        "#52525b",
+                        "#404040",
+                        "#262626",
+                        "#1c1917",
+                      ]}
+                      text=""
+                      textColor=""
+                    />
+                  </div>
+                </div>
+              )}
               {soldItemsSummary.byItem?.slice(0, 5).map((food, index) => (
                 <li
                   key={index}
                   className="flex items-center justify-between text-sm"
                 >
                   <span className="font-medium text-gray-800">{food._id}</span>
-                  <span className="text-gray-500">{food.totalQuantity} sold</span>
+                  <span className="text-gray-500">
+                    {food.totalQuantity} sold
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Quick Actions */}
           <div className="bg-white rounded-2xl p-6 border shadow-sm">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               Quick Actions
             </h2>
 
             <div className="flex flex-col gap-3 text-center">
-              <Link to={"/dashboard/admin/manageProducts"} className="w-full py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition">
+              <Link
+                to={"/dashboard/admin/manageProducts"}
+                className="w-full py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition"
+              >
                 Add New Food
               </Link>
-              <Link to={"/dashboard/admin/orders"} className="w-full py-2.5 rounded-xl border border-gray-300 text-sm font-semibold hover:bg-gray-100 transition">
+              <Link
+                to={"/dashboard/admin/orders"}
+                className="w-full py-2.5 rounded-xl border border-gray-300 text-sm font-semibold hover:bg-gray-100 transition"
+              >
                 Manage Orders
               </Link>
-              <Link to={"/dashboard/admin/reviews"} className="w-full py-2.5 rounded-xl border border-gray-300 text-sm font-semibold hover:bg-gray-100 transition">
+              <Link
+                to={"/dashboard/admin/reviews"}
+                className="w-full py-2.5 rounded-xl border border-gray-300 text-sm font-semibold hover:bg-gray-100 transition"
+              >
                 View Reports
               </Link>
             </div>
@@ -256,8 +260,10 @@ isPendingSoldItems && <div className="mt-20 flex justify-center">
         </div>
       </div>
 
-
-      <ReportsAnalytics soldItemsSummary={soldItemsSummary} isPendingSoldItems={isPendingSoldItems} />
+      <ReportsAnalytics
+        soldItemsSummary={soldItemsSummary}
+        isPendingSoldItems={isPendingSoldItems}
+      />
     </div>
   );
 };

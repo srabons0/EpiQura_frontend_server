@@ -92,7 +92,7 @@ const PaymentDetailsModal = ({ payment, onClose }) => {
               <tbody>
                 {payment.orderedItems.map((item, index) => (
                   <tr className="font-medium" key={index}>
-                    <td>{item.name}</td>
+                    <td>{item.name} ({item.offer})</td>
                     <td>{item.quantity}</td>
                     <td>৳ {item.realPrice}</td>
                     <td>৳ {item.quantity * item.realPrice}</td>

@@ -75,7 +75,7 @@ const PaymentsHistory = () => {
         <h2 className="text-3xl font-bold">My Payment History</h2>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ const PaymentsHistory = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="p-5 rounded-xl bg-linear-to-r from-purple-500 to-indigo-600 text-white"
+          className="p-5 rounded-xl hidden md:block bg-linear-to-r from-purple-500 to-indigo-600 text-white"
         >
           <h4 className="text-sm opacity-80">Payment Methods</h4>
           <p className="text-2xl font-bold">Stripe / COD</p>
@@ -127,7 +127,7 @@ const PaymentsHistory = () => {
         </motion.button>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+      <div className="hidden md:block  overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
         <table className="table w-full pb-5">
           <thead className="bg-gray-100 text-gray-700 ">
             <tr>
@@ -246,6 +246,72 @@ const PaymentsHistory = () => {
           </tbody>
         </table>
       </div>
+
+<div className="md:hidden flex flex-col gap-3">
+        {payments.map((payment, idx) => (
+          <motion.div
+            key={payment._id}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.25 }}
+            className="bg-white rounded-2xl border border-gray-200 shadow-sm px-4 py-3 flex items-center justify-between"
+          >
+      
+            <div className="flex flex-col">
+              <p className="text-base font-semibold text-gray-900 leading-tight">
+                #100{idx + 1}
+              </p>
+
+              <p className="text-sm font-medium text-gray-700 mt-1">
+                Items:{" "} 
+                {payment.orderedItems.reduce(
+                  (sum, item) => sum + item.quantity,
+                  0,
+                )}
+              </p>
+              <p className="text-sm font-medium text-gray-700 mt-1">
+              Price: ৳{payment.orderedItems.reduce(
+                  (sum, item) => sum + item.quantity * item.realPrice,
+                  0,
+                )}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-5 items-center">
+              <span
+                className={`mt-1 inline-block w-fit px-2.5 py-0.5 text-xs font-semibold rounded-full ${
+                  payment.status === "Completed"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-yellow-100 text-yellow-700"
+                }`}
+              >
+                {payment.status}
+              </span>
+              {selectedOption ? (
+                    <div className="text-center">
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.includes(payment._id)}
+                          onChange={() => toggleSelect(payment._id)}
+                          className="checkbox border-red-600 border-2 bg-white checked:border-orange-500 checked:bg-red-600 "
+                        />
+                      </label>
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => setSelectedPayment(payment)}
+                      className="text-lg cursor-pointer flex items-center justify-center"
+                    >
+                      <FaEye className="w-8 h-8 p-2 rounded-xl text-white hover:bg-gray-800 bg-gray-400" />
+                    </div>
+                  )}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+
       <PaymentDetails
         payment={selectedPayment}
         onClose={() => setSelectedPayment(null)}

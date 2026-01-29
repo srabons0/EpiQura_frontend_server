@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function RollingCounter({ initial = 1, min = 1, max = 20, onChange }) {
+export default function RollingCounter({
+  initial = 1,
+  min = 1,
+  max = 20,
+  onChange,
+}) {
   const [count, setCount] = useState(initial);
   const [dir, setDir] = useState(1);
 
-const increment = () => {
-    setCount(prev => {
+  const increment = () => {
+    setCount((prev) => {
       if (prev < max) {
         setDir(1);
         const newCount = prev + 1;
@@ -16,8 +21,8 @@ const increment = () => {
       return prev;
     });
   };
-    const decrement = () => {
-    setCount(prev => {
+  const decrement = () => {
+    setCount((prev) => {
       if (prev > min) {
         setDir(-1);
         const newCount = prev - 1;
@@ -50,7 +55,6 @@ const increment = () => {
         −
       </motion.button>
 
-      {/* Counter Box */}
       <div className="relative w-10 h-8 overflow-hidden flex items-center justify-center">
         <AnimatePresence initial={false} custom={dir}>
           <motion.span

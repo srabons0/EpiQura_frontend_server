@@ -24,7 +24,7 @@ const UserReviewLayout = () => {
 
   return (
     <div>
-      <div className="relative flex mb-5 border-b-2 border-gray-300">
+      <div className="relative flex md:mt-0 mt-10 mb-5 border-b-2 border-gray-300">
         <motion.div
           className="absolute bottom-0 h-[3px] bg-linear-to-r from-[#ff7904] to-[#ff0000] rounded-full"
           initial={false}
