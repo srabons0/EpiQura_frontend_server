@@ -1,0 +1,88 @@
+/* =========================
+   MOBILE TESTIMONIAL DESIGN
+   ========================= */
+@media (max-width: 767px) {
+  /* Swiper spacing */
+  .mySwiper {
+    padding-bottom: 48px;
+  }
+
+  /* Each slide */
+  .mySwiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: auto;
+  }
+
+  /* Card */
+  .mySwiper .swiper-slide > div {
+    width: 100%;
+    max-width: 92%;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fafafa 100%
+    );
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow:
+      0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Header layout */
+  .mySwiper img {
+    width: 48px;
+    height: 48px;
+    border-radius: 9999px;
+    object-fit: cover;
+  }
+
+  /* Name */
+  .mySwiper p.font-semibold.text-black {
+    font-size: 15px;
+  }
+
+  /* Email + date */
+  .mySwiper .absolute.right-0 {
+    position: static;
+    text-align: left;
+    margin-top: 4px;
+    font-size: 11px;
+    color: #6b7280;
+  }
+
+  /* Description */
+  .mySwiper p.text-sm {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4b5563;
+  }
+
+  /* Rating row */
+  .mySwiper .flex.text-sm.gap-2 {
+    margin-top: 8px;
+  }
+
+  /* Pros / Cons */
+  .mySwiper .flex.flex-col.mt-2 p {
+    font-size: 13px;
+    color: #374151;
+  }
+
+  /* Hide arrows on mobile */
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+
+  /* Pagination dots */
+  .swiper-pagination-bullet {
+    background: #ff9543;
+    opacity: 0.35;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+}

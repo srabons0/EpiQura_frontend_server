@@ -10,6 +10,7 @@ import BestSellers from "./BestSellers";
 import HowItWorks from "./HowItWorks";
 import Newsletter from "./Newsletter";
 import SpecialOffers from "./SpecialOffers";
+import Reviews from "./Testimonials/Reviews";
 import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
       <AboutDhaka></AboutDhaka>
       <AboutUs></AboutUs>
       <Testimonials></Testimonials>
+      <Reviews></Reviews>
       <AppDownload></AppDownload>
       <Newsletter></Newsletter>
     </div>

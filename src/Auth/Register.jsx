@@ -11,7 +11,8 @@ import useAuth from "../hooks/useAuth";
 
 const Register = () => {
   const [hidden, setHidden] = useState(true);
-  const { createUser, updatedUserProfile } = useAuth();
+  const [err, setErr] = useState('');
+  const { createUser, updatedUserProfile,resetPassword } = useAuth();
   const axiosInstance = useDataLoader();
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ const Register = () => {
     const password = data.password;
     createUser(email, password)
       .then(async (res) => {
-        // console.log(res.user);
-
+        console.log(res.user);
+setErr('');
         const userInfo = {
           name: data.name,
           email: data.email,
@@ -41,7 +42,7 @@ const Register = () => {
           last_log_in: new Date().toISOString(),
         };
         const userRes = await axiosInstance.post("/user", userInfo);
-        // console.log(userRes.data);
+        console.log(userRes.data);
 
         updatedUserProfile(name)
           .then((data) => {
@@ -53,9 +54,11 @@ const Register = () => {
           });
       })
       .catch((error) => {
-        // console.log(error)
+        console.log( error.message.includes("email-already-in-use") && setErr("Email already in used try another email!"));
       });
   };
+
+
 
   return (
     <div className="relative text-white mx-auto pb-30">
@@ -155,15 +158,11 @@ const Register = () => {
                       <FaEyeSlash className="absolute right-4 top-14 w-5 h-5" />
                     )}
                   </button>
-                  <label className="label">
-                    <a
-                      href=""
-                      className=" hover:link hover:text-black  font-semibold  my-1"
-                    >
-                      Forgot password?
-                    </a>
-                  </label>
+                  <Link to="/forgot-password" className="hover:link hover:text-black  font-semibold  my-1">
+  Forgot password?
+</Link>
                 </div>
+                <p className="text-red-500">{err}</p>
                 <div className="">
                   <motion.input
                     whileHover={{ scale: 1.03 }}

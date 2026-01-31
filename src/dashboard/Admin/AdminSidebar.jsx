@@ -68,7 +68,7 @@ const AdminSidebar = ({ handleLogout }) => {
         initial={false}
         animate={{ width: isCollapsed ? 80 : 288 }}
         transition={{ type: "spring", stiffness: 500, damping: 35 }}
-        className={` bg-gradient-to-b from-yellow-400 to-orange-500 text-white flex flex-col h-screen px-4 py-6 md:py-10 border-r-4 border-orange-500  ${
+        className={` bg-linear-to-b from-yellow-400 to-orange-500 text-white flex flex-col h-screen px-4 py-6 md:py-10 border-r-4 border-orange-500  ${
           isCollapsed ? "w-20 hidden md:block" : "w-72"
         }`}
       >

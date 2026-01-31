@@ -31,12 +31,13 @@ const Testimonials = () => {
     swiperRef.current.slides.forEach((slide, index) => {
       slide.style.transition = "all 0.3s ease-in-out 0.2s";
       if (index === swiperRef.current.activeIndex) {
-        slide.style.transform = "scale(1.23)";
+        slide.style.transform = "scale(1.1)";
         // slide.style.filter = "blur(0)";
         slide.style.marginTop= "40px";
 
       } else {
         slide.style.top = "40px";
+      
         slide.style.transform = "scale(0.9)";
         // slide.style.filter = "blur(1.5px)";
       }
@@ -53,12 +54,12 @@ const Testimonials = () => {
           Don’t take our word for it — here’s how our customers describe the flavors.
         </p>
       </div>
-      <div className="mt-2 w-[1340px] mx-auto">
+      <div className="mt-2 w-[1342px] mx-auto">
         <Swiper
           navigation={true}
           initialSlide={1}
           slidesPerView={3}
-          spaceBetween={30}
+          spaceBetween={20}
           centeredSlides={true} // center the middle slide
           freeMode={true}
           pagination={{

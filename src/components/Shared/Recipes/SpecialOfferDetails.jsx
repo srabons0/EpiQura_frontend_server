@@ -50,7 +50,7 @@ const SpecialOfferDetails = ({ id, offer }) => {
       confirmButtonText: "Yes, add it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        data.post("http://localhost:3000/orderFood", foodOrder).then(() => {
+        data.post("https://epi-qura-backend-server-red.vercel.app/orderFood", foodOrder).then(() => {
           toast.success("This Dish Has Been Added To Cart");
         });
       }

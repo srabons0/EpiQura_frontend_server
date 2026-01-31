@@ -39,6 +39,7 @@ import UserReviewLayout from "../dashboard/User/Review/UserReviewLayout";
 import Coverage from "../components/Coverage/Coverage";
 import Forbidden from "../components/feature/Forbidden";
 import NotFound from "../components/feature/NotFound";
+import ForgotPassword from "../Auth/ForgotPassword";
 
 export const Route = createBrowserRouter([
   {
@@ -68,7 +69,7 @@ export const Route = createBrowserRouter([
       {
         path: "coverage",
         Component: Coverage,
-        loader: () => fetch("http://localhost:3000/coverage"),
+        loader: () => fetch("https://epi-qura-backend-server-red.vercel.app/coverage"),
       },
       {
         path: "addToCart",
@@ -217,4 +218,8 @@ export const Route = createBrowserRouter([
     path: "/forbidden",
     Component: Forbidden,
   },
+  {
+  path: "/forgot-password",
+  element: <ForgotPassword />
+}
 ]);

@@ -32,7 +32,7 @@ const AddToCart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`http://localhost:3000/orderFood?email=${user.email}`)
+          .delete(`https://epi-qura-backend-server-red.vercel.app/orderFood?email=${user.email}`)
           .then(() => {
             toast.success("All order has been canceled.");
             refetch();
@@ -50,7 +50,7 @@ const AddToCart = () => {
       confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`http://localhost:3000/orderFood/${id}`).then(() => {
+        axiosSecure.delete(`https://epi-qura-backend-server-red.vercel.app/orderFood/${id}`).then(() => {
           toast.success("Order has been canceled.");
           refetch();
         });
@@ -89,7 +89,7 @@ const AddToCart = () => {
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleAllItemCancel}
-          className="bg-gradient-to-r from-red-600  text-xs md:text-base  to-red-400 text-white lg:px-8 px-4 py-1.5 lg:py-3 font-semibold rounded-full flex gap-2 items-center shadow-lg"
+          className="bg-linear-to-r from-red-600  text-xs md:text-base  to-red-400 text-white lg:px-8 px-4 py-1.5 lg:py-3 font-semibold rounded-full flex gap-2 items-center shadow-lg"
         >
           <FaRegTrashAlt /> Cancel All Items
         </motion.button>

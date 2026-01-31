@@ -119,11 +119,9 @@ const Login = () => {
                 <FaEyeSlash className="w-5 h-5" />
               )}
             </button>
-            <label className="label">
-              <a href="#" className="hover:link text-white/80 hover:text-black font-semibold my-1 block">
-                Forgot password?
-              </a>
-            </label>
+            <Link to="/forgot-password" className="hover:link hover:text-black  font-semibold  my-1">
+  Forgot password?
+</Link>
           </div>
 
           <motion.input

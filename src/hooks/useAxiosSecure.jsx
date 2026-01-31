@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase.init";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://epi-qura-backend-server-red.vercel.app",
 });
 const useAxiosSecure = () => {
   const { user, signOutUser } = useAuth();

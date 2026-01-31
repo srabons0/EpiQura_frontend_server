@@ -39,7 +39,7 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const { user, loading } = useAuth();
   const [isAdmin] = useAdmin();
-console.log(isAdmin)
+// console.log(isAdmin)
 
   const menuItems = [
     { to: "/", label: "Home", icon: IoHome },
