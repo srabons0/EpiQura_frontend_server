@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import ContactBanner from "./ContactBanner";
 import { motion } from "framer-motion";
-// import bgContact from "/assets/bg-contact.JPG"
+// import bgContact from "/assets/bg-contact.jpg"
 import bgContact from "/assets/food-banner/img-3.jpg";
 import useScrollToTop from "../../components/ui/useScrollToTop";
 

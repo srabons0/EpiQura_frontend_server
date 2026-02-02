@@ -1,4 +1,4 @@
-import foodApp from "/assets/logo/food_app.JPG";
+import foodApp from "/assets/logo/food_app.jpg";
 import { motion } from "framer-motion";
 
 export default function AppDownload() {

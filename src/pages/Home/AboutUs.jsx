@@ -1,4 +1,4 @@
-import aboutUs from "/assets/logo/about.JPG";
+import aboutUs from "/assets/logo/about.jpg";
 import { motion } from "framer-motion";
 
 
