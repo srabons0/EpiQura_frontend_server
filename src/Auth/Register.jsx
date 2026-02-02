@@ -9,16 +9,17 @@ import useDataLoader from "../hooks/useDataLoader";
 import { useForm } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
+import useScrollToTop from "../components/ui/useScrollToTop";
 
 const Register = () => {
   const [hidden, setHidden] = useState(true);
-  const [err, setErr] = useState('');
-  const { createUser, updatedUserProfile,resetPassword } = useAuth();
+  const [err, setErr] = useState("");
+  const { createUser, updatedUserProfile, resetPassword } = useAuth();
   const axiosInstance = useDataLoader();
   const location = useLocation();
   const navigate = useNavigate();
-  // useScrollToTop();
-  const { register, handleSubmit, formState } = useForm();
+  useScrollToTop();
+  const { register, handleSubmit, formState,reset } = useForm();
 
   const handleHidden = (e) => {
     e.preventDefault();
@@ -31,9 +32,8 @@ const Register = () => {
     const email = data.email;
     const password = data.password;
     createUser(email, password)
-      .then(async (res) => {
+      .then((res) => {
         console.log(res.user);
-setErr('');
         const userInfo = {
           name: data.name,
           email: data.email,
@@ -42,17 +42,18 @@ setErr('');
           created_at: new Date().toISOString(),
           last_log_in: new Date().toISOString(),
         };
-        const userRes = await axiosInstance.post("/user", userInfo);
-        // console.log(userRes.data);
-
         updatedUserProfile(name)
-          .then((data) => {
-            // console.log("userprofile updated", data);
+          .then(async (data) => {
+            const userRes = await axiosInstance.post("/user", userInfo);
+            console.log(!userRes.data.insertedId);
+            if (userRes.data.insertedId) {
+              reset();
               toast.success("Your account has been successfully registered!");
-            navigate(location.state ? location?.state : "/");
+              navigate(location.state ? location?.state : "/");
+            }
           })
           .catch((error) => {
-            // console.log(error);
+            console.log(error);
           });
       })
       .catch((error) => {
@@ -61,8 +62,6 @@ setErr('');
         toast.error("Email already in used try another email!");
       });
   };
-
-
 
   return (
     <div className="relative text-white mx-auto pb-30">
@@ -86,14 +85,17 @@ setErr('');
             transition={{ duration: 1, delay: 0.2 }}
             className="w-full lg:w-2/8 text-center lg:text-left"
           >
-        <motion.div
+            <motion.div
               initial={{ opacity: 0, y: -200 }}
               animate={{ opacity: 2, scale: 1, y: 0 }}
               exit={{ opacity: 0, y: -200 }}
               transition={{ duration: 1, delay: 0.2 }}
-            >   <h1 className="text-3xl  md:block hidden sm:text-4xl lg:text-4xl font-bold mb-8">
-              Register here!
-            </h1></motion.div> 
+            >
+              {" "}
+              <h1 className="text-3xl  md:block hidden sm:text-4xl lg:text-4xl font-bold mb-8">
+                Register here!
+              </h1>
+            </motion.div>
             <SocialUser></SocialUser>
           </motion.div>
 
@@ -108,7 +110,7 @@ setErr('');
           <div>
             <motion.div
               initial={{ opacity: 0, y: -200, x: 200 }}
-              animate={{ opacity: 2, scale: 1, y: 0,x: 0 }}
+              animate={{ opacity: 2, scale: 1, y: 0, x: 0 }}
               exit={{ opacity: 0, y: -200 }}
               transition={{ duration: 1, delay: 0.2 }}
             >
@@ -162,9 +164,12 @@ setErr('');
                       <FaEyeSlash className="absolute right-4 top-14 w-5 h-5" />
                     )}
                   </button>
-                  <Link to="/forgot-password" className="hover:link hover:text-black  font-semibold  my-1">
-  Forgot password?
-</Link>
+                  <Link
+                    to="/forgot-password"
+                    className="hover:link hover:text-black  font-semibold  my-1"
+                  >
+                    Forgot password?
+                  </Link>
                 </div>
                 <p className="text-red-500">{err}</p>
                 <div className="">

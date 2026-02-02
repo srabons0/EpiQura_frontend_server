@@ -157,14 +157,14 @@ const UserOrders = () => {
  
       <div className="md:hidden flex flex-col gap-3">
         {orders.length === 0 && !isPending ? (
-              <tr>
-                <td
+              
+                <div
                   colSpan={100}
                   className="text-center py-20 text-lg font-bold text-gray-500"
                 >
                   No order history found!
-                </td>
-              </tr>
+                </div>
+              
             ):
           (orders.map((order, idx) => (
           <motion.div

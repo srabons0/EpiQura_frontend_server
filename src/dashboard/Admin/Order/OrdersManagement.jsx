@@ -155,7 +155,7 @@ isPending && <div className="mt-20 flex justify-center">
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="relative rounded-3xl bg-white/40 backdrop-blur-lg border border-slate-200 p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="relative rounded-3xl bg-white/40 backdrop-blur-lg border border-slate-200 p-3 lg:p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
            
             <div className="flex justify-between items-start mb-4">
@@ -170,7 +170,7 @@ isPending && <div className="mt-20 flex justify-center">
               </div>
 
               <span
-                className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
+                className={`inline-flex items-center gap-1 rounded-full px-2 lg:px-3 py-1 text-xs font-semibold ${
                   order.status === "Pending"
                     ? "bg-yellow-100 text-yellow-800 animate-pulse"
                     : order.status === "Completed"

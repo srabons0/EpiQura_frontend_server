@@ -20,8 +20,10 @@ const image_url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
 import { FaSignOutAlt, FaArrowLeft, FaShieldAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Logout from "../../components/ui/logout";
+import useScrollToTop from "../../components/ui/useScrollToTop";
 
 const AdminProfile = () => {
+  useScrollToTop();
   const { user, loading, updatedUserProfile } = useAuth();
   const [images, setImages] = useState("");
   const dataloader = useDataLoader();
@@ -104,7 +106,7 @@ const AdminProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-8 md:p-10 flex flex-col gap-10">
+    <div className="min-h-screen bg-gray-50 py-8 md:p-10 flex flex-col gap-10">
   <motion.h2
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}

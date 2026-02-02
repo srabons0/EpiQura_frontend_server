@@ -68,7 +68,7 @@ const Banner = () => {
             onClick={() => {
               const width = window.innerWidth;
               let top = 1200;
-              if (width <= 640) top = 800;
+              if (width <= 640) top = 750;
               else if (width <= 1024) top = 900;
               window.scroll({ top: top, behavior: "smooth" });
             }}

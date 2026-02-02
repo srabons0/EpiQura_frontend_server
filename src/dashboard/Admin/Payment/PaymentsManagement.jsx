@@ -137,7 +137,7 @@ const PaymentsManagement = () => {
             <FaRegTrashAlt /> Delete All Payments
           </button>
         ) : (
-          <div className="relative">
+          <div className="relative w-full">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
@@ -158,23 +158,23 @@ const PaymentsManagement = () => {
                     y: -60,
                     transition: { duration: 0.7, delay: 0.01, ease: "easeIn" },
                   }}
-                  className="flex absolute bg-[#ffffff] p-3 border-[#ff000023] rounded-xl border-2  top-13 z-30 -left-43 gap-2 items-center"
+                  className="flex absolute bg-[#ffffff] lg:p-3 border-[#ff000023] rounded-xl border-2 p-3 top-13 z-30 lg:-left-43 gap-2 items-center"
                 >
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleAllItemDeleted("Completed")}
-                    className="bg-linear-to-r from-[#fe0000] to-[#ff3c3ce4] flex gap-2 items-center  text-white px-3 py-3 font-semibold text-sm rounded-xl"
+                    className="bg-linear-to-r from-[#fe0000] to-[#ff3c3ce4] flex lg:gap-2 items-center  text-white px-3 py-3 font-semibold text-xs lg:text-sm gap-1 rounded-xl"
                   >
-                    <FaRegTrashAlt /> Delete Completed
+                    <FaRegTrashAlt /> <span className="hidden lg:block">Delete</span> Completed
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleAllItemDeleted("Failed")}
-                    className="bg-linear-to-r from-[#fe0000] to-[#ff3c3ce4] flex gap-2 items-center  text-white px-3 py-3 font-semibold text-sm rounded-xl"
+                    className="bg-linear-to-r from-[#fe0000] to-[#ff3c3ce4] flex gap-1 lg:gap-2 items-center  text-white  px-3 py-3 font-semibold text-xs lg:text-sm  rounded-xl"
                   >
-                    <FaRegTrashAlt /> Delete Failed
+                    <FaRegTrashAlt /> <span className="hidden lg:block">Delete</span>  Failed
                   </motion.button>
                 </motion.div>
               )}
@@ -222,7 +222,7 @@ const PaymentsManagement = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="relative rounded-2xl bg-white/50 backdrop-blur-md border border-gray-200 p-5 shadow hover:shadow-2xl transition"
+            className="relative rounded-2xl bg-white/50 backdrop-blur-md border border-gray-200 p-3 lg:p-5 shadow hover:shadow-2xl transition"
           >
             <div className="flex justify-between items-start mb-4">
               <div>
@@ -234,7 +234,7 @@ const PaymentsManagement = () => {
                 </div>
               </div>
               <span
-                className={`inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold rounded-full ${
+                className={`inline-flex items-center gap-1 px-2 lg:px-3 py-1 text-xs font-semibold rounded-full ${
                   payment.paymentStatus === "Pending"
                     ? "bg-yellow-100 text-yellow-800 animate-pulse"
                     : payment.paymentStatus === "Completed"

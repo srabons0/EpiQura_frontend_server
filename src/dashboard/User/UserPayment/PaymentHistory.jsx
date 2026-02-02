@@ -249,14 +249,14 @@ const PaymentsHistory = () => {
 
 <div className="md:hidden flex flex-col gap-3">
        {payments.length === 0 && !isPending ? (
-              <tr>
-                <td
+             
+                <div
                   colSpan={100}
                   className="text-center py-20 text-lg font-bold text-gray-500"
                 >
                   No payment history found!
-                </td>
-              </tr>
+                </div>
+             
             ): (payments.map((payment, idx) => (
           <motion.div
             key={payment._id}

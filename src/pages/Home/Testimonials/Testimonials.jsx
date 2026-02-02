@@ -167,36 +167,3 @@ const Testimonials = () => {
 
 
 export default Testimonials;
-{
-  // <SwiperSlide className="" key={testimonials._id}>
-  //                           <div className="mx-16">
-  //                               <div className="flex gap-4 relative">
-  //                                   <img className="w-16 h-[64px] rounded-full" src={testimonials.img} alt="" />
-  //                                   <div className="flex items-center  ">
-  //                                       <p className="text-xl font-semibold text-black">{testimonials.name}</p>
-  //                                       <div className="text-right absolute right-0 font-semibold text-black">
-                                            // <p>{testimonials.email}</p>
-  //                                           <p>{new Date(testimonials.date).toLocaleDateString()}</p>
-  //                                       </div>
-  //                                   </div>
-  //                               </div>
-  //                               <div className="mt-6">
-  //                                   <p className="text-xl font-semibold  text-black mb-2" >{testimonials.title}</p>
-  //                                   <p className="w-11/12">{testimonials.description}</p>
-  //                                   <p className="">{testimonials.recommend}</p>
-  //                                   <div className="flex justify-between items-center">
-  //                                   <p className="text-lg font-semibold text-black mt-4 mb-3">{testimonials.tags}</p>
-  //                                   <div className="flex gap-2">{testimonials.rating}
-  //                                   <Rating
-  //                                    style={{ maxWidth: 100}}
-  //                                   value={testimonials.rating} readOnly
-  //                                   /></div>
-  //                                   </div>
-  //                                   </div>
-  //                               <div className="flex flex-col mt-2 gap-1">
-  //                                   <p className=""><span className="font-semibold text-black">Highlights:</span> {testimonials.pros}</p>
-  //                                   <p className=""><span className="font-semibold text-black">Downsides:</span> {testimonials.cons}</p>
-  //                               </div>
-  //                           </div>
-  //                       </SwiperSlide>
-}

@@ -8,11 +8,13 @@ import useDataLoader from "../hooks/useDataLoader";
 import SocialUser from "./SocialUser";
 import useAuth from "../hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
+import useScrollToTop from "../components/ui/useScrollToTop";
 
 
 const Login = () => {
   const [hidden, setHidden] = useState(true);
   const { loginUser } = useAuth();
+  useScrollToTop();
 
   const dataloader = useDataLoader();
   const location = useLocation();

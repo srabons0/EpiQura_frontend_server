@@ -20,11 +20,13 @@ const image_url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
 import { FaSignOutAlt, FaArrowLeft, FaShieldAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Logout from "../../components/ui/logout";
+import useScrollToTop from "../../components/ui/useScrollToTop";
 
 const UserProfile = () => {
   const { user, loading, updatedUserProfile } = useAuth();
   const [images, setImages] = useState("");
   const dataloader = useDataLoader();
+  useScrollToTop();
   const axiosSecure = useAxiosSecure();
   const {
     register,
@@ -99,7 +101,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 sm:px-6 lg:px-10 py-10">
+    <div className="min-h-screen bg-slate-50  lg:px-10 py-10">
   <motion.h2
     initial={{ opacity: 0, y: -16 }}
     animate={{ opacity: 1, y: 0 }}
