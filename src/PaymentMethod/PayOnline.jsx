@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useLoader from "../hooks/useLoader";
 import toast, { Toaster } from "react-hot-toast";
-import stripe from "/assets/logo/payment-stripe.PNG";
+import stripe from "/assets/logo/payment-stripe.png";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutForm from "./CheckOutForm";

@@ -70,9 +70,9 @@ const PaymentsHistory = () => {
     });
   };
   return (
-    <div className="p-6  min-h-screen">
+    <div className="lg:p-6  min-h-screen">
       <div className="mb-6">
-        <h2 className="text-3xl font-bold">My Payment History</h2>
+        <h2 className="lg:text-3xl text-xl lg:mt-0 mt-10  lg:ml-0 ml-5 font-bold">My Payment History</h2>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
@@ -248,7 +248,16 @@ const PaymentsHistory = () => {
       </div>
 
 <div className="md:hidden flex flex-col gap-3">
-        {payments.map((payment, idx) => (
+       {payments.length === 0 && !isPending ? (
+              <tr>
+                <td
+                  colSpan={100}
+                  className="text-center py-20 text-lg font-bold text-gray-500"
+                >
+                  No payment history found!
+                </td>
+              </tr>
+            ): (payments.map((payment, idx) => (
           <motion.div
             key={payment._id}
             initial={{ opacity: 0, scale: 0.96 }}
@@ -308,7 +317,7 @@ const PaymentsHistory = () => {
                   )}
             </div>
           </motion.div>
-        ))}
+        )))}
       </div>
 
 

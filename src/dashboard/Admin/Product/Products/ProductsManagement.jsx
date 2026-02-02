@@ -200,12 +200,12 @@ const ProductsManagement = () => {
               <p className="font-semibold text-gray-900">{product.name}</p>
               <span
                 className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                  product.status === "Available"
+                  product.status !== "Available"
                     ? "bg-green-100 text-green-800"
                     : "bg-red-100 text-red-800"
                 }`}
               >
-                {product.status ? product.status : "Out of ingredients"}
+                {product.status ? "Out of ingredients" : "Available"}
               </span>
             </div>
 

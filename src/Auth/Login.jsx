@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useDataLoader from "../hooks/useDataLoader";
 import SocialUser from "./SocialUser";
 import useAuth from "../hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const Login = () => {
@@ -32,10 +33,13 @@ const Login = () => {
     loginUser(email, password)
       .then((res) => {
         //  console.log(res.user);
+              toast.success("Your account has been successfully login!");
         navigate(location.state ? location?.state : "/");
       })
       .catch((error) =>{ 
         // console.log(error)
+        toast.error("Failed to login. Try again.");
+
     });
   };
 
@@ -142,6 +146,8 @@ const Login = () => {
       </motion.div>
     </div>
   </div>
+      <Toaster position="top-right" reverseOrder={false} />
+
 </div>
 
   );

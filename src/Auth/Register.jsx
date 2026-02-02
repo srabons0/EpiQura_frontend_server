@@ -8,6 +8,7 @@ import SocialUser from "./SocialUser";
 import useDataLoader from "../hooks/useDataLoader";
 import { useForm } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const [hidden, setHidden] = useState(true);
@@ -47,6 +48,7 @@ setErr('');
         updatedUserProfile(name)
           .then((data) => {
             // console.log("userprofile updated", data);
+              toast.success("Your account has been successfully registered!");
             navigate(location.state ? location?.state : "/");
           })
           .catch((error) => {
@@ -54,7 +56,9 @@ setErr('');
           });
       })
       .catch((error) => {
-        error.message.includes("email-already-in-use") && setErr("Email already in used try another email!");
+        // error.message.includes("email-already-in-use") && setErr("Email already in used try another email!");
+        console.log(error);
+        toast.error("Email already in used try another email!");
       });
   };
 
@@ -187,6 +191,7 @@ setErr('');
           </div>
         </div>
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

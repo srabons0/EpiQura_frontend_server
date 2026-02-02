@@ -38,9 +38,9 @@ const UserOrders = () => {
   );
   console.log(orders, user.email);
   return (
-    <div className="p-6  min-h-screen">
+    <div className="lg:p-6  min-h-screen">
       <div className="mb-6">
-        <h2 className="text-3xl font-bold">My Order</h2>
+        <h2 className="lg:text-3xl text-xl lg:mt-0 lg:ml-0 ml-5 mt-10 font-bold">My Order</h2>
       </div>
 
       <div className="hidden md:block  overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
@@ -156,7 +156,17 @@ const UserOrders = () => {
 
  
       <div className="md:hidden flex flex-col gap-3">
-        {orders.map((order, idx) => (
+        {orders.length === 0 && !isPending ? (
+              <tr>
+                <td
+                  colSpan={100}
+                  className="text-center py-20 text-lg font-bold text-gray-500"
+                >
+                  No order history found!
+                </td>
+              </tr>
+            ):
+          (orders.map((order, idx) => (
           <motion.div
             key={order._id}
             initial={{ opacity: 0, scale: 0.96 }}
@@ -203,7 +213,7 @@ const UserOrders = () => {
               </button>
             </div>
           </motion.div>
-        ))}
+        )))}
       </div>
 
       <UserOrderDetails

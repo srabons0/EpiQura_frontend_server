@@ -81,7 +81,7 @@ export default function UserHome() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50  sm:px-6 lg:px-10 py-8 space-y-10">
+    <div className="min-h-screen bg-slate-50  lg:px-10 py-8 space-y-10">
       <div className="bg-white rounded-2xl p-6 sm:p-8 border shadow-sm">
         <h1 className="text-xl sm:text-2xl font-semibold text-slate-900">
           Welcome back, {user?.displayName}!
