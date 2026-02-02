@@ -1,5 +1,5 @@
 import { use, useEffect, useState } from "react";
-import photoUploader from "/assets/logo/photoUploader.PNG";
+import photoUploader from "/assets/logo/photoUploader.png";
 import { motion } from "framer-motion";
 import {
   FaUser,

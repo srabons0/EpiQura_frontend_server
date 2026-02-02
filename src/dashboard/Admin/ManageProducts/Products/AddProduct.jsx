@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import img from "/assets/logo/photoUploader.PNG";
+import img from "/assets/logo/photoUploader.png";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";

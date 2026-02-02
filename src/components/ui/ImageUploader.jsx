@@ -1,5 +1,5 @@
 import { useState } from "react";
-import photoUploader from "/assets/logo/photoUploader.PNG";
+import photoUploader from "/assets/logo/photoUploader.png";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 const imageSecretKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
