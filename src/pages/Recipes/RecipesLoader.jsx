@@ -5,7 +5,7 @@ import { FaRegClock, FaStar } from "react-icons/fa";
 import { Mosaic } from "react-loading-indicators";
 import useDataLoader from "../../hooks/useDataLoader";
 import RecipeDetails from "../../components/Shared/Recipes/RecipeDetails";
-import usePublicData from "../../hooks/usePublicData";
+
 
 const RecipesLoader = () => {
   const { name } = useParams();
