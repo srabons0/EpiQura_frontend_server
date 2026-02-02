@@ -72,14 +72,14 @@ const AddToCart = () => {
     <div className="absolute inset-0 bg-linear-to-r from-[#161616] to-[#0000002d]" />
 
     <div className="relative z-10 h-full flex items-center md:justify-start justify-center">
-      <h1 className="text-3xl sm:text-4xl md:ms-60 lg:text-5xl font-bold text-white text-center tracking-wide md:text-right">
+      <h1 className="text-2xl sm:text-4xl md:ms-60 lg:text-5xl font-bold text-white text-center tracking-wide md:text-right">
         Your Shopping Cart
       </h1>
     </div>
   </div>
 
-  <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 mt-10">
-    <div className=" flex mt-20 relative flex-row lg:flex-row gap-6 items-center justify-between">
+  <div className="max-w-7xl mx-auto  px-2 sm:px-6 lg:px-8 mt-10">
+    <div className=" flex mt-20 relative flex-row lg:flex-row gap-1 lg:gap-6 items-center justify-between">
       {cart.length === 0 ? (
         <button className="bg-gray-500 text-gray-300 cursor-not-allowed opacity-50 lg:px-8 px-4 py-1.5 lg:py-3 font-semibold rounded-full flex gap-2 text-xs md:text-base items-center">
           <FaRegTrashAlt /> Cancel All Items
@@ -95,7 +95,7 @@ const AddToCart = () => {
         </motion.button>
       )}
 
-      <p className="text-xl absolute -top-13 left-25 md:static sm:text-2xl font-semibold uppercase underline underline-offset-4">
+      <p className="lg:text-xl px-2 text-lg absolute -top-13  md:static sm:text-2xl font-semibold uppercase lg:underline underline-offset-4">
         Total Cost : ৳{totalPrice}
       </p>
 

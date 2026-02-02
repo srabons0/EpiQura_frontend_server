@@ -54,7 +54,7 @@ const AdminSidebar = ({ handleLogout }) => {
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="md:hidden fixed top-6 left-1 z-50 p-1 bg-orange-500 rounded-lg text-white cursor-pointer hover:bg-white hover:text-orange-500 transition-all"
+        className="md:hidden fixed top-6 left-1 z-50 p-1 bg-orange-500 rounded-lg text-white cursor-pointer hover:bg-white  hover:text-orange-500 transition-all"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         <IoIosArrowForward
@@ -68,7 +68,7 @@ const AdminSidebar = ({ handleLogout }) => {
         initial={false}
         animate={{ width: isCollapsed ? 80 : 288 }}
         transition={{ type: "spring", stiffness: 500, damping: 35 }}
-        className={` bg-linear-to-b from-yellow-400 to-orange-500 text-white flex flex-col h-screen px-4 py-6 md:py-10 border-r-4 border-orange-500  ${
+        className={` bg-linear-to-b from-yellow-400 to-orange-500 text-white flex flex-col h-full rounded-br-box px-4 py-6 md:py-10 border-r-4 border-orange-500  ${
           isCollapsed ? "w-20 hidden md:block" : "w-72"
         }`}
       >

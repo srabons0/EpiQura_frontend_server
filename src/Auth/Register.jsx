@@ -42,7 +42,7 @@ setErr('');
           last_log_in: new Date().toISOString(),
         };
         const userRes = await axiosInstance.post("/user", userInfo);
-        console.log(userRes.data);
+        // console.log(userRes.data);
 
         updatedUserProfile(name)
           .then((data) => {
@@ -54,7 +54,7 @@ setErr('');
           });
       })
       .catch((error) => {
-        console.log( error.message.includes("email-already-in-use") && setErr("Email already in used try another email!"));
+        error.message.includes("email-already-in-use") && setErr("Email already in used try another email!");
       });
   };
 

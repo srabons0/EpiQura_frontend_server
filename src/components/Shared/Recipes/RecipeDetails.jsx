@@ -92,7 +92,7 @@ const RecipeDetails = ({ id,opacity }) => {
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.96 }}
         onClick={() => setIsOpen(true)}
-        className={`px-6 sm:px-9 border-2 cursor-pointer border-[#ff9543] text-[#ff9543] bg-[#fa81000e] py-3 font-bold text-base sm:text-xl rounded-md mt-2 sm:mt-4 ${opacity&& opacity}`}
+        className={`py-2 lg:px-9 w-full border-2 cursor-pointer border-[#ff9543] text-[#ff9543] bg-[#fa81000e] lg:py-3 text-semibold lg:font-bold text-xs lg:text-xl rounded-md mt-2 lg:mt-4 ${opacity&& opacity}`}
       >
         See Details
       </motion.button>

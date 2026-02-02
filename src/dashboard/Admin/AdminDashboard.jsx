@@ -51,6 +51,7 @@ const AdminDashboard = () => {
     "soldItemsSummary",
     `/soldItemsSummary`,
   );
+  // console.log(lastMonth, thisMonth);
   const [orders, isPending, refetch] = useLoader("savedOrder", `/save-order`);
 
   const trendRevenueMonthly = (
@@ -104,9 +105,9 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className=" bg-gray-50 mt-7 md:mt-0 md:p-10 space-y-10">
+    <div className=" bg-gray-50 mt-11 md:mt-0 md:p-10 space-y-10">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+        <h1 className="text-xl ml-5 lg:ml-0 lg:text-3xl font-bold text-gray-900">Admin Dashboard</h1>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {kpis.map((kpi, i) => (
@@ -154,7 +155,7 @@ const AdminDashboard = () => {
           </h2>
 
           <div className="overflow-x-auto h-[400px] overflow-y-auto ">
-            <table className="w-full text-sm">
+            <table className="w-full text-xs lg:text-sm">
               <thead>
                 <tr className="text-gray-500 border-b">
                   <th className="pb-3 text-left">ID</th>

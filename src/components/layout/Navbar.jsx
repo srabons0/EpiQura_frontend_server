@@ -51,7 +51,7 @@ const Navbar = () => {
     },
     { to: "/about", label: "About us", icon: BsFillPeopleFill },
     { to: "/contact", label: "Contact us", icon: IoIosCall },
-    { to: "/login", label: "Login", icon: FaSignInAlt },
+    { to: user ? `/dashboard/${isAdmin?"admin":"user"}/profile`:"/login" , label: user ? "Profile" : "Login", icon: user ? BsPersonCircle : FaSignInAlt },
   ];
 
   return (
@@ -67,7 +67,7 @@ const Navbar = () => {
             <motion.div
               initial={{ opacity: 0, scale: -0.5, x: -100 }}
               animate={{ opacity: 2, scale: 1.1, x: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 1.1, delay: 1 }}
               tabIndex={0}
               role="button"
               className={` text-white bg-black p-1.5 md:p-2.5 z-50 relative cursor-pointer btn-circle`}
@@ -105,8 +105,8 @@ const Navbar = () => {
               tabIndex={0}
               className={`${
                 isActive ? "absolute" : "hidden"
-              } pt-32 pb-10 w-48 md:w-64 md:ps-14 ps-5 text-[12px]  -top-7 rounded-b-lg md:h-[770px] -left-5 z-40
-               text-white bg-[#00000099] flex flex-col gap-10 text-center`}
+              } lg:pt-32 pt-20 pb-10 w-40 md:w-64 md:ps-14 ps-5 text-[12px]  -top-7 rounded-b-lg h-screen lg:h-[770px] -left-5 z-40
+               text-white bg-[#00000099] flex flex-col gap-5 lg:gap-10 text-center`}
             >
               {menuItems.map(({ to, label, icon: Icon }) => (
                 <motion.li
@@ -119,7 +119,7 @@ const Navbar = () => {
                     onClick={() => setIsActive(false)}
                     className={({ isActive }) =>
                       `flex items-center gap-2 w-11/12 bg-[#000000d5]
-                 px-4 py-2 rounded-md
+                 px-4 py-1 lg:py-2 rounded-md
            ${
              isActive
                ? "bg-white/40 border-l-4 border-orange-500 text-white"
@@ -127,8 +127,8 @@ const Navbar = () => {
            }`
                     }
                   >
-                    <Icon className="w-5 h-5" />
-                    <span className="text-sm font-medium">{label}</span>
+                    <Icon className="lg:w-5 lg:h-5" />
+                    <span className="text-xs lg:text-sm font-medium">{label}</span>
                   </NavLink>
                 </motion.li>
               ))}
@@ -139,7 +139,7 @@ const Navbar = () => {
         <motion.div
           initial={{ opacity: 0, scale: -0.5, y: -100 }}
           animate={{ opacity: 2, scale: 1.1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 1 }}
           className=" z-20 navbar-center cursor-pointer"
         >
           <NavLink to="/" className="flex items-center">
@@ -172,10 +172,10 @@ const Navbar = () => {
               <motion.button
                 initial={{ opacity: 0, scale: -0.5, y: -100 }}
                 animate={{ opacity: 2, scale: 1.1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="md:p-3 p-2 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle mr-2 md:mr-5  z-30"
+                transition={{ duration: 1, delay: 1 }}
+                className="md:p-3 p-1.5 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle mr-1 md:mr-5  z-30"
               >
-                <IoLocationSharp className="md:w-6 md:h-6 text-white" />
+                <IoLocationSharp className="w-3.5 h-3.5 md:w-6 md:h-6 text-white" />
               </motion.button>
             </Link>
           </motion.div>
@@ -188,10 +188,10 @@ const Navbar = () => {
               <motion.button
                 initial={{ opacity: 0, scale: -0.5, y: 100 }}
                 animate={{ opacity: 2, scale: 1.1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="md:p-3 p-2 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle md:mr-5  z-30"
+                transition={{ duration: 1, delay: 1 }}
+                className="md:p-3 p-1.5 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle md:mr-5  z-30"
               >
-                <AiOutlineShoppingCart className="md:w-6 md:h-6 text-white" />
+                <AiOutlineShoppingCart className="w-3.5 h-3.5 md:w-6 md:h-6 text-white" />
               </motion.button>
             </Link>
           </motion.div>
@@ -200,7 +200,7 @@ const Navbar = () => {
             <motion.button
               initial={{ opacity: 0, scale: -0.5, x: 50 }}
               animate={{ opacity: 2, scale: 1.1, x: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 1, delay: 1 }}
               className="btn hidden md:block  btn-ghost btn-circle mr-10 border-none w-12 h-12 z-30 hover:bg-[#00000050]"
             >
               {user ? (

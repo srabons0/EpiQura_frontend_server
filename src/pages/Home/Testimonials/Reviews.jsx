@@ -9,14 +9,21 @@ import useDataLoader from "../../../hooks/useDataLoader";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
-  const data = useDataLoader();
+   const [time, setTime] = useState(5000);
 
+  const data = useDataLoader();
   useEffect(() => {
     data.get("/review").then((res) => setReviews(res.data));
-  }, [data]);
+   }, [time]);
+  setTimeout(() => {
+    if (reviews.length === 0) {
+      setTime(0);
+    }
+    // console.log(testimonials);
+  }, time);
 
   return (
-    <section className="min-h-screen bg-gray-50 py-6 md:hidden">
+    <section className="min-h-screen bg-gray-50 py-6 lg:hidden">
       {/* Header */}
       <div className="text-center px-4 mb-6">
         <h2 className="text-3xl font-bold text-orange-500 mb-2">

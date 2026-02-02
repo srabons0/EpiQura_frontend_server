@@ -10,14 +10,22 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { EffectCoverflow, FreeMode, Pagination } from "swiper/modules";
 import useDataLoader from "../../../hooks/useDataLoader";
+import { Mosaic } from "react-loading-indicators";
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
+  const [time, setTime] = useState(5000);
 
   const data = useDataLoader();
   useEffect(() => {
     data.get("/review").then((res) => setTestimonials(res.data));
-  }, [data]);
+   }, [time]);
+  setTimeout(() => {
+    if (testimonials.length === 0) {
+      setTime(0);
+    }
+    // console.log(testimonials);
+  }, time);
 
   // console.log(testimonials);
 
@@ -45,7 +53,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className=" py-16 mt-20">
+    <section className="hidden lg:block py-16 mt-20">
       <div className="max-w-full mx-auto  px-4 text-center ">
         <h2 className="text-3xl md:text-4xl text-[#ff9543] font-bold ">
           Taste That Speaks for Itself
@@ -54,6 +62,24 @@ const Testimonials = () => {
           Don’t take our word for it — here’s how our customers describe the flavors.
         </p>
       </div>
+       {testimonials.length === 0 && (
+        <div className="flex mx-auto pt-32 pb-40 w-8 h-8 scale-60 lg:scale-80">
+          <Mosaic
+            color={[
+              "#000000",
+              "#475569",
+              "#4b5563",
+              "#52525b",
+              "#404040",
+              "#262626",
+              "#1c1917",
+            ]}
+            size="small"
+            text=""
+            textColor=""
+          />
+        </div>
+      )}
       <div className="mt-2 w-[1342px] mx-auto">
         <Swiper
           navigation={true}

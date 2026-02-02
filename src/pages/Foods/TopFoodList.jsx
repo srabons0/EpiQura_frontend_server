@@ -9,15 +9,21 @@ import RecipeDetails from "../../components/Shared/Recipes/RecipeDetails";
 const TopFoodList = () => {
   const [topFood, setTopFood] = useState([]);
   const [cut, setCut] = useState(6);
+  const [time, setTime] = useState(5000);
 
   const data = useDataLoader();
   useEffect(() => {
     data.get("/foodItems/TopFood").then((res) => setTopFood(res.data));
-  }, [data]);
-  
+  }, [time]);
+  setTimeout(() => {
+    if (topFood.length === 0) {
+      setTime(0);
+    }
+    console.log(topFood);
+  }, time);
   return (
-   <div className="mt-16 md:mt-20">
-  <p className="text-center font-bold text-[#ff9543] underline underline-offset-4 text-lg sm:text-xl md:text-3xl mb-4 md:mb-12">
+   <div className="mt-10 md:mt-20">
+  <p className="text-center font-bold text-[#ff9543] underline underline-offset-4 text-lg sm:text-2xl md:text-3xl mb-4 md:mb-12">
     Our Top Food List
   </p>
 
@@ -27,60 +33,59 @@ const TopFoodList = () => {
   </p>
 
   {topFood.length === 0 && (
-    <div className="flex justify-center pt-28 pb-36">
-      <Mosaic
-        color={[
-          "#000000",
-          "#475569",
-          "#4b5563",
-          "#52525b",
-          "#404040",
-          "#262626",
-          "#1c1917",
-        ]}
-        size="small"
-        text=""
-        textColor=""
-      />
-    </div>
+    <div className="flex mx-auto pt-32 pb-40 w-8 h-8 scale-60 lg:scale-80">
+          <Mosaic
+            color={[
+              "#000000",
+              "#475569",
+              "#4b5563",
+              "#52525b",
+              "#404040",
+              "#262626",
+              "#1c1917",
+            ]}
+            size="small"
+            text=""
+            textColor=""
+          />
+        </div>
   )}
 
  <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-7 mx-3 md:mx-20 overflow-hidden">
 
     {topFood.slice(0, cut).map((food, index) => (
-      <motion.div
-        key={food._id}
-        initial={{ opacity: 0, y: 40, x: 40 }}
-        whileInView={{ opacity: 1, y: 0, x: 0 }}
-        transition={{ duration: 0.9, delay: index * 0.1, type: "spring" }}
-        viewport={{ once: true }}
-        className="flex flex-col-reverse md:flex-row items-center justify-between border-2 border-[#ff9543] rounded-lg py-4 md:py-6 px-4 md:px-10 gap-4"
-      >
-        <div className="flex flex-col gap-2 md:gap-3 w-full md:w-2/3">
-          <p className="text-base sm:text-lg md:text-2xl font-bold">
-            {food.name}
-          </p>
+      <div key={food._id}>
+            <motion.div
+              initial={{ opacity: 0, scale: 1, y: 50, x: 50 }}
+              transition={{ duration: 1, delay: index * 0.1, type: "spring" }}
+              //   animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col-reverse lg:flex-row justify-between h-full items-center border-2 border-[#ff9543] rounded-lg pb-2 lg:py-6  lg:px-10 gap-3 lg:gap-0"
+            >
+              <div className="flex  flex-col gap-1 md:gap-3 w-full md:w-2/3 px-2">
+                <p className="text-sm lg:text-2xl font-bold">{food.name}</p>
 
-          <p className="flex items-center gap-2 text-sm sm:text-base md:text-lg font-medium">
-            <span className="font-semibold">Rating:</span>
-            <FaStar />
-            {food.rating}
-          </p>
+                <p className="flex items-center gap-0.5 lg:gap-2  text-sm md:text-lg font-medium">
+                  <span className="font-semibold">Rating:</span>
+                  <FaStar className="text-yellow-400" />
+                  {food.rating ? food.rating : 0}
+                </p>
+                <p className="flex items-center gap-1 md:gap-2 text-sm md:text-lg font-medium">
+                  <span className=" md:text-lg font-semibold ">Price:</span>৳
+                  {food.realPrice}
+                </p>
+<div className="lg:w-9/12">
+                <RecipeDetails id={food._id}></RecipeDetails></div>
+              </div>
 
-          <p className="flex items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg font-medium">
-            <span className="font-semibold">Price:</span>
-            ৳{food.realPrice}
-          </p>
-
-          <RecipeDetails id={food._id} />
-        </div>
-
-        <img
-          src={food.img}
-          alt={food.name}
-          className="w-full md:w-[275px] h-32 sm:h-36 md:h-44 rounded-xl object-cover"
-        />
-      </motion.div>
+              <img
+                className="w-full md:w-[275px] h-28 md:h-44 rounded-t-lg lg:rounded-xl object-cover"
+                src={food.img}
+                alt={food.name}
+              />
+            </motion.div>
+          </div>
     ))}
   </div>
 

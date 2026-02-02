@@ -41,11 +41,11 @@ export default function AppDownload() {
             discounts only available through the app.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex gap-4">
             <a
               href="https://play.google.com/store/apps?hl=en"
               target="_blank"
-              className="flex items-center gap-3 bg-linear-to-r from-[#fad370] to-[#fca31f] text-white px-5 py-3 rounded-xl shadow hover:opacity-90 transition"
+              className="flex items-center lg:gap-3 bg-linear-to-r from-[#fad370] to-[#fca31f] text-white px-3 py-2 lg:px-5 lg:py-3 rounded-xl shadow hover:opacity-90 transition"
             >
               <img
                 src="https://c.clc2l.com/t/g/o/google-playstore-Iauj7q.png"
@@ -61,7 +61,7 @@ export default function AppDownload() {
             <a
               href="https://www.apple.com/app-store/"
               target="_blank"
-              className="flex items-center gap-3 bg-linear-to-r from-[#fad370] to-[#fca31f] text-white px-5 py-3 rounded-xl shadow hover:opacity-90 transition"
+              className="flex items-center lg:gap-3 bg-linear-to-r from-[#fad370] to-[#fca31f] text-white  px-3 py-2 lg:px-5 lg:py-3 rounded-xl shadow hover:opacity-90 transition"
             >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg"

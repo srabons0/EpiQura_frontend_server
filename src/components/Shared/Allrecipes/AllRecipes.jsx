@@ -9,13 +9,13 @@ const AllRecipes = () => {
       <p className="text-2xl md:text-3xl text-[#ff9543] text-center mt-16 mb-5 md:mb-8 font-bold underline underline-offset-4">
        All Recipes
       </p>
-      <div className="grid grid-cols-6 gap-3 md:gap-0 mx-5 md:grid-cols-10 ">
+      <div className="grid grid-cols-5 gap-2 md:gap-0 mx-2 lg:mx-5 md:grid-cols-10 ">
         {category.map((data, idx) => (
           <Link
             to={`/recipes/${data.name}`}
             key={idx}
             className=" flex flex-col 
-                    items-center gap-2 justify-center font-medium md:font-semibold text-sm md:text-lg"
+                    items-center gap-2 justify-center font-medium md:font-semibold text-xs md:text-lg"
            
           >
             <motion.img
@@ -24,7 +24,7 @@ const AllRecipes = () => {
               className="w-14 h-14 md:w-32 md:h-32 md:ms-5 mt-5 rounded-full"
               src={data.img}
             />
-            <p>{data.name}</p>
+            <p className="">{data.name}</p>
           </Link>
         ))}
       </div>

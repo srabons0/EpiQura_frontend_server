@@ -3,28 +3,52 @@ import useDataLoader from "../../hooks/useDataLoader";
 import { useEffect, useState } from "react";
 import SpecialOfferDetails from "../../components/Shared/Recipes/SpecialOfferDetails";
 
+import { Mosaic } from "react-loading-indicators";
+
 export default function SpecialOffers() {
   const [specialOffers, setSpecialOffers] = useState([]);
-
+  const [time, setTime] = useState(5000);
   const data = useDataLoader();
   useEffect(() => {
     data
       .get("/foodItems/SpecialOffer")
       .then((res) => setSpecialOffers(res.data));
-  }, [data]);
-
+  }, [time]);
+  setTimeout(() => {
+    if (specialOffers.length === 0) {
+      setTime(0);
+    }
+    console.log(specialOffers);
+  }, time);
   return (
-    <section className="py-16 px-6">
+    <section className="lg:py-16 pb-10 w-11/12 mx-auto lg:px-8">
       <div className="text-center max-w-2xl mx-auto mb-12">
-        <h2 className="text-4xl font-bold mb-4 text-[#ff9543]">
+        <h2 className="text-center font-bold text-[#ff9543] underline underline-offset-4 text-2xl lg:text-4xl mb-6 md:mb-12">
           Special Offers
         </h2>
-        <p className="text-gray-600 text-lg">
+        <p className=" md:mx-auto text-center md:text-lg text-gray-600 mx-auto  w-11/12  mb-10 md:mb-16">
           Save more & enjoy premium meals with our weekly discounts and
           exclusive deals.
         </p>
-      </div>
-
+      </div> 
+{specialOffers.length === 0 && (
+        <div className="flex mx-auto pt-32 pb-40 w-8 h-8 scale-60 lg:scale-80">
+          <Mosaic
+            color={[
+              "#000000",
+              "#475569",
+              "#4b5563",
+              "#52525b",
+              "#404040",
+              "#262626",
+              "#1c1917",
+            ]}
+            size="small"
+            text=""
+            textColor=""
+          />
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {specialOffers.slice(0, 3).map((offer, index) => (
           <motion.div
@@ -32,7 +56,7 @@ export default function SpecialOffers() {
             initial={{ opacity: 0, scale: 1.05, y: (index + 1) * 50 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, delay: index * 0.12 }}
-            className="bg-white shadow-lg rounded-xl overflow-hidden group mx-5 md:mx-0"
+            className="bg-white shadow-lg rounded-xl overflow-hidden group md:mx-0"
           >
             <div className="relative z-0 h-48 overflow-hidden">
               <img

@@ -25,7 +25,7 @@ const Categories = () => {
       md:w-6/12 
       font-medium 
       text-black 
-      mb-6 md:mb-10
+      mb-4 md:mb-10
     "
       >
         Discover a variety of delicious dishes at your fingertips! From
@@ -51,7 +51,7 @@ const Categories = () => {
           flex flex-col items-center justify-center
           gap-2 md:gap-3
           font-semibold
-          text-sm md:text-lg
+          text-xs md:text-lg
           mx-1 md:mx-2
         "
           >
@@ -61,7 +61,7 @@ const Categories = () => {
               src={data.img}
               alt={data.name}
               className="
-            w-20 h-20 sm:w-24 sm:h-24 
+            w-15 h-15 
             md:w-36 md:h-36 
             rounded-full 
             object-cover
