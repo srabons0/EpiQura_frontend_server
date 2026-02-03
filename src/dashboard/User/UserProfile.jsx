@@ -74,7 +74,6 @@ const UserProfile = () => {
 
     const result = await axiosSecure.patch(`/user?email=${user?.email}`, info);
     console.log(result.data,"user info updated");
-    if (result.data.modifiedCount > 0 || result.data.acknowledged) {
       updatedUserProfile(data.name, res?.data?.data?.display_url || "").then(
         (data) => {
           // console.log("userprofile updated", data);
@@ -84,8 +83,9 @@ const UserProfile = () => {
       )
       .catch((error) => {
         console.log(error);
+        toast.error("Failed to update profile. Try again.");
       });
-    }
+    
     reset();
   };
 
