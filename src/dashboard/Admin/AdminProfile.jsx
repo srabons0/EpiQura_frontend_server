@@ -191,7 +191,7 @@ const AdminProfile = () => {
         </label>
         <input
           defaultValue={users.name}
-          {...register("name", { required: "Name is required" })}
+          {...register("name")}
           className="input-field"
         />
         {errors.name && (
@@ -206,7 +206,7 @@ const AdminProfile = () => {
         <input
           type="email"
           defaultValue={users.email}
-          {...register("email", { required: "Email is required" })}
+          {...register("email")}
           className="input-field"
         />
         {errors.email && (
@@ -222,7 +222,6 @@ const AdminProfile = () => {
           type="tel"
           defaultValue={users.phone}
           {...register("phone", {
-            required: "Phone number is required",
             pattern: {
               value: /^[0-9]{11}$/,
               message: "Enter a valid 11-digit number",
@@ -241,7 +240,7 @@ const AdminProfile = () => {
         </label>
         <input
           defaultValue={users.address}
-          {...register("address", { required: "Address is required" })}
+          {...register("address")}
           className="input-field"
         />
         {errors.address && (

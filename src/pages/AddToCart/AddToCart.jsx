@@ -166,7 +166,7 @@ const AddToCart = () => {
   </div>
 
   {!cart.length && (
-    <div className="h-64 flex items-center justify-center text-center text-2xl sm:text-3xl text-slate-400 font-semibold">
+    <div className="h-64 flex items-center justify-center text-center text-lg lg:text-3xl text-slate-400 font-semibold">
       You need to add an item to your shopping cart!
     </div>
   )}

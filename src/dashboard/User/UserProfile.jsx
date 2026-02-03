@@ -153,7 +153,7 @@ const UserProfile = () => {
         <input
           type="text"
           defaultValue={users.name}
-          {...register("name", { required: "Name is required" })}
+          {...register("name")}
           className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
         />
         {errors.name && (
@@ -168,7 +168,7 @@ const UserProfile = () => {
         <input
           type="email"
           defaultValue={users.email}
-          {...register("email", { required: "Email is required" })}
+          {...register("email")}
           className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
         />
         {errors.email && (
@@ -184,7 +184,7 @@ const UserProfile = () => {
           type="tel"
           defaultValue={users.phone}
           {...register("phone", {
-            required: "Phone number is required",
+            
             pattern: {
               value: /^[0-9]{11}$/,
               message: "Enter a valid 11-digit number",
@@ -204,7 +204,7 @@ const UserProfile = () => {
         <input
           type="text"
           defaultValue={users.address}
-          {...register("address", { required: "Address is required" })}
+          {...register("address")}
           className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
         />
         {errors.address && (
