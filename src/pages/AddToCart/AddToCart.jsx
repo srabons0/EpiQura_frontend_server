@@ -32,7 +32,7 @@ const AddToCart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`https://epi-qura-backend-server-red.vercel.app/orderFood?email=${user.email}`)
+          .delete(`https://epiqura-backend-server.onrender.com/orderFood?email=${user.email}`)
           .then(() => {
             toast.success("All order has been canceled.");
             refetch();
@@ -50,7 +50,7 @@ const AddToCart = () => {
       confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`https://epi-qura-backend-server-red.vercel.app/orderFood/${id}`).then(() => {
+        axiosSecure.delete(`https://epiqura-backend-server.onrender.com/orderFood/${id}`).then(() => {
           toast.success("Order has been canceled.");
           refetch();
         });

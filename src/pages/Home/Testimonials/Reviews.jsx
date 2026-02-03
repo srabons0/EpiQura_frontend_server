@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef  } from "react";
 import useDataLoader from "../../../hooks/useDataLoader";
 
-import { Star, ThumbsUp, CheckCircle, XCircle, ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import { Star, ArrowBigLeft, ArrowBigRight } from "lucide-react";
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
    const [time, setTime] = useState(5000);
@@ -14,7 +14,7 @@ const Reviews = () => {
     if (reviews.length === 0) {
       setTime(0);
     }
-    // console.log(testimonials);
+   
   }, time);
 
   const [current, setCurrent] = useState(0);
@@ -23,19 +23,19 @@ const Reviews = () => {
 
   const total = reviews.length;
 
-  // Move 1 by 1
+  
   const prevSlide = () => setCurrent((prev) => (prev - 1 + total) % total);
   const nextSlide = () => setCurrent((prev) => (prev + 1) % total);
 
-  // Drag / Swipe
+  
   const handleDragStart = (x) => setDragStart(x);
 
   const handleDragEnd = (x) => {
     if (dragStart === null) return;
     const diff = dragStart - x;
 
-    if (diff > 30) nextSlide(); // swipe left
-    else if (diff < -30) prevSlide(); // swipe right
+    if (diff > 30) nextSlide();
+    else if (diff < -30) prevSlide(); 
 
     setDragStart(null);
   };
@@ -110,7 +110,7 @@ const Reviews = () => {
           ))}
         </div>
 
-        {/* Buttons */}
+       
         <button
           onClick={prevSlide}
           className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/90 p-2 rounded-full shadow text-orange-500"
@@ -125,7 +125,7 @@ const Reviews = () => {
         </button>
       </div>
 
-      {/* Pagination */}
+   
       <div className="flex gap-2 mt-4">
         {reviews.map((_, i) => (
           <span

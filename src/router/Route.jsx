@@ -69,7 +69,7 @@ export const Route = createBrowserRouter([
       {
         path: "coverage",
         Component: Coverage,
-        loader: () => fetch("https://epi-qura-backend-server-red.vercel.app/coverage"),
+        loader: () => fetch("https://epiqura-backend-server.onrender.com/coverage"),
       },
       {
         path: "addToCart",

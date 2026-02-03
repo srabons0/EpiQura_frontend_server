@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const dataLoader = axios.create({
-    baseURL: 'https://epi-qura-backend-server-red.vercel.app',
+    baseURL: 'https://epiqura-backend-server.onrender.com',
      timeout: 10000,
 })
 
