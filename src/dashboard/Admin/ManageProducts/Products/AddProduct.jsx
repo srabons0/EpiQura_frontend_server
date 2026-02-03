@@ -49,7 +49,7 @@ const AddProduct = () => {
         description: data.description,
       },
     };
-    console.log(info);
+    // console.log(info);
 
     if (res.data.success) {
       const res = await axiosSecure.post("/foodItem", info);
@@ -70,7 +70,7 @@ const AddProduct = () => {
   const handleImageUpload = (event) => {
     // console.log(event)
     const file = event.target.files[0];
-    console.log(file);
+    // console.log(file);
     if (file) {
       setImages(URL.createObjectURL(file));
     } else {

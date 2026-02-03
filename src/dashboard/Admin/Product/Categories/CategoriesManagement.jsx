@@ -10,7 +10,7 @@ import useScrollToTop from "../../../../components/ui/useScrollToTop";
 
 const CategoriesManagement = ({ categories, isPending, refetch }) => {
   useScrollToTop();
-  console.log(categories);
+  // console.log(categories);
   const [selectedCategoryEdit, setSelectedCategoryEdit] = useState(null);
   const axiosSecure = useAxiosSecure();
 
@@ -73,7 +73,7 @@ const CategoriesManagement = ({ categories, isPending, refetch }) => {
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-6">
         {categories.map((category, index) => (
           <motion.div
-            key={category}
+            key={index}
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}

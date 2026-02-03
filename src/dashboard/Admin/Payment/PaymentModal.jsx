@@ -77,12 +77,12 @@ const PaymentModal = ({ payment, onClose, handleUpdateStatus }) => {
           >
             <FaCheckCircle />  Completed
           </button>
-          <button
-            onClick={() => handleUpdateStatus(payment._id, "Pending")}
-            className="flex-1 bg-yellow-200 text-yellow-800 py-2 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
-          >
-            <FaCheckCircle />  Pending
-          </button>
+          {payment.payment === "Paid" || (   <button
+               onClick={() => handleUpdateStatus(payment._id, "Pending")}
+               className="flex-1 bg-yellow-200 text-yellow-800 py-2 rounded-xl hover:bg-yellow-300 transition flex items-center justify-center gap-2"
+             >
+               <FaCheckCircle />  Pending
+             </button>)}
           <button
             onClick={() => handleUpdateStatus(payment._id, "Failed")}
             className="flex-1 bg-red-600 text-white py-2 rounded-xl hover:bg-red-700 transition flex items-center justify-center gap-2"

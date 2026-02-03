@@ -14,15 +14,15 @@ const AddCategory = () => {
   const dataLoader = useDataLoader();
 
   const onSubmit = async (data) => {
-    console.log(data.image[0]);
+    // console.log(data.image[0]);
     const imageFile = { image: data.image[0] };
     const res = await dataLoader.post(image_url, imageFile, {
       headers: {
         "content-type": "multipart/form-data",
       },
     });
-    console.log(res.data.data.display_url);
-    console.log(imageFile);
+    // console.log(res.data.data.display_url);
+    // console.log(imageFile);
     const info = {
       name: data.name,
       img: res.data.data.display_url,
@@ -48,7 +48,7 @@ const AddCategory = () => {
   const handleImageUpload = (event) => {
     // console.log(event)
     const file = event.target.files[0];
-    console.log(file);
+    // console.log(file);
     if (file) {
       setImages(URL.createObjectURL(file));
     } else {

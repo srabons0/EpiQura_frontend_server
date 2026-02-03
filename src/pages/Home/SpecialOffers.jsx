@@ -18,7 +18,7 @@ export default function SpecialOffers() {
     if (specialOffers.length === 0) {
       setTime(0);
     }
-    console.log(specialOffers);
+    // console.log(specialOffers);
   }, time);
   return (
     <section className="lg:py-16 pb-10 w-11/12 mx-auto lg:px-8">

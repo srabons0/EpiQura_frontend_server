@@ -23,7 +23,7 @@ const ReviewsManagement = ({AllReviewsRefetch}) => {
     "reviewRequest",
     `/reviewRequest`
   );
-  console.log(reviews);
+  // console.log(reviews);
   const totalReviews = reviews.length;
   const avgRating = (
     reviews.reduce((a, b) => a + b.rating, 0) / totalReviews
@@ -45,7 +45,7 @@ const ReviewsManagement = ({AllReviewsRefetch}) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSecure.patch(`/reviewRequest`, { status, id });
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.updateReviewStatus.acknowledged && res.data.deleteReview.deletedCount > 0) {
           toast.success(`This review has been ${status}!`);
           refetch();

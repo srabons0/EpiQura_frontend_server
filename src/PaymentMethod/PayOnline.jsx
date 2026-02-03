@@ -56,7 +56,7 @@ const PayOnline = () => {
     const timer = setTimeout(async () => {
       setError("");
     }, 5000);
-    if (users?.address && users?.phone) {
+    if (users.address && users.phone) {
       setProcessing(true);
       await axiosSecure.delete(`/orderFood?email=${user.email}`).then(() => {
         setSuccess(

@@ -21,7 +21,7 @@ const [cut, setCut] = useState(6);
     if (specialOffers.length === 0) {
       setTime(0);
     }
-    console.log(specialOffers);
+    // console.log(specialOffers);
   }, time);
 
   return (

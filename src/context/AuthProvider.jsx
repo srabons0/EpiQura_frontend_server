@@ -59,7 +59,7 @@ const resetPassword=(email)=>{
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("auth state changed", currentUser);
+      // console.log("auth state changed", currentUser);
       setLoading(false);
     });
     return () => {

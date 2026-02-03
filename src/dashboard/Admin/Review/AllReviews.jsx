@@ -13,7 +13,7 @@ const AllReview = ({ reviews = [], isPending, refetch }) => {
       <div className="py-24 text-center text-slate-400">No reviews found</div>
     );
   }
-console.log("reviews in all review", reviews);
+// console.log("reviews in all review", reviews);
   const handleDeleteReview = (id) => {
     Swal.fire({
       title: `Are you sure? you want to delete?`,
@@ -26,7 +26,7 @@ console.log("reviews in all review", reviews);
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSecure.delete(`/review/${id}`);
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.deletedCount > 0) {
           toast.success(`This review has been deleted!`);
           refetch();

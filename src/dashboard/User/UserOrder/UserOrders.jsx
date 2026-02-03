@@ -36,7 +36,7 @@ const UserOrders = () => {
     `/save-order/${user?.email}`,
     !!user?.email && !loading,
   );
-  console.log(orders, user.email);
+  // console.log(orders, user.email);
   return (
     <div className="lg:p-6  min-h-screen">
       <div className="mb-6">

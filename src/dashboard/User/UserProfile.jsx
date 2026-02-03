@@ -39,8 +39,8 @@ const UserProfile = () => {
     `/user?email=${user.email}`,
     !!user?.email && !loading
   );
-  console.log(users);
-  console.log(user);
+  // console.log(users);
+  // console.log(user);
 
   const navigate = useNavigate();
   // const { logOut } = useAuth();
@@ -70,22 +70,22 @@ const UserProfile = () => {
       phone: data.phone,
       address: data.address,
     };
-    console.log(info);
+   // console.log(info);
 
     const result = await axiosSecure.patch(`/user?email=${user?.email}`, info);
-    console.log(result.data,"user info updated");
+    // console.log(result.data,"user info updated");
     if (result.data.modifiedCount > 0 || result.data.acknowledged){
-          toast.success("Successfully your order has been placed!");
+          toast.success("Successfully your updated profile!");
     }
       updatedUserProfile(data.name, res?.data?.data?.display_url || "").then(
         (data) => {
           // console.log("userprofile updated", data);
-          toast.success("Successfully your order has been placed!");
+          toast.success("Successfully your updated profile!");
           refetch();
         }
       )
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error("Failed to update profile. Try again.");
       });
     

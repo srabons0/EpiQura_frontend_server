@@ -31,7 +31,7 @@ const OrdersManagement = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isStatus, setIsStatus] = useState(null);
   const axiosSecure = useAxiosSecure();
-console.log(orders);
+// console.log(orders);
   const filteredOrders = orders.filter((order) => {
     const matchSearch =
       order.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -41,7 +41,7 @@ console.log(orders);
   });
 
   const updateStatus = async(orderId, newStatus) => {
-    console.log(orderId, newStatus);
+    // console.log(orderId, newStatus);
 const res = await axiosSecure.patch(`/save-order/${orderId}`, {newStatus});
     if (res.data.matchedCount) {
       toast.success(`order has been successfully updated to ${newStatus}!`);

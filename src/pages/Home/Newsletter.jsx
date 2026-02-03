@@ -9,7 +9,7 @@ export default function Newsletter() {
     e.preventDefault();
 
    
-    console.log("Newsletter subscribed:", email);
+    // console.log("Newsletter subscribed:", email);
 
     setEmail(""); 
   };

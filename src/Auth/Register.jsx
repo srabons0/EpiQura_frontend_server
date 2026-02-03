@@ -33,7 +33,7 @@ const Register = () => {
     const password = data.password;
     createUser(email, password)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         const userInfo = {
           name: data.name,
           email: data.email,
@@ -45,7 +45,7 @@ const Register = () => {
         updatedUserProfile(name)
           .then(async (data) => {
             const userRes = await axiosInstance.post("/user", userInfo);
-            console.log(!userRes.data.insertedId);
+            // console.log(!userRes.data.insertedId);
             if (userRes.data.insertedId) {
               reset();
               toast.success("Your account has been successfully registered!");
@@ -58,7 +58,7 @@ const Register = () => {
       })
       .catch((error) => {
         // error.message.includes("email-already-in-use") && setErr("Email already in used try another email!");
-        console.log(error);
+        // console.log(error);
         toast.error("Email already in used try another email!");
       });
   };

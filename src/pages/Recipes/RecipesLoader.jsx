@@ -25,7 +25,7 @@ const RecipesLoader = () => {
     if (foodItem.length === 0) {
       setTime(0);
     }
-    console.log(foodItem);
+    // console.log(foodItem);
   }, time);
 
   return (

@@ -20,7 +20,7 @@ const UsersManagement = () => {
   const [filter, setFilter] = useState("All");
 const axiosSecure = useAxiosSecure();
   const [{ allUsers: users = [],total, totalPage }, isPending, refetch] = useLoader("AllUser", `/users?page=${page}&limit=${limit}&role=${filter}&search=${search}`);
-console.log(users, totalPage, total);
+// console.log(users, totalPage, total);
   useEffect(() => {
     if (totalPages !== totalPage && users.length > 0) {
       setTotalPages(totalPage);

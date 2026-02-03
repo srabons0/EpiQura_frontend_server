@@ -41,7 +41,7 @@ useEffect(() => {
     }
 
    const res = await axiosSecure.patch(`/user?email=${user?.email}`,info)
-    console.log("Server Response:", res.data);
+    // console.log("Server Response:", res.data);
     if (res.data.modifiedCount > 0) {
         notify();
         refetch();

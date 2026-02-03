@@ -16,7 +16,7 @@ const PaymentsHistory = () => {
     "paymentsHistory",
     `/paymentHistory`
   );
-  console.log(payments);
+  // console.log(payments);
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
   const axiosSecure = useAxiosSecure();
@@ -39,7 +39,7 @@ const PaymentsHistory = () => {
   }, 0);
   // console.log(selectedIds);
 
-  console.log("totalItemsPrice", totalRevenue);
+  // console.log("totalItemsPrice", totalRevenue);
   const handleSelectedDeletedPayments = async () => {
     Swal.fire({
       title: "Are You Certain You Want To Deleted?",

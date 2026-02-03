@@ -11,7 +11,7 @@ const ReviewLayout = () => {
     "reviewRequest",
     `/reviewRequest`
   );
-  console.log(reviews);
+  // console.log(reviews);
   const [toggle, setToggle] = useState(false);
     const totalReviews =toggle ? reviewRequest.length: reviews.length;
   const avgRating = (

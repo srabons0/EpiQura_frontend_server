@@ -21,7 +21,7 @@ const OrderModal = ({ isStatus ,setIsStatus, updateStatus}) => {
              <FaTimes size={18} />
            </button>
    
-           <h2 className="text-lg font-bold text-gray-400 mb-4">
+           <h2 className="text-sm lg:text-base font-bold text-gray-400 mb-4">
              ##{isStatus._id}
            </h2>
    
@@ -32,7 +32,7 @@ const OrderModal = ({ isStatus ,setIsStatus, updateStatus}) => {
              </div>
              <div>
                <p className="text-gray-400">Email</p>
-               <p className="font-medium">{isStatus.email}</p>
+               <p className="font-medium text-xs lg:text-sm">{isStatus.email}</p>
              </div>
              <div>
                <p className="text-gray-400">Amount</p>
@@ -66,7 +66,7 @@ const OrderModal = ({ isStatus ,setIsStatus, updateStatus}) => {
            </div>
    
        
-           <div className="flex gap-3">
+           <div className="flex gap-3 text-xs lg:text-base">
              <button
                onClick={() => updateStatus(isStatus._id, "Completed")}
                className="flex-1 bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 transition flex items-center justify-center gap-2"

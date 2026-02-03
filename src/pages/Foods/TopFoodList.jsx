@@ -19,7 +19,7 @@ const TopFoodList = () => {
     if (topFood.length === 0) {
       setTime(0);
     }
-    console.log(topFood);
+    // console.log(topFood);
   }, time);
   return (
    <div className="mt-10 md:mt-20">

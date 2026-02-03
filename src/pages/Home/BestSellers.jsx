@@ -16,7 +16,7 @@ const [time, setTime] = useState(true);
     if (bestSellers.length === 0) {
       setTime(0);
     }
-    console.log(bestSellers);
+    // console.log(bestSellers);
   }, time);
 
   return (

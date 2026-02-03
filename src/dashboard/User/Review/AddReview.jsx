@@ -31,7 +31,7 @@ const AddReview = ({ refetchPendingReviews, refetchApprovedReviews }) => {
   const [rating, setRating] = useState(0);
   const { register, handleSubmit, reset } = useForm();
 
-  console.log("selectedItems", selectedItems);
+  // console.log("selectedItems", selectedItems);
 
   const onSubmit = async (data) => {
     if(selectedItems.length === 0){
@@ -53,7 +53,7 @@ const AddReview = ({ refetchPendingReviews, refetchApprovedReviews }) => {
       recommend: data.recommend === "true" ? true : false,
       status: "Pending",
     };
-    console.log(newReview);
+    // console.log(newReview);
     await axiosSecure.post("/reviewRequest", newReview).then((res) => {
       if (res.data.insertedId) {
         toast.success(

@@ -18,7 +18,7 @@ const [cut, setCut] = useState(6);
     if (bestSellers.length === 0) {
       setTime(0);
     }
-    console.log(bestSellers);
+    // console.log(bestSellers);
   }, time);
 
   return (

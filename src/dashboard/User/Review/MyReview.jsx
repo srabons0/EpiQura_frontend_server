@@ -28,7 +28,7 @@ const MyReview = ({
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSecure.delete(`/reviewRequest/${id}`);
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.deletedCount > 0) {
           toast.success(`This review has been deleted!`);
           refetchPendingReviews();

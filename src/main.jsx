@@ -6,7 +6,9 @@ import { Route } from "./router/Route.jsx";
 import AuthProvider from "./context/AuthProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
-
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
 createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
     <AuthProvider>

@@ -39,7 +39,7 @@ const CheckOutForm = ({transcription,setTranscription}) => {
   //         address: users?.address,});
 
   const totalPrice = cart.reduce((total, item) => total + Number(item?.realPrice)*Number(item?.quantity), 0);
-    console.log(totalPrice, cart);
+    // console.log(totalPrice, cart);
 
   //   console.log(info);
 
@@ -59,7 +59,7 @@ const CheckOutForm = ({transcription,setTranscription}) => {
     });
     }
   }, [axiosSecure, totalPrice]);
-console.log("clientSecret:", clientSecret,totalPrice);
+// console.log("clientSecret:", clientSecret,totalPrice);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -82,15 +82,15 @@ console.log("clientSecret:", clientSecret,totalPrice);
     });
 
     if (error) {
-      console.log("[error]", error);
+      // console.log("[error]", error);
       setError(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // console.log("[PaymentMethod]", paymentMethod);
       setError("");
     }
 
   
-    console.log("clientSecret", clientSecret);
+    // console.log("clientSecret", clientSecret);
 
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -104,11 +104,11 @@ console.log("clientSecret:", clientSecret,totalPrice);
       });
 
     if (confirmError) {
-      console.log(confirmError);
+      // console.log(confirmError);
     } else {
-      console.log("paymentIntent", paymentIntent);
+      // console.log("paymentIntent", paymentIntent);
     }
-    console.log("paymentIntent", paymentIntent);
+    // console.log("paymentIntent", paymentIntent);
     if (paymentIntent.status === "succeeded") {
       setTranscription(paymentIntent.id);
 

@@ -18,7 +18,7 @@ const ProductEdit = ({ product, categories, onClose, onUpdate }) => {
   const [imBb, setImBb] = useState();
   const imageSecretKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
   const image_url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
-  console.log(specialOffer);
+  // console.log(specialOffer);
   const handleImageUpload = async (event) => {
     // console.log(event)
     const imageFile = { image: event.target.files[0] };

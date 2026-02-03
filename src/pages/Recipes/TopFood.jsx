@@ -19,7 +19,7 @@ const TopFood = () => {
     if (topFood.length === 0) {
       setTime(0);
     }
-    console.log(topFood);
+    // console.log(topFood);
   }, time);
 
   return (

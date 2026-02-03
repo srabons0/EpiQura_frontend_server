@@ -21,7 +21,7 @@ import useScrollToTop from "../../../components/ui/useScrollToTop";
 const PaymentsManagement = () => {
   useScrollToTop();
   const [payments, isPending, refetch] = useLoader("savedOrder", `/save-order`);
-  console.log(payments);
+  // console.log(payments);
   const [option, setOption] = useState(false);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
@@ -45,7 +45,7 @@ const PaymentsManagement = () => {
   ).length;
 
   const handleUpdateStatus = async (orderId, newStatus) => {
-    console.log(orderId, newStatus);
+    // console.log(orderId, newStatus);
     const res = await axiosSecure.patch(
       `/save-order/paymentStatus/${orderId}`,
       { newStatus }
@@ -58,7 +58,7 @@ const PaymentsManagement = () => {
   };
 
   const handleAllItemDeleted = async(paymentStatus) => {
-    console.log(paymentStatus);
+    // console.log(paymentStatus);
    await axiosSecure
       .delete(`/completeOrder`, { data: { paymentStatus } })
       .then((res) => {
