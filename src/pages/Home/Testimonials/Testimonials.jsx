@@ -86,7 +86,7 @@ const Testimonials = () => {
           initialSlide={1}
           slidesPerView={3}
           spaceBetween={20}
-          centeredSlides={true} // center the middle slide
+          centeredSlides={true} 
           freeMode={true}
           pagination={{
             clickable: true,
@@ -100,7 +100,7 @@ const Testimonials = () => {
           }}
           onSlideChange={handleSlideChange}
         >
-          {testimonials.map((slide, i) => (
+          {testimonials.slice(0, 10).map((slide, i) => (
             <SwiperSlide
               key={i}
               className="flex items-center justify-center bg-white rounded-2xl shadow-lg p-6 transition-all duration-300"
@@ -108,7 +108,7 @@ const Testimonials = () => {
               <div className="">
                 <div className="flex gap-1 relative">
                   <img
-                    className="w-12 h-12 rounded-full"
+                    className="w-12 h-12 rounded-full  object-cover"
                     src={slide.img}
                     alt=""
                   />
@@ -128,7 +128,7 @@ const Testimonials = () => {
                   <p className="">{slide.recommend}</p>
                   <div className="flex justify-between items-center">
                     <p className=" font-semibold text-black mt-2 mb-1">
-                      {slide.tags}
+                      {slide.dish}
                     </p>
                     <div className="flex text-sm gap-2">
                       {slide.rating}
@@ -155,6 +155,11 @@ const Testimonials = () => {
                     {slide.cons}
                   </p>
                 </div>
+                <div className="relative w-full h-12">{slide.recommend && (
+                    <p className="text-white text-xs bg-green-600/60 px-2 py-1.5 rounded-4xl absolute right-0 mt-5 text-right font-semibold">
+                      Recommended
+                    </p>
+                  )}</div>
               </div>
             </SwiperSlide>
           ))}

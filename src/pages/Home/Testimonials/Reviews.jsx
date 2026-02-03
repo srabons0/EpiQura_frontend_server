@@ -54,7 +54,7 @@ const Reviews = () => {
           onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
           onTouchEnd={(e) => handleDragEnd(e.changedTouches[0].clientX)}
         >
-          {reviews.map((slide, i) => (
+          {reviews.slice(0, 10).map((slide, i) => (
             <div
               key={i}
               className="flex-shrink-0 w-full px-2 flex justify-center"
@@ -62,7 +62,7 @@ const Reviews = () => {
               <div className="flex flex-col items-start bg-white rounded-2xl shadow-lg p-6 transition-all duration-300">
                 <div className="flex gap-3 relative w-full">
                   <img
-                    className="w-12 h-12 rounded-full"
+                    className="w-12 h-12 rounded-full object-cover"
                     src={slide.img}
                     alt={slide.name}
                   />
