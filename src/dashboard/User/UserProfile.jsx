@@ -74,6 +74,9 @@ const UserProfile = () => {
 
     const result = await axiosSecure.patch(`/user?email=${user?.email}`, info);
     console.log(result.data,"user info updated");
+    if (result.data.modifiedCount > 0 || result.data.acknowledged){
+          toast.success("Successfully your order has been placed!");
+    }
       updatedUserProfile(data.name, res?.data?.data?.display_url || "").then(
         (data) => {
           // console.log("userprofile updated", data);
