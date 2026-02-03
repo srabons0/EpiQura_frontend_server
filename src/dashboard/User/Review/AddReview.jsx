@@ -34,6 +34,10 @@ const AddReview = ({ refetchPendingReviews, refetchApprovedReviews }) => {
   console.log("selectedItems", selectedItems);
 
   const onSubmit = async (data) => {
+    if(selectedItems.length === 0){
+      toast.error("Please select at least one item!");
+      return;
+    }
     const newReview = {
       img: user.photoURL
         ? user.photoURL

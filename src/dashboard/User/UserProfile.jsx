@@ -77,7 +77,7 @@ const UserProfile = () => {
     if (result.data.modifiedCount > 0 || result.data.acknowledged) {
       updatedUserProfile(data.name, res?.data?.data?.display_url || "").then(
         (data) => {
-          console.log("userprofile updated", data);
+          // console.log("userprofile updated", data);
           toast.success("Successfully your order has been placed!");
           refetch();
         }

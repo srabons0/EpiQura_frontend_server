@@ -125,7 +125,7 @@ const ReviewsManagement = ({AllReviewsRefetch}) => {
            
             <div className="flex items-start justify-between mb-4">
              <div className="flex items-center gap-3">
-               <img className="w-12 h-12 rounded-full" src={review.img} alt="" />
+               <img className="w-12 h-12 rounded-full object-cover" src={review.img} alt="" />
                <div>
                 <p className="font-semibold text-slate-900 leading-tight">
                   {review.name}
