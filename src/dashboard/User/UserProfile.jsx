@@ -166,7 +166,7 @@ const UserProfile = () => {
           <FaEnvelope /> Email
         </label>
         <input
-          type="email"
+          type="email" disabled
           defaultValue={users.email}
           {...register("email")}
           className="w-full rounded-xl border border-slate-300 p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
