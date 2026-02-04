@@ -18,7 +18,7 @@ export default function AppDownload() {
         <motion.div
         initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0, }}
-            transition={{ duration: .8, delay: 0.5, }}
+            transition={{ duration: .7, delay: 0.5, }}
             className="flex justify-center">
           <img
             src={foodApp}
@@ -30,7 +30,7 @@ export default function AppDownload() {
          <motion.div
         initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0, }}
-            transition={{ duration: .8, delay: .5, }}>
+            transition={{ duration: .6, delay: .5, }}>
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">
             Get Your Favorite Food With Just One Tap
           </h3>

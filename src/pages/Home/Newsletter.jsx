@@ -33,7 +33,7 @@ export default function Newsletter() {
         <motion.input  
         initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0, }}
-            transition={{ duration: .8, delay: 0.5, }}
+            transition={{ duration: .5, delay: 0.5, }}
           type="email"
           required
           placeholder="Enter your email"
@@ -44,7 +44,7 @@ export default function Newsletter() {
 <motion.button
                  initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0, }}
-            transition={{ duration: .8, delay: 0.5, }}
+            transition={{ duration: .5, delay: 0.5, }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={()=> window.scrollTo(0,1000)}

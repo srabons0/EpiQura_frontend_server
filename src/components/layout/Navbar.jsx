@@ -67,7 +67,7 @@ const Navbar = () => {
             <motion.div
               initial={{ opacity: 0, scale: -0.5, x: -100 }}
               animate={{ opacity: 2, scale: 1.1, x: 0 }}
-              transition={{ duration: 1.1, delay: 1 }}
+              transition={{ duration: 1, delay: 0.7 }}
               tabIndex={0}
               role="button"
               className={` text-white bg-black p-1.5 md:p-2.5 z-50 relative cursor-pointer btn-circle`}
@@ -139,7 +139,7 @@ const Navbar = () => {
         <motion.div
           initial={{ opacity: 0, scale: -0.5, y: -100 }}
           animate={{ opacity: 2, scale: 1.1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
           className=" z-20 navbar-center cursor-pointer"
         >
           <NavLink to="/" className="flex items-center">
@@ -172,7 +172,7 @@ const Navbar = () => {
               <motion.button
                 initial={{ opacity: 0, scale: -0.5, y: -100 }}
                 animate={{ opacity: 2, scale: 1.1, y: 0 }}
-                transition={{ duration: 1, delay: 1 }}
+                transition={{ duration: 1, delay: 0.7 }}
                 className="md:p-3 p-1.5 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle mr-1 md:mr-5  z-30"
               >
                 <IoLocationSharp className="w-3.5 h-3.5 md:w-6 md:h-6 text-white" />
@@ -188,7 +188,7 @@ const Navbar = () => {
               <motion.button
                 initial={{ opacity: 0, scale: -0.5, y: 100 }}
                 animate={{ opacity: 2, scale: 1.1, y: 0 }}
-                transition={{ duration: 1, delay: 1 }}
+                transition={{ duration: 1, delay: 0.7 }}
                 className="md:p-3 p-1.5 bg-[#00000033] relative hover:bg-[#00000075] text-white border-none btn-circle md:mr-5  z-30"
               >
                 <AiOutlineShoppingCart className="w-3.5 h-3.5 md:w-6 md:h-6 text-white" />
@@ -200,7 +200,7 @@ const Navbar = () => {
             <motion.button
               initial={{ opacity: 0, scale: -0.5, x: 50 }}
               animate={{ opacity: 2, scale: 1.1, x: 0 }}
-              transition={{ duration: 1, delay: 1 }}
+              transition={{ duration: 1, delay: 0.7 }}
               className="btn hidden md:block  btn-ghost btn-circle mr-10 border-none w-12 h-12 z-30 hover:bg-[#00000050]"
             >
               {user ? (

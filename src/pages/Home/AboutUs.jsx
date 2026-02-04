@@ -20,7 +20,7 @@ export default function AboutUs() {
         <motion.div
         initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0, }}
-            transition={{ duration: .8, delay: 0.5, }}>
+            transition={{ duration: .7, delay: 0.5, }}>
           <img
             className="w-full rounded-2xl shadow-md object-cover"
             src={aboutUs}
@@ -31,7 +31,7 @@ export default function AboutUs() {
         <motion.div
         initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0, }}
-            transition={{ duration: .8, delay: .5, }}>
+            transition={{ duration: .7, delay: .5, }}>
           <h3 className="text-2xl font-semibold text-[#ff9543] mb-4">
             Bringing You Fresh & Authentic Flavors
           </h3>
